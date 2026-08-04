@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تفاصيل البلاغ | مفقودين الجزائر</title>
+  <meta name="description" content="تفاصيل بلاغ الشخص المفقود - الاسم، العمر، مكان الاختفاء، ومعلومات الاتصال">
+  <meta property="og:title" content="تفاصيل البلاغ | مفقودين الجزائر">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://mafkoudin-dz.com/pages/detail.html">
+  
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+</head>
+<body>
+  <!-- Emergency Bar -->
+  <div class="emergency-bar">
+    <div class="container">
+      <span><i class="fas fa-phone-alt me-2"></i>أرقام الطوارئ:</span>
+      <a href="tel:1548">الشرطة 1548</a>
+      <a href="tel:1055">الدرك 1055</a>
+      <a href="tel:1021">الحماية المدنية 1021</a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <div class="brand-icon"><i class="fas fa-search"></i></div>
+        <span>مفقودين الجزائر</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="../index.html">الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link" href="states.html">الولايات</a></li>
+          <li class="nav-item"><a class="nav-link" href="statistics.html">الإحصائيات</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">من نحن</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">اتصل بنا</a></li>
+        </ul>
+        <div class="d-flex gap-2">
+          <a href="report.html" class="btn btn-light text-danger fw-bold"><i class="fas fa-plus-circle me-1"></i>نشر بلاغ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Detail Hero -->
+  <section class="detail-hero">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-3">
+          <li class="breadcrumb-item"><a href="../index.html" class="text-white-50">الرئيسية</a></li>
+          <li class="breadcrumb-item active text-white" aria-current="page">تفاصيل البلاغ</li>
+        </ol>
+      </nav>
+      <div class="d-flex align-items-center gap-3">
+        <span class="badge bg-white text-danger fs-6" id="detailStatus">جاري التحميل...</span>
+        <span class="text-white-50" id="detailId">رقم البلاغ: ---</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail Content -->
+  <section class="content-section">
+    <div class="container">
+      <div class="row">
+        <!-- Left Column: Images -->
+        <div class="col-lg-4 mb-4">
+          <div class="sticky-top" style="top: 100px; z-index: 1;">
+            <img id="mainImage" src="" alt="صورة الشخص" class="detail-main-image mb-3">
+            <div class="detail-gallery" id="gallery">
+              <!-- Gallery images will be rendered here -->
+            </div>
+            
+            <!-- Share Card -->
+            <div class="detail-info-card mt-4">
+              <h3><i class="fas fa-share-alt"></i> مشاركة البلاغ</h3>
+              <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-sm" style="background:#1877f2;color:#fff" onclick="shareCurrent('facebook')"><i class="fab fa-facebook-f"></i></button>
+                <button class="btn btn-sm" style="background:#0084ff;color:#fff" onclick="shareCurrent('messenger')"><i class="fab fa-facebook-messenger"></i></button>
+                <button class="btn btn-sm" style="background:#25d366;color:#fff" onclick="shareCurrent('whatsapp')"><i class="fab fa-whatsapp"></i></button>
+                <button class="btn btn-sm" style="background:#0088cc;color:#fff" onclick="shareCurrent('telegram')"><i class="fab fa-telegram-plane"></i></button>
+                <button class="btn btn-sm" style="background:#000;color:#fff" onclick="shareCurrent('twitter')"><i class="fab fa-x-twitter"></i></button>
+                <button class="btn btn-sm btn-outline-secondary" onclick="shareCurrent('email')"><i class="fas fa-envelope"></i></button>
+                <button class="btn btn-sm btn-outline-secondary" onclick="shareCurrent('copy')"><i class="fas fa-link"></i></button>
+                <button class="btn btn-sm btn-outline-danger" onclick="printReport()"><i class="fas fa-print"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Info -->
+        <div class="col-lg-8">
+          <!-- Personal Info -->
+          <div class="detail-info-card">
+            <h3><i class="fas fa-user"></i> المعلومات الشخصية</h3>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="detail-info-row">
+                  <span class="detail-info-label">الاسم الكامل</span>
+                  <span class="detail-info-value" id="fullName">---</span>
+                </div>
+                <div class="detail-info-row">
+                  <span class="detail-info-label">العمر</span>
+                  <span class="detail-info-value" id="age">---</span>
+                </div>
+                <div class="detail-info-row">
+                  <span class="detail-info-label">الجنس</span>
+                  <span class="detail-info-value" id="gender">---</span>
+                </div>
+                <div class="detail-info-row">
+                  <span class="detail-info-label">الطول</span>
+                  <span class="detail-info-value" id="height">---</span>
+                </div>
+                <div class="detail-info-row">
+                  <span class="detail-info-label">الوزن</span>
+                  <span class="detail-info-value" id="weight">---</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="detail-info-row">
+                  <span class="detail-info-label">لون الشعر</span>
+                  <span class="detail-info-value" id="hairColor">---</span>
+                </div>
+                <div class="detail-info-row">
+                  <span class="detail-info-label">لون العينين</span>
+                  <span class="detail-info-value" id="eyeColor">---</span>
+                </div>
+                <div class="detail-info-row">
+                  <span class="detail-info-label">الملابس عند الاختفاء</span>
+                  <span class="detail-info-value" id="clothing">---</span>
+                </div>
+                <div class="detail-info-row">
+                  <span class="detail-info-label">العلامات المميزة</span>
+                  <span class="detail-info-value" id="distinctiveMarks">---</span>
+                </div>
+                <div class="detail-info-row">
+                  <span class="detail-info-label">الحالة النفسية</span>
+                  <span class="detail-info-value" id="mentalState">---</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Disappearance Info -->
+          <div class="detail-info-card">
+            <h3><i class="fas fa-map-marker-alt"></i> معلومات الاختفاء</h3>
+            <div class="detail-info-row">
+              <span class="detail-info-label">تاريخ الاختفاء</span>
+              <span class="detail-info-value" id="dateMissing">---</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-info-label">الساعة</span>
+              <span class="detail-info-value" id="timeMissing">---</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-info-label">مكان الاختفاء</span>
+              <span class="detail-info-value" id="placeMissing">---</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-info-label">آخر مكان شوهد فيه</span>
+              <span class="detail-info-value" id="lastSeen">---</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-info-label">مدة الاختفاء</span>
+              <span class="detail-info-value" id="daysMissing">---</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-info-label">الولاية</span>
+              <span class="detail-info-value" id="state">---</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-info-label">البلدية</span>
+              <span class="detail-info-value" id="municipality">---</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-info-label">العنوان</span>
+              <span class="detail-info-value" id="address">---</span>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="detail-info-card">
+            <h3><i class="fas fa-file-alt"></i> الظروف والوصف</h3>
+            <div class="detail-info-row">
+              <span class="detail-info-label">ظروف الاختفاء</span>
+              <span class="detail-info-value" id="circumstances">---</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-info-label">وصف كامل</span>
+              <span class="detail-info-value" id="description">---</span>
+            </div>
+          </div>
+
+          <!-- Map -->
+          <div class="detail-info-card">
+            <h3><i class="fas fa-map"></i> الموقع على الخريطة</h3>
+            <div class="map-container" id="mapContainer">
+              <iframe 
+                id="mapFrame"
+                width="100%" 
+                height="100%" 
+                style="border:0; border-radius: 12px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="detail-info-card">
+            <h3><i class="fas fa-address-book"></i> بيانات الاتصال</h3>
+            <div class="detail-info-row">
+              <span class="detail-info-label">اسم المبلغ</span>
+              <span class="detail-info-value" id="reporterName">---</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-info-label">صلة القرابة</span>
+              <span class="detail-info-value" id="reporterRelation">---</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-info-label">رقم الهاتف</span>
+              <span class="detail-info-value" id="reporterPhone">---</span>
+            </div>
+            <div class="detail-info-row" id="reporterPhone2Row">
+              <span class="detail-info-label">رقم هاتف احتياطي</span>
+              <span class="detail-info-value" id="reporterPhone2">---</span>
+            </div>
+            <div class="detail-info-row" id="reporterEmailRow">
+              <span class="detail-info-label">البريد الإلكتروني</span>
+              <span class="detail-info-value" id="reporterEmail">---</span>
+            </div>
+            
+            <div class="contact-buttons mt-4">
+              <button class="btn-contact btn-phone" id="btnCall">
+                <i class="fas fa-phone"></i> اتصال مباشر
+              </button>
+              <button class="btn-contact btn-whatsapp" id="btnWhatsApp">
+                <i class="fab fa-whatsapp"></i> واتساب
+              </button>
+              <button class="btn-contact btn-viber" id="btnViber">
+                <i class="fab fa-viber"></i> فايبر
+              </button>
+              <button class="btn-contact btn-share" onclick="shareCurrent('copy')">
+                <i class="fas fa-share-alt"></i> نسخ الرابط
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="footer-brand">
+            <div class="brand-icon"><i class="fas fa-search"></i></div>
+            <span>مفقودين الجزائر</span>
+          </div>
+          <p class="footer-desc">منصة وطنية تطوعية تهدف إلى المساعدة في العثور على الأشخاص المفقودين في الجزائر.</p>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4">
+          <h4 class="footer-title">روابط سريعة</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html">الرئيسية</a></li>
+            <li><a href="states.html">الولايات</a></li>
+            <li><a href="statistics.html">الإحصائيات</a></li>
+            <li><a href="report.html">نشر بلاغ</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4">
+          <h4 class="footer-title">المعلومات</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">من نحن</a></li>
+            <li><a href="contact.html">اتصل بنا</a></li>
+            <li><a href="privacy.html">سياسة الخصوصية</a></li>
+            <li><a href="disclaimer.html">إخلاء المسؤولية</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4 mb-4">
+          <h4 class="footer-title">أرقام الطوارئ</h4>
+          <ul class="footer-links">
+            <li><a href="tel:1548">الشرطة الوطنية: 1548</a></li>
+            <li><a href="tel:1055">الدرك الوطني: 1055</a></li>
+            <li><a href="tel:1021">الحماية المدنية: 1021</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>جميع الحقوق محفوظة &copy; 2026 مفقودين الجزائر</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Main JS -->
+  <script src="../js/main.js"></script>
+  
+  <script>
+    let currentPerson = null;
+    
+    function loadPerson() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+      
+      if (!id) {
+        showToast("رقم البلاغ غير صحيح", "error");
+        return;
+      }
+      
+      currentPerson = demoData.persons.find(p => p.id === id);
+      
+      if (!currentPerson) {
+        showToast("البلاغ غير موجود", "error");
+        return;
+      }
+      
+      // Update page title
+      document.title = `${currentPerson.firstName} ${currentPerson.lastName} - مفقودين الجزائر`;
+      
+      // Update meta
+      document.querySelector('meta[name="description"]').content = 
+        `بلاغ مفقود: ${currentPerson.firstName} ${currentPerson.lastName}, ${currentPerson.age} سنة, ${currentPerson.state}`;
+      
+      // Status
+      const statusEl = document.getElementById("detailStatus");
+      statusEl.textContent = getStatusLabel(currentPerson.status);
+      statusEl.className = `badge fs-6 ${currentPerson.status === 'found' ? 'bg-success' : 'bg-white text-danger'}`;
+      
+      // ID
+      document.getElementById("detailId").textContent = `رقم البلاغ: ${currentPerson.id}`;
+      
+      // Image
+      document.getElementById("mainImage").src = currentPerson.mainImage;
+      document.getElementById("mainImage").alt = `${currentPerson.firstName} ${currentPerson.lastName}`;
+      
+      // Gallery
+      const gallery = document.getElementById("gallery");
+      if (currentPerson.gallery && currentPerson.gallery.length > 0) {
+        gallery.innerHTML = currentPerson.gallery.map(img => `
+          <img src="${img}" alt="صورة إضافية" onclick="document.getElementById('mainImage').src='${img}'">
+        `).join("");
+      } else {
+        gallery.innerHTML = `<p class="text-muted text-center w-100">لا توجد صور إضافية</p>`;
+      }
+      
+      // Personal info
+      document.getElementById("fullName").textContent = `${currentPerson.firstName} ${currentPerson.lastName}`;
+      document.getElementById("age").textContent = `${currentPerson.age} سنة (${getAgeCategory(currentPerson.age)})`;
+      document.getElementById("gender").textContent = getGenderLabel(currentPerson.gender);
+      document.getElementById("height").textContent = currentPerson.height ? `${currentPerson.height} سم` : "غير محدد";
+      document.getElementById("weight").textContent = currentPerson.weight ? `${currentPerson.weight} كغ` : "غير محدد";
+      document.getElementById("hairColor").textContent = currentPerson.hairColor || "غير محدد";
+      document.getElementById("eyeColor").textContent = currentPerson.eyeColor || "غير محدد";
+      document.getElementById("clothing").textContent = currentPerson.clothing || "غير محدد";
+      document.getElementById("distinctiveMarks").textContent = currentPerson.distinctiveMarks || "غير محدد";
+      document.getElementById("mentalState").textContent = currentPerson.mentalState || "غير محدد";
+      
+      // Disappearance info
+      document.getElementById("dateMissing").textContent = formatDate(currentPerson.dateMissing);
+      document.getElementById("timeMissing").textContent = currentPerson.timeMissing || "غير محدد";
+      document.getElementById("placeMissing").textContent = currentPerson.placeMissing || "غير محدد";
+      document.getElementById("lastSeen").textContent = currentPerson.lastSeen || "غير محدد";
+      document.getElementById("daysMissing").textContent = `${currentPerson.daysMissing} يوم`;
+      document.getElementById("state").textContent = currentPerson.state;
+      document.getElementById("municipality").textContent = currentPerson.municipality;
+      document.getElementById("address").textContent = currentPerson.address || "غير محدد";
+      
+      // Description
+      document.getElementById("circumstances").textContent = currentPerson.circumstances || "غير محدد";
+      document.getElementById("description").textContent = currentPerson.description || "غير محدد";
+      
+      // Map - using OpenStreetMap
+      const mapFrame = document.getElementById("mapFrame");
+      const stateData = demoData.states.find(s => s.name === currentPerson.state);
+      if (stateData) {
+        mapFrame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${stateData.lng - 0.5}%2C${stateData.lat - 0.5}%2C${stateData.lng + 0.5}%2C${stateData.lat + 0.5}&layer=mapnik&marker=${stateData.lat}%2C${stateData.lng}`;
+      } else {
+        mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=2.5%2C36.5%2C3.5%2C37.5&layer=mapnik";
+      }
+      
+      // Contact info
+      document.getElementById("reporterName").textContent = currentPerson.reporterName || "غير محدد";
+      document.getElementById("reporterRelation").textContent = currentPerson.reporterRelation || "غير محدد";
+      document.getElementById("reporterPhone").textContent = currentPerson.reporterPhone || "غير محدد";
+      
+      const phone2Row = document.getElementById("reporterPhone2Row");
+      if (currentPerson.reporterPhone2) {
+        document.getElementById("reporterPhone2").textContent = currentPerson.reporterPhone2;
+        phone2Row.style.display = "flex";
+      } else {
+        phone2Row.style.display = "none";
+      }
+      
+      const emailRow = document.getElementById("reporterEmailRow");
+      if (currentPerson.reporterEmail) {
+        document.getElementById("reporterEmail").textContent = currentPerson.reporterEmail;
+        emailRow.style.display = "flex";
+      } else {
+        emailRow.style.display = "none";
+      }
+      
+      // Contact buttons
+      if (currentPerson.reporterPhone) {
+        document.getElementById("btnCall").onclick = () => callPhone(currentPerson.reporterPhone);
+        docume
