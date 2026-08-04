@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مفقودين الجزائر | Mafkoudin DZ - البحث عن الأشخاص المفقودين</title>
+  <meta name="description" content="منصة جزائرية للبحث عن الأشخاص المفقودين داخل الجزائر. ساهم في إعادة المفقودين إلى ذويهم من خلال نشر ومشاركة البلاغات.">
+  <meta name="keywords" content="مفقودين الجزائر, missing persons algeria, بلاغات مفقودين, البحث عن مفقود, الجزائر">
+  <meta name="author" content="Mafkoudin DZ">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="مفقودين الجزائر | Mafkoudin DZ">
+  <meta property="og:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين داخل الجزائر">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mafkoudin-dz.com">
+  <meta property="og:image" content="https://mafkoudin-dz.com/images/og-image.jpg">
+  <meta property="og:locale" content="ar_DZ">
+  
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="مفقودين الجزائر | Mafkoudin DZ">
+  <meta name="twitter:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين داخل الجزائر">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://mafkoudin-dz.com">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#d32f2f">
+  
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "مفقودين الجزائر | Mafkoudin DZ",
+    "url": "https://mafkoudin-dz.com",
+    "description": "منصة جزائرية للبحث عن الأشخاص المفقودين",
+    "inLanguage": "ar-DZ"
+  }
+  </script>
+</head>
+<body>
+  <!-- Emergency Bar -->
+  <div class="emergency-bar">
+    <div class="container">
+      <span><i class="fas fa-phone-alt me-2"></i>أرقام الطوارئ:</span>
+      <a href="tel:1548"><i class="fas fa-shield-alt me-1"></i>الشرطة 1548</a>
+      <a href="tel:1055"><i class="fas fa-user-shield me-1"></i>الدرك 1055</a>
+      <a href="tel:1021"><i class="fas fa-ambulance me-1"></i>الحماية المدنية 1021</a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <div class="brand-icon"><i class="fas fa-search"></i></div>
+        <span>مفقودين الجزائر</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home me-1"></i>الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/states.html"><i class="fas fa-map-marked-alt me-1"></i>الولايات</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/statistics.html"><i class="fas fa-chart-bar me-1"></i>الإحصائيات</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/about.html"><i class="fas fa-info-circle me-1"></i>من نحن</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/contact.html"><i class="fas fa-envelope me-1"></i>اتصل بنا</a></li>
+        </ul>
+        <div class="d-flex gap-2">
+          <a href="pages/report.html" class="btn btn-light text-danger fw-bold"><i class="fas fa-plus-circle me-1"></i>نشر بلاغ</a>
+          <a href="pages/admin.html" class="btn btn-outline-light"><i class="fas fa-lock me-1"></i>الإدارة</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <div class="hero-content">
+            <h1 class="hero-title">ساهم في إعادة المفقودين إلى ذويهم</h1>
+            <p class="hero-subtitle">منصة وطنية للبحث عن الأشخاص المفقودين في الجزائر. شارك البلاغات وساهم في إعادة الأمل إلى العائلات.</p>
+            <div class="hero-buttons">
+              <a href="pages/report.html" class="btn-hero btn-hero-primary">
+                <i class="fas fa-plus-circle"></i>
+                نشر بلاغ جديد
+              </a>
+              <a href="#searchSection" class="btn-hero btn-hero-outline">
+                <i class="fas fa-search"></i>
+                البحث عن مفقود
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="hero-stats">
+            <div class="stat-card">
+              <span class="stat-number" id="statTotal">0</span>
+              <span class="stat-label">إجمالي البلاغات</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number text-success" id="statFound">0</span>
+              <span class="stat-label">تم العثور عليهم</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number" id="statStates">0</span>
+              <span class="stat-label">ولاية مشمولة</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number" id="statToday">0</span>
+              <span class="stat-label">بلاغات اليوم</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="search-section" id="searchSection">
+    <div class="container">
+      <div class="search-box">
+        <input type="text" class="search-input" id="searchInput" placeholder="ابحث بالاسم، اللقب، أو رقم البلاغ...">
+        <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters Section -->
+  <section class="filters-section">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-6 col-md-4 col-lg-2">
+          <label class="filter-label">الولاية</label>
+          <select class="filter-select" id="filterState">
+            <option value="">الكل</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <label class="filter-label">البلدية</label>
+          <select class="filter-select" id="filterMunicipality">
+            <option value="">الكل</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <label class="filter-label">الجنس</label>
+          <select class="filter-select" id="filterGender">
+            <option value="">الكل</option>
+            <option value="male">ذكر</option>
+            <option value="female">أنثى</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <label class="filter-label">الفئة العمرية</label>
+          <select class="filter-select" id="filterAge">
+            <option value="">الكل</option>
+            <option value="child">طفل (0-12)</option>
+            <option value="teen">مراهق (13-17)</option>
+            <option value="adult">بالغ (18-59)</option>
+            <option value="senior">مسن (60+)</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <label class="filter-label">الحالة</label>
+          <select class="filter-select" id="filterStatus">
+            <option value="">الكل</option>
+            <option value="missing">مفقود حاليا</option>
+            <option value="found">تم العثور عليه</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <label class="filter-label">الترتيب</label>
+          <select class="filter-select" id="filterSort">
+            <option value="newest">الأحدث</option>
+            <option value="oldest">الأقدم</option>
+            <option value="mostViewed">الأكثر مشاهدة</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 col-md-6">
+          <label class="filter-label">تاريخ الاختفاء</label>
+          <div class="d-flex gap-2">
+            <input type="date" class="filter-input" id="filterDateFrom" placeholder="من">
+            <input type="date" class="filter-input" id="filterDateTo" placeholder="إلى">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex align-items-end gap-2 mt-3 mt-md-0">
+          <button class="filter-btn" id="applyFilters"><i class="fas fa-filter me-1"></i>تطبيق الفلاتر</button>
+          <button class="filter-btn reset-filters" id="resetFilters"><i class="fas fa-undo me-1"></i>إعادة تعيين</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards Section -->
+  <section class="cards-section">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-users text-primary-red"></i> البلاغات</h2>
+      <p class="section-subtitle">آخر البلاغات المنشورة للأشخاص المفقودين</p>
+      
+      <div class="row g-4" id="cardsContainer">
+        <!-- Cards will be rendered here -->
+      </div>
+      
+      <div class="empty-state d-none" id="emptyState">
+        <i class="fas fa-search"></i>
+        <h3>لا توجد نتائج مطابقة للبحث</h3>
+        <p class="text-muted">جرب تغيير معايير البحث أو الفلاتر</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ad Section -->
+  <section class="py-4">
+    <div class="container">
+      <div class="bg-white rounded-3 p-3 text-center border" style="min-height: 90px;">
+        <small class="text-muted">مساحة إعلانية - Google AdSense</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="footer-brand">
+            <div class="brand-icon"><i class="fas fa-search"></i></div>
+            <span>مفقودين الجزائر</span>
+          </div>
+          <p class="footer-desc">منصة وطنية تطوعية تهدف إلى المساعدة في العثور على الأشخاص المفقودين في الجزائر من خلال نشر البلاغات وتسهيل الوصول إليها.</p>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4">
+          <h4 class="footer-title">روابط سريعة</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-left"></i>الرئيسية</a></li>
+            <li><a href="pages/states.html"><i class="fas fa-chevron-left"></i>الولايات</a></li>
+            <li><a href="pages/statistics.html"><i class="fas fa-chevron-left"></i>الإحصائيات</a></li>
+            <li><a href="pages/report.html"><i class="fas fa-chevron-left"></i>نشر بلاغ</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4">
+          <h4 class="footer-title">المعلومات</h4>
+          <ul class="footer-links">
+            <li><a href="pages/about.html"><i class="fas fa-chevron-left"></i>من نحن</a></li>
+            <li><a href="pages/contact.html"><i class="fas fa-chevron-left"></i>اتصل بنا</a></li>
+            <li><a href="pages/privacy.html"><i class="fas fa-chevron-left"></i>سياسة الخصوصية</a></li>
+            <li><a href="pages/disclaimer.html"><i class="fas fa-chevron-left"></i>إخلاء المسؤولية</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4 mb-4">
+          <h4 class="footer-title">أرقام الطوارئ</h4>
+          <ul class="footer-links">
+            <li><a href="tel:1548"><i class="fas fa-phone"></i>الشرطة الوطنية: 1548</a></li>
+            <li><a href="tel:1055"><i class="fas fa-phone"></i>الدرك الوطني: 1055</a></li>
+            <li><a href="tel:1021"><i class="fas fa-phone"></i>الحماية المدنية: 1021</a></li>
+            <li><a href="tel:1050"><i class="fas fa-phone"></i>النجدة: 1050</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>جميع الحقوق محفوظة &copy; 2026 مفقودين الجزائر | Mafkoudin DZ</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Main JS -->
+  <script src="js/main.js"></script>
+  
+  <script>
+    // ============================================
+    // INDEX PAGE LOGIC
+    // ============================================
+    
+    // Initialize stats
+    function updateStats() {
+      const total = demoData.persons.length;
+      const found = demoData.persons.filter(p => p.status === "found").length;
+      const states = new Set(demoData.persons.map(p => p.state)).size;
+      const today = demoData.persons.filter(p => {
+        const reportDate = new Date(p.reportDate);
+        const now = new Date();
+        return reportDate.toDateString() === now.toDateString();
+      }).length;
+      
+      animateNumber("statTotal", total);
+      animateNumber("statFound", found);
+      animateNumber("statStates", states);
+      animateNumber("statToday", today);
+    }
+    
+    function animateNumber(id, target) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      let current = 0;
+      const increment = Math.ceil(target / 30);
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        el.textContent = current.toLocaleString("ar-DZ");
+      }, 30);
+    }
+    
+    // Populate state filter
+    function populateStates() {
+      const select = document.getElementById("filterState");
+      const states = [...new Set(demoData.persons.map(p => p.state))].sort();
+      states.forEach(state => {
+        const option = document.createElement("option");
+        option.value = state;
+        option.textContent = state;
+        select.appendChild(option);
+      });
+    }
+    
+    // Populate municipality filter based on state
+    function populateMunicipalities(state) {
+      const select = document.getElementById("filterMunicipality");
+      select.innerHTML = '<option value="">الكل</option>';
+      if (state && demoData.municipalities[state]) {
+        demoData.municipalities[state].forEach(mun => {
+          const option = document.createElement("option");
+          option.value = mun;
+          option.textContent = mun;
+          select.appendChild(option);
+        });
+      }
+    }
+    
+    // Render cards
+    function renderCards(persons) {
+      const container = document.getElementById("cardsContainer");
+      const emptyState = document.getElementById("emptyState");
+      
+      if (persons.length === 0) {
+        container.innerHTML = "";
+        emptyState.classList.remove("d-none");
+        return;
+      }
+      
+      emptyState.classList.add("d-none");
+      container.innerHTML = persons.map(person => `
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="person-card ${getStatusClass(person.status)}" data-animate>
+            <div class="card-image-wrapper">
+              <img src="${person.mainImage}" alt="${person.firstName} ${person.lastName}" class="card-image" loading="lazy">
+              <span class="card-status ${getStatusClass(person.status)}">${getStatusLabel(person.status)}</span>
+            </div>
+            <div class="card-body">
+              <h5 class="card-name">${person.firstName} ${person.lastName}</h5>
+              <div class="card-info">
+                <div class="card-info-item"><i class="fas fa-birthday-cake"></i> ${person.age} سنة - ${getAgeCategory(person.age)}</div>
+                <div class="card-info-item"><i class="fas fa-venus-mars"></i> ${getGenderLabel(person.gender)}</div>
+                <div class="card-info-item"><i class="fas fa-map-marker-alt"></i> ${person.state} - ${person.municipality}</div>
+                <div class="card-info-item"><i class="fas fa-calendar-alt"></i> ${formatDate(person.dateMissing)}</div>
+                <div class="card-info-item"><i class="fas fa-clock"></i> ${person.daysMissing} يوم</div>
+                <div class="card-info-item"><i class="fas fa-eye"></i> ${person.views.toLocaleString("ar-DZ")} مشاهدة</div>
+                ${person.foundDate ? `<div class="card-info-item found-date"><i class="fas fa-check-circle"></i> تم العثور: ${formatDate(person.foundDate)}</div>` : ""}
+              </div>
+              <div class="card-footer-actions">
+                <a href="pages/detail.html?id=${person.id}" class="btn-card btn-card-primary">عرض التفاصيل</a>
+                <button class="btn-card btn-card-outline" onclick="shareReport(demoData.persons.find(p => p.id === '${person.id}'), 'copy')">
+                  <i class="fas fa-share-alt"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join("");
+      
+      initLazyLoading();
+      initScrollAnimations();
+    }
+    
+    // Filter and search
+    function filterPersons() {
+      let filtered = [...demoData.persons];
+      
+      // Search
+      const searchTerm = document.getElementById("searchInput").value.toLowerCase().trim();
+      if (searchTerm) {
+        filtered = filtered.filter(p => 
+          p.firstName.toLowerCase().includes(searchTerm) ||
+          p.lastName.toLowerCase().includes(searchTerm) ||
+          p.id.toLowerCase().includes(searchTerm) ||
+          `${p.firstName} ${p.lastName}`.toLowerCase().includes(searchTerm)
+        );
+      }
+      
+      // State
+      const state = document.getElementById("filterState").value;
+      if (state) filtered = filtered.filter(p => p.state === state);
+      
+      // Municipality
+      const municipality = document.getElementById("filterMunicipality").value;
+      if (municipality) filtered = filtered.filter(p => p.municipality === municipality);
+      
+      // Gender
+      const gender = document.getElementById("filterGender").value;
+      if (gender) filtered = filtered.filter(p => p.gender === gender);
+      
+      // Age
+      const ageFilter = document.getElementById("filterAge").value;
+      if (ageFilter) {
+        filtered = filtered.filter(p => {
+          if (ageFilter === "child") return p.age < 13;
+          if (ageFilter === "teen") return p.age >= 13 && p.age < 18;
+          if (ageFilter === "adult") return p.age >= 18 && p.age < 60;
+          if (ageFilter === "senior") return p.age >= 60;
+        });
+      }
+      
+      // Status
+      const status = document.getElementById("filterStatus").value;
+      if (status) filtered = filtered.filter(p => p.status === status);
+      
+      // Date range
+      const dateFrom = document.getElementById("filterDateFrom").value;
+      const dateTo = document.getElementById("filterDateTo").value;
+      if (dateFrom) filtered = filtered.filter(p => new Date(p.dateMissing) >= new Date(dateFrom));
+      if (dateTo) filtered = filtered.filter(p => new Date(p.dateMissing) <= new Date(dateTo));
+      
+      // Sort
+      const sort = document.getElementById("filterSort").value;
+      if (sort === "newest") filtered.sort((a, b) => new Date(b.dateMissing) - new Date(a.dateMissing));
+      if (sort === "oldest") filtered.sort((a, b) => new Date(a.dateMissing) - new Date(b.dateMissing));
+      if (sort === "mostViewed") filtered.sort((a, b) => b.views - a.views);
+      
+      renderCards(filtered);
+    }
+    
+    // Event listeners
+    document.addEventListener("DOMContentLoaded", () => {
+      updateStats();
+      populateStates();
+      renderCards(demoData.persons);
+      
+      document.getElementById("searchInput").addEventListener("input", filterPersons);
+      document.getElementById("searchBtn").addEventListener("click", filterPersons);
+      document.getElementById("filterState").addEventListener("change", (e) => {
+        populateMunicipalities(e.target.value);
+        filterPersons();
+      });
+      document.getElementById("filterMunicipality").addEventListener("change", filterPersons);
+      document.getElementById("filterGender").addEventListener("change", filterPersons);
+      document.getElementById("filterAge").addEventListener("change", filterPersons);
+      document.getElementById("filterStatus").addEventListener("change", filterPersons);
+      document.getElementById("filterSort").addEventListener("change", filterPersons);
+      document.getElementById("filterDateFrom").addEventListener("change", filterPersons);
+      document.getElementById("filterDateTo").addEventListener("change", filterPersons);
+      
+      document.getElementById("applyFilters").addEventListener("click", filterPersons);
+      document.getElementById("resetFilters").addEventListener("click", () => {
+        document.getElementById("searchInput").value = "";
+        document.getElementById("filterState").value = "";
+        document.getElementById("filterMunicipality").innerHTML = '<option value="">الكل</option>';
+        document.getElementById("filterGender").value = "";
+        document.getElementById("filterAge").value = "";
+        document.getElementById("filterStatus").value = "";
+        document.getElementById("filterSort").value = "newest";
+        document.getElementById("filterDateFrom").value = "";
+        document.getElementById("filterDateTo").value = "";
+        renderCards(demoData.persons);
+      });
+    });
+  </script>
+</body>
+</html>
