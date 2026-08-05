@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الإحصائيات | مفقودين الجزائر</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="emergency-bar"><div class="container">
+    <span><i class="fas fa-phone-alt me-2"></i>أرقام الطوارئ:</span>
+    <a href="tel:1548">الشرطة 1548</a><a href="tel:1055">الدرك 1055</a><a href="tel:1021">الحماية المدنية 1021</a>
+  </div></div>
+  <nav class="navbar navbar-expand-lg"><div class="container">
+    <a class="navbar-brand" href="../index.html"><div class="brand-icon"><i class="fas fa-search"></i></div><span>مفقودين الجزائر</span></a>
+    <div class="collapse navbar-collapse"><ul class="navbar-nav me-auto">
+      <li class="nav-item"><a class="nav-link" href="../index.html">الرئيسية</a></li>
+      <li class="nav-item"><a class="nav-link" href="states.html">الولايات</a></li>
+      <li class="nav-item"><a class="nav-link active" href="statistics.html">الإحصائيات</a></li>
+      <li class="nav-item"><a class="nav-link" href="about.html">من نحن</a></li>
+    </ul><a href="report.html" class="btn btn-light text-danger fw-bold">نشر بلاغ</a></div>
+  </div></nav>
+
+  <section class="stats-section"><div class="container">
+    <h2 class="section-title"><i class="fas fa-chart-bar text-primary-red"></i> الإحصائيات</h2>
+    <div class="row">
+      <div class="col-md-6"><div class="stat-widget"><h4><i class="fas fa-map"></i> البلاغات حسب الولاية</h4><canvas id="statesChart"></canvas></div></div>
+      <div class="col-md-6"><div class="stat-widget"><h4><i class="fas fa-venus-mars"></i> البلاغات حسب الجنس</h4><canvas id="genderChart"></canvas></div></div>
+      <div class="col-md-6"><div class="stat-widget"><h4><i class="fas fa-birthday-cake"></i> البلاغات حسب الفئة العمرية</h4><canvas id="ageChart"></canvas></div></div>
+      <div class="col-md-6"><div class="stat-widget"><h4><i class="fas fa-check-circle"></i> نسبة العثور</h4><canvas id="foundChart"></canvas></div></div>
+    </div>
+  </div></section>
+
+  <footer class="footer"><div class="container"><div class="footer-bottom"><p>جميع الحقوق محفوظة &copy; 2026 مفقودين الجزائر</p></div></div></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const statesCtx = document.getElementById('statesChart').getContext('2d');
+      new Chart(statesCtx, { type: 'bar', data: { labels: demoData.states.slice(0,8).map(s=>s.name), datasets: [{ label:'البلاغات', data: demoData.states.slice(0,8).map(s=>s.count), backgroundColor:'#d32f2f' }] }, options: { indexAxis:'y', responsive:true } });
+
+      const genderCtx = document.getElementById('genderChart').getContext('2d');
+      const maleCount = demoData.persons.filter(p=>p.gender==='male').length;
+      new Chart(genderCtx, { type: 'doughnut', data: { labels:['ذكر','أنثى'], datasets: [{ data:[maleCount, demoData.persons.length-maleCount], backgroundColor:['#d32f2f','#006233'] }] } });
+
+      const ageCtx = document.getElementById('ageChart').getContext('2d');
+      const child = demoData.persons.filter(p=>p.age<13).length;
+      const teen = demoData.persons.filter(p=>p.age>=13&&p.age<18).length;
+      const adult = demoData.persons.filter(p=>p.age>=18&&p.age<60).length;
+      const senior = demoData.persons.filter(p=>p.age>=60).length;
+      new Chart(ageCtx, { type: 'bar', data: { labels:['طفل','مراهق','بالغ','مسن'], datasets: [{ data:[child,teen,adult,senior], backgroundColor:['#ffcdd2','#ffeb3b','#4caf50','#90caf9'] }] } });
+
+      const foundCtx = document.getElementById('foundChart').getContext('2d');
+      const found = demoData.persons.filter(p=>p.status==='found').length;
+      new Chart(foundCtx, { type: 'pie', data: { labels:['مفقود','تم العثور'], datasets: [{ data:[demoData.persons.length-found, found], backgroundColor:['#d32f2f','#2e7d32'] }] } });
+    });
+  </script>
+</body>
+</html>
