@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الولايات | مفقودين الجزائر</title>
+  <meta name="description" content="استعراض البلاغات حسب الولاية - خريطة الجزائر التفاعلية">
+  <link rel="canonical" href="https://mafkoudin-dz.com/pages/states.html">
+  
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  
+  <style>
+    #algeriaMap { height: 500px; border-radius: 12px; }
+    .state-card-mini { 
+      background: #fff; border-radius: 8px; padding: 1rem; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid #e0e0e0;
+      transition: all 0.3s; cursor: pointer;
+    }
+    .state-card-mini:hover { 
+      transform: translateY(-3px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); 
+      border-color: #d32f2f;
+    }
+    .state-card-mini .count { 
+      font-size: 1.5rem; font-weight: 800; color: #d32f2f; 
+    }
+    .leaflet-popup-content-wrapper { border-radius: 12px; }
+    .leaflet-popup-content { text-align: center; font-family: 'Segoe UI', sans-serif; }
+    .popup-state-name { font-weight: 700; font-size: 1.1rem; }
+    .popup-state-count { color: #d32f2f; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <!-- Emergency Bar -->
+  <div class="emergency-bar">
+    <div class="container">
+      <span><i class="fas fa-phone-alt me-2"></i>أرقام الطوارئ:</span>
+      <a href="tel:1548">الشرطة 1548</a>
+      <a href="tel:1055">الدرك 1055</a>
+      <a href="tel:1021">الحماية المدنية 1021</a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <div class="brand-icon"><i class="fas fa-search"></i></div>
+        <span>مفقودين الجزائر</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="../index.html">الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link active" href="states.html">الولايات</a></li>
+          <li class="nav-item"><a class="nav-link" href="statistics.html">الإحصائيات</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">من نحن</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">اتصل بنا</a></li>
+        </ul>
+        <div class="d-flex gap-2">
+          <a href="report.html" class="btn btn-light text-danger fw-bold"><i class="fas fa-plus-circle me-1"></i>نشر بلاغ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- States Section -->
+  <section class="states-section">
+    <div class="container">
+      <h2 class="section-title"><i class="fas fa-map-marked-alt text-primary-red"></i> خريطة الجزائر</h2>
+      <p class="section-subtitle">استعرض البلاغات حسب الولاية - اضغط على أي ولاية لعرض البلاغات الخاصة بها</p>
+      
+      <!-- Map -->
+      <div class="mb-4">
+        <div id="algeriaMap"></div>
+      </div>
+      
+      <!-- States Grid -->
+      <h3 class="mb-3"><i class="fas fa-list text-primary-red me-2"></i>قائمة الولايات</h3>
+      <div class="row g-3" id="statesGrid">
+        <!-- States will be rendered here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="footer-brand">
+            <div class="brand-icon"><i class="fas fa-search"></i></div>
+            <span>مفقودين الجزائر</span>
+          </div>
+          <p class="footer-desc">منصة وطنية تطوعية تهدف إلى المساعدة في العثور على الأشخاص المفقودين في الجزائر.</p>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4">
+          <h4 class="footer-title">روابط سريعة</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html">الرئيسية</a></li>
+            <li><a href="states.html">الولايات</a></li>
+            <li><a href="statistics.html">الإحصائيات</a></li>
+            <li><a href="report.html">نشر بلاغ</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4">
+          <h4 class="footer-title">المعلومات</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">من نحن</a></li>
+            <li><a href="contact.html">اتصل بنا</a></li>
+            <li><a href="privacy.html">سياسة الخصوصية</a></li>
+            <li><a href="disclaimer.html">إخلاء المسؤولية</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4 mb-4">
+          <h4 class="footer-title">أرقام الطوارئ</h4>
+          <ul class="footer-links">
+            <li><a href="tel:1548">الشرطة الوطنية: 1548</a></li>
+            <li><a href="tel:1055">الدرك الوطني: 1055</a></li>
+            <li><a href="tel:1021">الحماية المدنية: 1021</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>جميع الحقوق محفوظة &copy; 2026 مفقودين الجزائر</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Main JS -->
+  <script src="../js/main.js"></script>
+  
+  <script>
+    let map;
+    
+    function initMap() {
+      // Center on Algeria
+      map = L.map('algeriaMap').setView([28.5, 1.6], 5);
+      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
+      // Add markers for each state
+      demoData.states.forEach(state => {
+        const marker = L.marker([state.lat, state.lng]).addTo(map);
+        marker.bindPopup(`
+          <div class="popup-state-name">${state.name}</div>
+          <div class="popup-state-count">${state.count} بلاغ</div>
+          <a href="../index.html?state=${encodeURIComponent(state.name)}" class="btn btn-sm btn-danger mt-2" style="background:#d32f2f;color:#fff;border:none;padding:4px 12px;border-radius:4px;font-size:0.8rem;">عرض البلاغات</a>
+        `);
+      });
+    }
+    
+    function renderStates() {
+      const grid = document.getElementById("statesGrid");
+      grid.innerHTML = demoData.states.map(state => `
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="state-card-mini" onclick="window.location.href='../index.html?state=${encodeURIComponent(state.name)}'">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <i class="fas fa-map-marker-alt text-primary-red"></i>
+              <span class="count">${state.count}</span>
+            </div>
+            <div class="state-name fw-bold">${state.name}</div>
+            <small class="text-muted">بلاغ مفقود</small>
+          </div>
+        </div>
+      `).join("");
+    }
+    
+    document.addEventListener("DOMContentLoaded", () => {
+      initMap();
+      renderStates();
+    });
+  </script>
+</body>
+  </html>
+  
