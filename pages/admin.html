@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة الإدارة | مفقودين الجزائر</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container-fluid"><div class="row">
+    <div class="col-lg-2 admin-sidebar p-0">
+      <div class="admin-sidebar-brand"><div class="brand-icon"><i class="fas fa-search"></i></div><span>لوحة الإدارة</span></div>
+      <a href="#" class="admin-nav-link active"><i class="fas fa-file-alt"></i> البلاغات</a>
+      <a href="#" class="admin-nav-link"><i class="fas fa-users"></i> المستخدمون</a>
+      <a href="#" class="admin-nav-link"><i class="fas fa-map"></i> الولايات</a>
+      <a href="#" class="admin-nav-link"><i class="fas fa-images"></i> الصور</a>
+      <a href="#" class="admin-nav-link"><i class="fas fa-exclamation-triangle"></i> البلاغات المكررة</a>
+      <a href="../index.html" class="admin-nav-link"><i class="fas fa-arrow-left"></i> العودة للموقع</a>
+    </div>
+    <div class="col-lg-10 admin-main">
+      <h2 class="mb-4">إدارة البلاغات</h2>
+      <div class="admin-card">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead><tr><th>رقم البلاغ</th><th>الاسم</th><th>الولاية</th><th>التاريخ</th><th>الحالة</th><th>المشاهدات</th><th>الإجراءات</th></tr></thead>
+            <tbody id="adminTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById('adminTableBody').innerHTML = demoData.persons.map(p => `
+        <tr>
+          <td><span class="badge bg-light text-dark">${p.id}</span></td>
+          <td><strong>${p.firstName} ${p.lastName}</strong><br><small class="text-muted">${p.age} سنة</small></td>
+          <td>${p.state}</td>
+          <td>${p.reportDate}</td>
+          <td><span class="badge badge-${p.status==='found'?'found':(p.status==='pending'?'pending':'approved')}">${p.status==='found'?'تم العثور':'منشور'}</span></td>
+          <td>${p.views}</td>
+          <td>
+            <button class="btn-admin btn-admin-approve"><i class="fas fa-check"></i></button>
+            <button class="btn-admin btn-admin-edit"><i class="fas fa-edit"></i></button>
+            <button class="btn-admin btn-admin-reject"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+      `).join('');
+    });
+  </script>
+</body>
+</html>
