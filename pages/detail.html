@@ -14,7 +14,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="../css/style.css?v=hero-stats-3">
+  <link rel="stylesheet" href="../css/style.css?v=detail-social-4">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" sizes="180x180">
   <meta property="og:description" content="تفاصيل بلاغ الشخص المفقود، تاريخ ومكان الاختفاء، الوصف، وطرق الإبلاغ عن أي معلومة.">
@@ -111,15 +111,15 @@
             <!-- Share Card -->
             <div class="detail-info-card mt-4">
               <h3><i class="fas fa-share-alt"></i> مشاركة البلاغ</h3>
-              <div class="d-flex flex-wrap gap-2">
-                <button class="btn btn-sm" style="background:#1877f2;color:#fff" onclick="shareCurrent('facebook')"><i class="fab fa-facebook-f"></i></button>
-                <button class="btn btn-sm" style="background:#0084ff;color:#fff" onclick="shareCurrent('messenger')"><i class="fab fa-facebook-messenger"></i></button>
-                <button class="btn btn-sm" style="background:#25d366;color:#fff" onclick="shareCurrent('whatsapp')"><i class="fab fa-whatsapp"></i></button>
-                <button class="btn btn-sm" style="background:#0088cc;color:#fff" onclick="shareCurrent('telegram')"><i class="fab fa-telegram-plane"></i></button>
-                <button class="btn btn-sm" style="background:#000;color:#fff" onclick="shareCurrent('twitter')"><i class="fab fa-x-twitter"></i></button>
-                <button class="btn btn-sm btn-outline-secondary" onclick="shareCurrent('email')"><i class="fas fa-envelope"></i></button>
-                <button class="btn btn-sm btn-outline-secondary" onclick="shareCurrent('copy')"><i class="fas fa-link"></i></button>
-                <button class="btn btn-sm btn-outline-danger" onclick="printReport()"><i class="fas fa-print"></i></button>
+              <div class="share-actions" role="group" aria-label="خيارات مشاركة البلاغ">
+                <button type="button" class="share-button share-facebook" aria-label="مشاركة عبر فيسبوك" title="مشاركة عبر فيسبوك" onclick="shareCurrent('facebook')"><i class="fab fa-facebook-f"></i><span>فيسبوك</span></button>
+                <button type="button" class="share-button share-messenger" aria-label="مشاركة عبر ماسنجر" title="مشاركة عبر ماسنجر" onclick="shareCurrent('messenger')"><i class="fab fa-facebook-messenger"></i><span>ماسنجر</span></button>
+                <button type="button" class="share-button share-whatsapp" aria-label="مشاركة عبر واتساب" title="مشاركة عبر واتساب" onclick="shareCurrent('whatsapp')"><i class="fab fa-whatsapp"></i><span>واتساب</span></button>
+                <button type="button" class="share-button share-telegram" aria-label="مشاركة عبر تيليغرام" title="مشاركة عبر تيليغرام" onclick="shareCurrent('telegram')"><i class="fab fa-telegram-plane"></i><span>تيليغرام</span></button>
+                <button type="button" class="share-button share-twitter" aria-label="مشاركة عبر X" title="مشاركة عبر X" onclick="shareCurrent('twitter')"><i class="fab fa-x-twitter"></i><span>X</span></button>
+                <button type="button" class="share-button share-email" aria-label="إرسال عبر البريد الإلكتروني" title="إرسال عبر البريد الإلكتروني" onclick="shareCurrent('email')"><i class="fas fa-envelope"></i><span>البريد</span></button>
+                <button type="button" class="share-button share-copy" aria-label="نسخ رابط البلاغ" title="نسخ رابط البلاغ" onclick="shareCurrent('copy')"><i class="fas fa-link"></i><span>نسخ الرابط</span></button>
+                <button type="button" class="share-button share-print" aria-label="طباعة البلاغ" title="طباعة البلاغ" onclick="printReport()"><i class="fas fa-print"></i><span>طباعة</span></button>
               </div>
             </div>
           </div>

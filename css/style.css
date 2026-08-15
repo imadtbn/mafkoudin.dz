@@ -2948,3 +2948,100 @@ textarea:focus-visible {
     font-size: .7rem;
   }
 }
+
+/* ============================================
+   DETAIL SOCIAL SHARE ACTIONS
+   ============================================ */
+.share-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+  margin-top: var(--space-4);
+}
+
+.share-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: .65rem .7rem;
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.share-button i {
+  flex: 0 0 auto;
+  width: 1.1rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.share-button:hover,
+.share-button:focus-visible {
+  color: #fff;
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+.share-button:focus-visible,
+.btn-contact:focus-visible {
+  outline: 3px solid rgba(255, 193, 7, .75);
+  outline-offset: 2px;
+}
+
+.share-button:active,
+.btn-contact:active {
+  transform: translateY(0);
+}
+
+.share-facebook { background: #1877f2; }
+.share-messenger { background: #0084ff; }
+.share-whatsapp { background: #25d366; }
+.share-telegram { background: #0088cc; }
+.share-twitter { background: #111; }
+.share-email { background: #64748b; }
+.share-copy { background: var(--primary-600); }
+.share-print { background: #475569; }
+
+@media (min-width: 768px) {
+  .share-actions {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575px) {
+  .share-actions {
+    gap: .55rem;
+  }
+
+  .share-button {
+    min-height: 46px;
+    padding: .7rem .45rem;
+    font-size: .76rem;
+  }
+
+  .share-button i {
+    font-size: .95rem;
+  }
+
+  .contact-buttons {
+    grid-template-columns: 1fr;
+    gap: .65rem;
+  }
+
+  .btn-contact {
+    min-height: 48px;
+    padding: .75rem 1rem;
+  }
+}
