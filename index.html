@@ -389,7 +389,7 @@
                 ${person.foundDate ? `<div class="card-info-item found-date"><i class="fas fa-check-circle"></i> تم العثور: ${formatDate(person.foundDate)}</div>` : ""}
               </div>
               <div class="card-footer-actions">
-                <a href="${getReportUrl(person)}" class="btn-card btn-card-primary">عرض التفاصيل</a>
+                <a href="${getDetailUrl(person)}" class="btn-card btn-card-primary">عرض التفاصيل</a>
                 <button class="btn-card btn-card-outline" onclick="shareReport(demoData.persons.find(p => p.id === '${person.id}'), 'copy')">
                   <i class="fas fa-share-alt"></i>
                 </button>

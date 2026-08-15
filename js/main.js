@@ -1,8 +1,12 @@
 const SITE_URL = "https://imadtbn.github.io/mafkoudin.dz";
 const SITE_NAME = "مفقودين الجزائر | Mafkoudin DZ";
 
-function getReportUrl(person) {
+function getDetailUrl(person) {
   return `${SITE_URL}/pages/detail.html?id=${encodeURIComponent(person.id)}`;
+}
+
+function getReportUrl(person) {
+  return `${SITE_URL}/reports/${encodeURIComponent(person.id)}/`;
 }
 
 function setMetaContent(selector, value, attribute = "content") {

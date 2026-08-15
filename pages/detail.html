@@ -256,7 +256,7 @@
             </div>
             <div class="detail-info-row" id="reporterEmailRow">
               <span class="detail-info-label">البريد الإلكتروني</span>
-              <span class="detail-info-value" id="reporterEmail">---</span>
+              <a class="detail-info-value detail-email-value" id="reporterEmail" href="#" aria-label="إرسال بريد إلكتروني">---</a>
             </div>
             
             <div class="contact-buttons mt-4">
@@ -356,11 +356,12 @@
       
       // Share and SEO metadata for the current report.
       const reportUrl = getReportUrl(currentPerson);
+      const detailUrl = getDetailUrl(currentPerson);
       const reportTitle = `${currentPerson.firstName} ${currentPerson.lastName} - مفقودين الجزائر`;
       const reportDescription = `بلاغ ${getStatusLabel(currentPerson.status)}: ${currentPerson.firstName} ${currentPerson.lastName}، ${currentPerson.age} سنة، ${currentPerson.state}، تاريخ الاختفاء ${formatDate(currentPerson.dateMissing)}.`;
       document.title = reportTitle;
       document.querySelector('meta[name="description"]').content = reportDescription;
-      document.querySelector('link[rel="canonical"]').href = reportUrl;
+      document.querySelector('link[rel="canonical"]').href = detailUrl;
       setMetaContent('meta[property="og:title"]', reportTitle);
       setMetaContent('meta[property="og:description"]', reportDescription);
       setMetaContent('meta[property="og:url"]', reportUrl);
@@ -380,7 +381,7 @@
           headline: reportTitle,
           description: reportDescription,
           image: [currentPerson.mainImage],
-          url: reportUrl,
+          url: detailUrl,
           datePublished: currentPerson.reportDate,
           dateModified: currentPerson.foundDate || currentPerson.reportDate,
           inLanguage: 'ar-DZ',
@@ -461,7 +462,10 @@
       
       const emailRow = document.getElementById("reporterEmailRow");
       if (currentPerson.reporterEmail) {
-        document.getElementById("reporterEmail").textContent = currentPerson.reporterEmail;
+        const emailLink = document.getElementById("reporterEmail");
+        emailLink.textContent = currentPerson.reporterEmail;
+        emailLink.href = `mailto:${encodeURIComponent(currentPerson.reporterEmail)}`;
+        emailLink.title = `إرسال رسالة إلى ${currentPerson.reporterEmail}`;
         emailRow.style.display = "flex";
       } else {
         emailRow.style.display = "none";

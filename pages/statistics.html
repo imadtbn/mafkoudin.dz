@@ -1,17 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الإحصائيات | مفقودين الجزائر</title>
+  <title>الإحصائيات العامة | مفقودين الجزائر</title>
+  <meta name="description" content="إحصائيات عامة وتفاعلية عن بلاغات الأشخاص المفقودين في الجزائر حسب الحالة والولاية والجنس والفئة العمرية.">
+  <link rel="canonical" href="https://imadtbn.github.io/mafkoudin.dz/pages/statistics.html">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" sizes="180x180">
-  <meta property="og:title" content="الإحصائيات | مفقودين الجزائر">
-  <meta property="og:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين ونشر البلاغات ومشاركتها للمساعدة في إعادتهم إلى ذويهم.">
+  <meta property="og:title" content="الإحصائيات العامة | مفقودين الجزائر">
+  <meta property="og:description" content="إحصائيات عامة وتفاعلية عن بلاغات الأشخاص المفقودين في الجزائر.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://imadtbn.github.io/mafkoudin.dz/pages/statistics.html">
   <meta property="og:image" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
@@ -23,60 +24,261 @@
   <meta property="og:site_name" content="مفقودين الجزائر | Mafkoudin DZ">
   <meta property="og:locale" content="ar_DZ">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="الإحصائيات | مفقودين الجزائر">
-  <meta name="twitter:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين ونشر البلاغات ومشاركتها للمساعدة في إعادتهم إلى ذويهم.">
+  <meta name="twitter:title" content="الإحصائيات العامة | مفقودين الجزائر">
+  <meta name="twitter:description" content="إحصائيات عامة وتفاعلية عن بلاغات الأشخاص المفقودين في الجزائر.">
   <meta name="twitter:image" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
   <meta name="twitter:url" content="https://imadtbn.github.io/mafkoudin.dz/pages/statistics.html">
   <meta name="robots" content="index,follow,max-image-preview:large">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="emergency-bar"><div class="container">
-    <span><i class="fas fa-phone-alt me-2"></i>أرقام الطوارئ:</span>
-    <a href="tel:1548">الشرطة 1548</a><a href="tel:1055">الدرك 1055</a><a href="tel:1021">الحماية المدنية 1021</a>
-  </div></div>
-  <nav class="navbar navbar-expand-lg"><div class="container">
-    <a class="navbar-brand" href="../index.html"><span class="brand-icon"><img src="../assets/brand-mark.svg" alt="" width="44" height="44" aria-hidden="true"></span><span>مفقودين الجزائر</span></a>
-    <div class="collapse navbar-collapse"><ul class="navbar-nav me-auto">
-      <li class="nav-item"><a class="nav-link" href="../index.html">الرئيسية</a></li>
-      <li class="nav-item"><a class="nav-link" href="states.html">الولايات</a></li>
-      <li class="nav-item"><a class="nav-link active" href="statistics.html">الإحصائيات</a></li>
-      <li class="nav-item"><a class="nav-link" href="about.html">من نحن</a></li>
-    </ul><a href="report.html" class="btn btn-light text-danger fw-bold">نشر بلاغ</a></div>
-  </div></nav>
-
-  <section class="stats-section"><div class="container">
-    <h2 class="section-title"><i class="fas fa-chart-bar text-primary-red"></i> الإحصائيات</h2>
-    <div class="row">
-      <div class="col-md-6"><div class="stat-widget"><h4><i class="fas fa-map"></i> البلاغات حسب الولاية</h4><canvas id="statesChart"></canvas></div></div>
-      <div class="col-md-6"><div class="stat-widget"><h4><i class="fas fa-venus-mars"></i> البلاغات حسب الجنس</h4><canvas id="genderChart"></canvas></div></div>
-      <div class="col-md-6"><div class="stat-widget"><h4><i class="fas fa-birthday-cake"></i> البلاغات حسب الفئة العمرية</h4><canvas id="ageChart"></canvas></div></div>
-      <div class="col-md-6"><div class="stat-widget"><h4><i class="fas fa-check-circle"></i> نسبة العثور</h4><canvas id="foundChart"></canvas></div></div>
+  <div class="emergency-bar">
+    <div class="container">
+      <span><i class="fas fa-phone-alt me-2"></i>أرقام الطوارئ:</span>
+      <a href="tel:1548"><i class="fas fa-shield-alt me-1"></i>الشرطة 1548</a>
+      <a href="tel:1055"><i class="fas fa-user-shield me-1"></i>الدرك 1055</a>
+      <a href="tel:1021"><i class="fas fa-ambulance me-1"></i>الحماية المدنية 1021</a>
     </div>
-  </div></section>
+  </div>
 
-  <footer class="footer"><div class="container"><div class="footer-bottom"><p>جميع الحقوق محفوظة &copy; 2026 مفقودين الجزائر</p></div></div></footer>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">
+        <span class="brand-icon"><img src="../assets/brand-mark.svg" alt="" width="44" height="44" aria-hidden="true"></span>
+        <span>مفقودين الجزائر</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="فتح القائمة">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="../index.html"><i class="fas fa-home me-1"></i>الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link" href="states.html"><i class="fas fa-map-marked-alt me-1"></i>الولايات</a></li>
+          <li class="nav-item"><a class="nav-link active" href="statistics.html" aria-current="page"><i class="fas fa-chart-bar me-1"></i>الإحصائيات</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i>من نحن</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1"></i>اتصل بنا</a></li>
+        </ul>
+        <a href="report.html" class="btn btn-light text-danger fw-bold"><i class="fas fa-plus-circle me-1"></i>نشر بلاغ</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="stats-section" aria-labelledby="statsTitle">
+    <div class="container">
+      <div class="stats-page-header">
+        <div>
+          <p class="stats-eyebrow"><i class="fas fa-chart-line"></i> لوحة المتابعة العامة</p>
+          <h1 id="statsTitle" class="section-title"><i class="fas fa-chart-bar text-primary-red"></i> الإحصائيات العامة</h1>
+          <p class="section-subtitle">نظرة مبسطة ومتجددة على البلاغات المسجلة في المنصة حسب الحالة والموقع والفئة العمرية.</p>
+        </div>
+        <div class="stats-updated" id="statsUpdated" aria-live="polite">يتم تحديث البيانات...</div>
+      </div>
+
+      <section class="stats-filters" aria-label="فلاتر الإحصائيات">
+        <div class="stats-filter-group">
+          <label for="statsStatusFilter">الحالة</label>
+          <select id="statsStatusFilter" class="filter-select">
+            <option value="all">كل البلاغات</option>
+            <option value="missing">المفقودون حاليا</option>
+            <option value="found">تم العثور عليهم</option>
+          </select>
+        </div>
+        <div class="stats-filter-group">
+          <label for="statsStateFilter">الولاية</label>
+          <select id="statsStateFilter" class="filter-select">
+            <option value="all">كل الولايات</option>
+          </select>
+        </div>
+        <div class="stats-filter-group">
+          <label for="statsPeriodFilter">الفترة الزمنية</label>
+          <select id="statsPeriodFilter" class="filter-select">
+            <option value="all">كل الفترات</option>
+            <option value="30">آخر 30 يومًا</option>
+            <option value="90">آخر 90 يومًا</option>
+            <option value="365">آخر سنة</option>
+          </select>
+        </div>
+        <button type="button" class="filter-btn reset-filters" id="resetStats"><i class="fas fa-undo me-1"></i>إعادة التعيين</button>
+      </section>
+
+      <section class="stats-summary-grid" aria-label="ملخص الإحصائيات">
+        <article class="stats-summary-card"><span class="stats-summary-icon bg-red"><i class="fas fa-file-alt"></i></span><span class="stats-summary-number" id="summaryTotal">0</span><span class="stats-summary-label">إجمالي البلاغات</span></article>
+        <article class="stats-summary-card"><span class="stats-summary-icon bg-orange"><i class="fas fa-search"></i></span><span class="stats-summary-number" id="summaryMissing">0</span><span class="stats-summary-label">بلاغات مفتوحة</span></article>
+        <article class="stats-summary-card"><span class="stats-summary-icon bg-green"><i class="fas fa-check-circle"></i></span><span class="stats-summary-number" id="summaryFound">0</span><span class="stats-summary-label">تم العثور عليهم</span></article>
+        <article class="stats-summary-card"><span class="stats-summary-icon bg-blue"><i class="fas fa-map-marker-alt"></i></span><span class="stats-summary-number" id="summaryStates">0</span><span class="stats-summary-label">ولايات ممثلة</span></article>
+      </section>
+
+      <section class="stats-chart-grid" aria-label="الرسوم البيانية">
+        <article class="stat-widget stats-chart-card stats-chart-wide">
+          <div class="stats-widget-heading"><h2><i class="fas fa-map"></i> البلاغات حسب الولاية</h2><span>حسب البيانات المفلترة</span></div>
+          <div class="chart-frame chart-frame-tall"><canvas id="statesChart" aria-label="رسم بياني للبلاغات حسب الولاية"></canvas></div>
+        </article>
+        <article class="stat-widget stats-chart-card">
+          <div class="stats-widget-heading"><h2><i class="fas fa-chart-pie"></i> الحالة الحالية</h2><span>مفقود / عُثر عليه</span></div>
+          <div class="chart-frame"><canvas id="statusChart" aria-label="رسم بياني لحالات البلاغات"></canvas></div>
+        </article>
+        <article class="stat-widget stats-chart-card">
+          <div class="stats-widget-heading"><h2><i class="fas fa-users"></i> الفئات العمرية</h2><span>توزيع الأعمار</span></div>
+          <div class="chart-frame"><canvas id="ageChart" aria-label="رسم بياني للفئات العمرية"></canvas></div>
+        </article>
+        <article class="stat-widget stats-chart-card stats-chart-wide">
+          <div class="stats-widget-heading"><h2><i class="fas fa-calendar-alt"></i> البلاغات عبر الزمن</h2><span>حسب تاريخ البلاغ</span></div>
+          <div class="chart-frame chart-frame-tall"><canvas id="timelineChart" aria-label="رسم بياني زمني للبلاغات"></canvas></div>
+        </article>
+      </section>
+
+      <section class="stats-table-widget stat-widget" aria-labelledby="stateTableTitle">
+        <div class="stats-widget-heading"><h2 id="stateTableTitle"><i class="fas fa-list-ol"></i> ترتيب الولايات</h2><span id="tableResultCount">0 ولاية</span></div>
+        <div class="table-responsive">
+          <table class="stats-table">
+            <thead><tr><th scope="col">الترتيب</th><th scope="col">الولاية</th><th scope="col">عدد البلاغات</th><th scope="col">مفقود حاليا</th><th scope="col">تم العثور عليه</th></tr></thead>
+            <tbody id="stateTableBody"></tbody>
+          </table>
+        </div>
+        <p class="stats-empty d-none" id="statsEmpty">لا توجد بيانات مطابقة للفلاتر المحددة.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand"><span class="brand-icon"><img src="../assets/brand-mark.svg" alt="" width="40" height="40" aria-hidden="true"></span><span>مفقودين الجزائر</span></div>
+      <p class="footer-desc">منصة وطنية تطوعية تهدف إلى المساعدة في العثور على الأشخاص المفقودين في الجزائر.</p>
+      <div class="footer-bottom"><p>جميع الحقوق محفوظة &copy; 2026 مفقودين الجزائر</p></div>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../js/main.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const statesCtx = document.getElementById('statesChart').getContext('2d');
-      new Chart(statesCtx, { type: 'bar', data: { labels: demoData.states.slice(0,8).map(s=>s.name), datasets: [{ label:'البلاغات', data: demoData.states.slice(0,8).map(s=>s.count), backgroundColor:'#d32f2f' }] }, options: { indexAxis:'y', responsive:true } });
+    const statisticsCharts = {};
 
-      const genderCtx = document.getElementById('genderChart').getContext('2d');
-      const maleCount = demoData.persons.filter(p=>p.gender==='male').length;
-      new Chart(genderCtx, { type: 'doughnut', data: { labels:['ذكر','أنثى'], datasets: [{ data:[maleCount, demoData.persons.length-maleCount], backgroundColor:['#d32f2f','#006233'] }] } });
+    function destroyChart(name) {
+      if (statisticsCharts[name]) {
+        statisticsCharts[name].destroy();
+        delete statisticsCharts[name];
+      }
+    }
 
-      const ageCtx = document.getElementById('ageChart').getContext('2d');
-      const child = demoData.persons.filter(p=>p.age<13).length;
-      const teen = demoData.persons.filter(p=>p.age>=13&&p.age<18).length;
-      const adult = demoData.persons.filter(p=>p.age>=18&&p.age<60).length;
-      const senior = demoData.persons.filter(p=>p.age>=60).length;
-      new Chart(ageCtx, { type: 'bar', data: { labels:['طفل','مراهق','بالغ','مسن'], datasets: [{ data:[child,teen,adult,senior], backgroundColor:['#ffcdd2','#ffeb3b','#4caf50','#90caf9'] }] } });
+    function getFilteredStatisticsPersons() {
+      const status = document.getElementById('statsStatusFilter').value;
+      const state = document.getElementById('statsStateFilter').value;
+      const period = document.getElementById('statsPeriodFilter').value;
+      const now = new Date();
 
-      const foundCtx = document.getElementById('foundChart').getContext('2d');
-      const found = demoData.persons.filter(p=>p.status==='found').length;
-      new Chart(foundCtx, { type: 'pie', data: { labels:['مفقود','تم العثور'], datasets: [{ data:[demoData.persons.length-found, found], backgroundColor:['#d32f2f','#2e7d32'] }] } });
+      return demoData.persons.filter((person) => {
+        if (status !== 'all' && person.status !== status) return false;
+        if (state !== 'all' && person.state !== state) return false;
+        if (period !== 'all') {
+          const days = Number(period);
+          const reportDate = new Date(`${person.reportDate}T00:00:00`);
+          const difference = Math.floor((now - reportDate) / 86400000);
+          if (difference < 0 || difference > days) return false;
+        }
+        return true;
+      });
+    }
+
+    function numberAr(value) {
+      return Number(value || 0).toLocaleString('ar-DZ');
+    }
+
+    function updateSummary(persons) {
+      const found = persons.filter((p) => p.status === 'found').length;
+      const states = new Set(persons.map((p) => p.state)).size;
+      document.getElementById('summaryTotal').textContent = numberAr(persons.length);
+      document.getElementById('summaryMissing').textContent = numberAr(persons.length - found);
+      document.getElementById('summaryFound').textContent = numberAr(found);
+      document.getElementById('summaryStates').textContent = numberAr(states);
+      document.getElementById('statsUpdated').textContent = `آخر تحديث للبيانات: ${new Date().toLocaleDateString('ar-DZ')}`;
+    }
+
+    function chartOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 450 },
+        plugins: {
+          legend: { labels: { font: { family: 'Tahoma, Arial, sans-serif' } } }
+        },
+        scales: {
+          x: { ticks: { precision: 0, font: { family: 'Tahoma, Arial, sans-serif' } }, grid: { color: 'rgba(148,163,184,.15)' } },
+          y: { ticks: { font: { family: 'Tahoma, Arial, sans-serif' } }, grid: { color: 'rgba(148,163,184,.15)' } }
+        }
+      };
+    }
+
+    function renderStatistics() {
+      const persons = getFilteredStatisticsPersons();
+      updateSummary(persons);
+      const empty = document.getElementById('statsEmpty');
+      empty.classList.toggle('d-none', persons.length > 0);
+
+      const stateMap = {};
+      persons.forEach((person) => {
+        if (!stateMap[person.state]) stateMap[person.state] = { total: 0, missing: 0, found: 0 };
+        stateMap[person.state].total += 1;
+        stateMap[person.state][person.status] += 1;
+      });
+      const stateRows = Object.entries(stateMap).sort((a, b) => b[1].total - a[1].total || a[0].localeCompare(b[0], 'ar'));
+      document.getElementById('tableResultCount').textContent = `${numberAr(stateRows.length)} ولاية`;
+      document.getElementById('stateTableBody').innerHTML = stateRows.map(([state, stats], index) => `<tr><td>${numberAr(index + 1)}</td><td><strong>${state}</strong></td><td>${numberAr(stats.total)}</td><td><span class="status-dot status-dot-missing"></span>${numberAr(stats.missing)}</td><td><span class="status-dot status-dot-found"></span>${numberAr(stats.found)}</td></tr>`).join('');
+
+      destroyChart('states');
+      statisticsCharts.states = new Chart(document.getElementById('statesChart'), {
+        type: 'bar',
+        data: { labels: stateRows.map(([state]) => state), datasets: [{ label: 'عدد البلاغات', data: stateRows.map(([, stats]) => stats.total), backgroundColor: '#d32f2f', borderRadius: 8, maxBarThickness: 28 }] },
+        options: { ...chartOptions(), indexAxis: 'y' }
+      });
+
+      const found = persons.filter((p) => p.status === 'found').length;
+      destroyChart('status');
+      statisticsCharts.status = new Chart(document.getElementById('statusChart'), {
+        type: 'doughnut',
+        data: { labels: ['مفقود حاليا', 'تم العثور عليه'], datasets: [{ data: [persons.length - found, found], backgroundColor: ['#d32f2f', '#138a43'], borderWidth: 0 }] },
+        options: { ...chartOptions(), cutout: '62%', scales: { x: { display: false }, y: { display: false } } }
+      });
+
+      const ageBuckets = { 'طفل': 0, 'مراهق': 0, 'بالغ': 0, 'مسن': 0 };
+      persons.forEach((person) => { ageBuckets[getAgeCategory(person.age)] += 1; });
+      destroyChart('age');
+      statisticsCharts.age = new Chart(document.getElementById('ageChart'), {
+        type: 'bar',
+        data: { labels: Object.keys(ageBuckets), datasets: [{ label: 'عدد البلاغات', data: Object.values(ageBuckets), backgroundColor: ['#fca5a5', '#fcd34d', '#4ade80', '#93c5fd'], borderRadius: 8, maxBarThickness: 44 }] },
+        options: { ...chartOptions(), plugins: { legend: { display: false } } }
+      });
+
+      const timeline = {};
+      persons.forEach((person) => { timeline[person.reportDate] = (timeline[person.reportDate] || 0) + 1; });
+      const timelineRows = Object.entries(timeline).sort(([a], [b]) => a.localeCompare(b));
+      destroyChart('timeline');
+      statisticsCharts.timeline = new Chart(document.getElementById('timelineChart'), {
+        type: 'line',
+        data: { labels: timelineRows.map(([date]) => formatDate(date)), datasets: [{ label: 'بلاغات جديدة', data: timelineRows.map(([, count]) => count), borderColor: '#138a43', backgroundColor: 'rgba(19,138,67,.14)', fill: true, tension: .35, pointRadius: 5, pointBackgroundColor: '#138a43' }] },
+        options: chartOptions()
+      });
+    }
+
+    function populateStatisticsStates() {
+      const select = document.getElementById('statsStateFilter');
+      [...new Set(demoData.persons.map((person) => person.state))].sort((a, b) => a.localeCompare(b, 'ar')).forEach((state) => {
+        const option = document.createElement('option');
+        option.value = state;
+        option.textContent = state;
+        select.appendChild(option);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      populateStatisticsStates();
+      ['statsStatusFilter', 'statsStateFilter', 'statsPeriodFilter'].forEach((id) => document.getElementById(id).addEventListener('change', renderStatistics));
+      document.getElementById('resetStats').addEventListener('click', () => {
+        document.getElementById('statsStatusFilter').value = 'all';
+        document.getElementById('statsStateFilter').value = 'all';
+        document.getElementById('statsPeriodFilter').value = 'all';
+        renderStatistics();
+      });
+      renderStatistics();
     });
   </script>
 </body>
