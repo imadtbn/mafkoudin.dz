@@ -9,27 +9,27 @@
   <meta name="author" content="Mafkoudin DZ">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="مفقودين الجزائر | Mafkoudin DZ">
-  <meta property="og:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين داخل الجزائر">
+  <meta property="og:title" content="مفقودين الجزائر | Mafkoudin DZ - البحث عن الأشخاص المفقودين">
+  <meta property="og:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين ونشر البلاغات ومشاركتها للمساعدة في إعادتهم إلى ذويهم.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mafkoudin-dz.com">
-  <meta property="og:image" content="https://mafkoudin-dz.com/images/og-image.jpg">
+  <meta property="og:url" content="https://imadtbn.github.io/mafkoudin.dz/">
+  <meta property="og:image" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
   <meta property="og:locale" content="ar_DZ">
   
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="مفقودين الجزائر | Mafkoudin DZ">
-  <meta name="twitter:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين داخل الجزائر">
+  <meta name="twitter:title" content="مفقودين الجزائر | Mafkoudin DZ - البحث عن الأشخاص المفقودين">
+  <meta name="twitter:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين ونشر البلاغات ومشاركتها للمساعدة في إعادتهم إلى ذويهم.">
   
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://mafkoudin-dz.com">
+  <link rel="canonical" href="https://imadtbn.github.io/mafkoudin.dz/">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
-  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180">
   
   <!-- PWA -->
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="assets/site.webmanifest">
   <meta name="theme-color" content="#d32f2f">
   
   <!-- Bootstrap 5 RTL -->
@@ -50,6 +50,15 @@
     "inLanguage": "ar-DZ"
   }
   </script>
+  <meta property="og:image:secure_url" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="شعار ومنصة مفقودين الجزائر">
+  <meta property="og:site_name" content="مفقودين الجزائر | Mafkoudin DZ">
+  <meta name="twitter:image" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
+  <meta name="twitter:url" content="https://imadtbn.github.io/mafkoudin.dz/">
+  <meta name="robots" content="index,follow,max-image-preview:large">
 </head>
 <body>
   <!-- Emergency Bar -->
@@ -66,7 +75,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand" href="index.html">
-        <div class="brand-icon"><i class="fas fa-search"></i></div>
+        <span class="brand-icon"><img src="assets/brand-mark.svg" alt="" width="44" height="44" aria-hidden="true"></span>
         <span>مفقودين الجزائر</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -242,7 +251,7 @@
       <div class="row">
         <div class="col-lg-4 mb-4">
           <div class="footer-brand">
-            <div class="brand-icon"><i class="fas fa-search"></i></div>
+            <span class="brand-icon"><img src="assets/brand-mark.svg" alt="" width="44" height="44" aria-hidden="true"></span>
             <span>مفقودين الجزائر</span>
           </div>
           <p class="footer-desc">منصة وطنية تطوعية تهدف إلى المساعدة في العثور على الأشخاص المفقودين في الجزائر من خلال نشر البلاغات وتسهيل الوصول إليها.</p>
@@ -380,7 +389,7 @@
                 ${person.foundDate ? `<div class="card-info-item found-date"><i class="fas fa-check-circle"></i> تم العثور: ${formatDate(person.foundDate)}</div>` : ""}
               </div>
               <div class="card-footer-actions">
-                <a href="pages/detail.html?id=${person.id}" class="btn-card btn-card-primary">عرض التفاصيل</a>
+                <a href="${getReportUrl(person)}" class="btn-card btn-card-primary">عرض التفاصيل</a>
                 <button class="btn-card btn-card-outline" onclick="shareReport(demoData.persons.find(p => p.id === '${person.id}'), 'copy')">
                   <i class="fas fa-share-alt"></i>
                 </button>

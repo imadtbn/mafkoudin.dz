@@ -7,7 +7,7 @@
   <meta name="description" content="تفاصيل بلاغ الشخص المفقود - الاسم، العمر، مكان الاختفاء، ومعلومات الاتصال">
   <meta property="og:title" content="تفاصيل البلاغ | مفقودين الجزائر">
   <meta property="og:type" content="article">
-  <link rel="canonical" href="https://mafkoudin-dz.com/pages/detail.html">
+  <link rel="canonical" href="https://imadtbn.github.io/mafkoudin.dz/pages/detail.html">
   
   <!-- Bootstrap 5 RTL -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
@@ -15,7 +15,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" sizes="180x180">
+  <meta property="og:description" content="تفاصيل بلاغ الشخص المفقود، تاريخ ومكان الاختفاء، الوصف، وطرق الإبلاغ عن أي معلومة.">
+  <meta property="og:url" content="https://imadtbn.github.io/mafkoudin.dz/pages/detail.html">
+  <meta property="og:image" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
+  <meta property="og:image:secure_url" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="شعار ومنصة مفقودين الجزائر">
+  <meta property="og:site_name" content="مفقودين الجزائر | Mafkoudin DZ">
+  <meta property="og:locale" content="ar_DZ">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="تفاصيل البلاغ | مفقودين الجزائر">
+  <meta name="twitter:description" content="تفاصيل بلاغ الشخص المفقود، تاريخ ومكان الاختفاء، الوصف، وطرق الإبلاغ عن أي معلومة.">
+  <meta name="twitter:image" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
+  <meta name="twitter:url" content="https://imadtbn.github.io/mafkoudin.dz/pages/detail.html">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <script type="application/ld+json" id="reportJsonLd">{}</script>
 </head>
 <body>
   <!-- Emergency Bar -->
@@ -32,7 +50,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand" href="../index.html">
-        <div class="brand-icon"><i class="fas fa-search"></i></div>
+        <span class="brand-icon"><img src="../assets/brand-mark.svg" alt="" width="44" height="44" aria-hidden="true"></span>
         <span>مفقودين الجزائر</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -267,7 +285,7 @@
       <div class="row">
         <div class="col-lg-4 mb-4">
           <div class="footer-brand">
-            <div class="brand-icon"><i class="fas fa-search"></i></div>
+            <span class="brand-icon"><img src="../assets/brand-mark.svg" alt="" width="44" height="44" aria-hidden="true"></span>
             <span>مفقودين الجزائر</span>
           </div>
           <p class="footer-desc">منصة وطنية تطوعية تهدف إلى المساعدة في العثور على الأشخاص المفقودين في الجزائر.</p>
@@ -336,156 +354,41 @@
       document.querySelector('meta[name="description"]').content = 
         `بلاغ مفقود: ${currentPerson.firstName} ${currentPerson.lastName}, ${currentPerson.age} سنة, ${currentPerson.state}`;
       
-      // Status
-      const statusEl = document.getElementById("detailStatus");
-      statusEl.textContent = getStatusLabel(currentPerson.status);
-      statusEl.className = `badge fs-6 ${currentPerson.status === 'found' ? 'bg-success' : 'bg-white text-danger'}`;
-      
-      // ID
-      document.getElementById("detailId").textContent = `رقم البلاغ: ${currentPerson.id}`;
-      
-      // Image
-      document.getElementById("mainImage").src = currentPerson.mainImage;
-      document.getElementById("mainImage").alt = `${currentPerson.firstName} ${currentPerson.lastName}`;
-      
-      // Gallery
-      const gallery = document.getElementById("gallery");
-      if (currentPerson.gallery && currentPerson.gallery.length > 0) {
-        gallery.innerHTML = currentPerson.gallery.map(img => `
-          <img src="${img}" alt="صورة إضافية" onclick="document.getElementById('mainImage').src='${img}'">
-        `).join("");
-      } else {
-        gallery.innerHTML = `<p class="text-muted text-center w-100">لا توجد صور إضافية</p>`;
+      // Share and SEO metadata for the current report.
+      const reportUrl = getReportUrl(currentPerson);
+      const reportTitle = `${currentPerson.firstName} ${currentPerson.lastName} - مفقودين الجزائر`;
+      const reportDescription = `بلاغ ${getStatusLabel(currentPerson.status)}: ${currentPerson.firstName} ${currentPerson.lastName}، ${currentPerson.age} سنة، ${currentPerson.state}، تاريخ الاختفاء ${formatDate(currentPerson.dateMissing)}.`;
+      document.title = reportTitle;
+      document.querySelector('meta[name="description"]').content = reportDescription;
+      document.querySelector('link[rel="canonical"]').href = reportUrl;
+      setMetaContent('meta[property="og:title"]', reportTitle);
+      setMetaContent('meta[property="og:description"]', reportDescription);
+      setMetaContent('meta[property="og:url"]', reportUrl);
+      setMetaContent('meta[property="og:image"]', currentPerson.mainImage);
+      setMetaContent('meta[property="og:image:secure_url"]', currentPerson.mainImage);
+      setMetaContent('meta[property="og:image:type"]', 'image/jpeg');
+      setMetaContent('meta[property="og:image:alt"]', `${currentPerson.firstName} ${currentPerson.lastName}`);
+      setMetaContent('meta[name="twitter:title"]', reportTitle);
+      setMetaContent('meta[name="twitter:description"]', reportDescription);
+      setMetaContent('meta[name="twitter:image"]', currentPerson.mainImage);
+      setMetaContent('meta[name="twitter:url"]', reportUrl);
+      const reportJsonLd = document.getElementById('reportJsonLd');
+      if (reportJsonLd) {
+        reportJsonLd.textContent = JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: reportTitle,
+          description: reportDescription,
+          image: [currentPerson.mainImage],
+          url: reportUrl,
+          datePublished: currentPerson.reportDate,
+          dateModified: currentPerson.foundDate || currentPerson.reportDate,
+          inLanguage: 'ar-DZ',
+          isAccessibleForFree: true,
+          author: { '@type': 'Organization', name: SITE_NAME }
+        });
       }
-      
-      // Personal info
-      document.getElementById("fullName").textContent = `${currentPerson.firstName} ${currentPerson.lastName}`;
-      document.getElementById("age").textContent = `${currentPerson.age} سنة (${getAgeCategory(currentPerson.age)})`;
-      document.getElementById("gender").textContent = getGenderLabel(currentPerson.gender);
-      document.getElementById("height").textContent = currentPerson.height ? `${currentPerson.height} سم` : "غير محدد";
-      document.getElementById("weight").textContent = currentPerson.weight ? `${currentPerson.weight} كغ` : "غير محدد";
-      document.getElementById("hairColor").textContent = currentPerson.hairColor || "غير محدد";
-      document.getElementById("eyeColor").textContent = currentPerson.eyeColor || "غير محدد";
-      document.getElementById("clothing").textContent = currentPerson.clothing || "غير محدد";
-      document.getElementById("distinctiveMarks").textContent = currentPerson.distinctiveMarks || "غير محدد";
-      document.getElementById("mentalState").textContent = currentPerson.mentalState || "غير محدد";
-      
-      // Disappearance info
-      document.getElementById("dateMissing").textContent = formatDate(currentPerson.dateMissing);
-      document.getElementById("timeMissing").textContent = currentPerson.timeMissing || "غير محدد";
-      document.getElementById("placeMissing").textContent = currentPerson.placeMissing || "غير محدد";
-      document.getElementById("lastSeen").textContent = currentPerson.lastSeen || "غير محدد";
-      document.getElementById("daysMissing").textContent = `${currentPerson.daysMissing} يوم`;
-      document.getElementById("state").textContent = currentPerson.state;
-      document.getElementById("municipality").textContent = currentPerson.municipality;
-      document.getElementById("address").textContent = currentPerson.address || "غير محدد";
-      
-      // Description
-      document.getElementById("circumstances").textContent = currentPerson.circumstances || "غير محدد";
-      document.getElementById("description").textContent = currentPerson.description || "غير محدد";
-      
-      // Map - using OpenStreetMap
-      const mapFrame = document.getElementById("mapFrame");
-      const stateData = demoData.states.find(s => s.name === currentPerson.state);
-      if (stateData) {
-        mapFrame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${stateData.lng - 0.5}%2C${stateData.lat - 0.5}%2C${stateData.lng + 0.5}%2C${stateData.lat + 0.5}&layer=mapnik&marker=${stateData.lat}%2C${stateData.lng}`;
-      } else {
-        mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=2.5%2C36.5%2C3.5%2C37.5&layer=mapnik";
-      }
-      
-      // Contact info
-      document.getElementById("reporterName").textContent = currentPerson.reporterName || "غير محدد";
-      document.getElementById("reporterRelation").textContent = currentPerson.reporterRelation || "غير محدد";
-      document.getElementById("reporterPhone").textContent = currentPerson.reporterPhone || "غير محدد";
-      
-      const phone2Row = document.getElementById("reporterPhone2Row");
-      if (currentPerson.reporterPhone2) {
-        document.getElementById("reporterPhone2").textContent = currentPerson.reporterPhone2;
-        phone2Row.style.display = "flex";
-      } else {
-        phone2Row.style.display = "none";
-      }
-      
-      const emailRow = document.getElementById("reporterEmailRow");
-      if (currentPerson.reporterEmail) {
-        document.getElementById("reporterEmail").textContent = currentPerson.reporterEmail;
-        emailRow.style.display = "flex";
-      } else {
-        emailRow.style.display = "none";
-      }
-      
-      // Contact buttons
-      if (currentPerson.reporterPhone) {
-        document.getElementById("btnCall").onclick = () => callPhone(currentPerson.reporterPhone);
-        docume            <div class="brand-icon"><i class="fas fa-search"></i></div>
-            <span>مفقودين الجزائر</span>
-          </div>
-          <p class="footer-desc">منصة وطنية تطوعية تهدف إلى المساعدة في العثور على الأشخاص المفقودين في الجزائر.</p>
-        </div>
-        <div class="col-lg-2 col-md-4 mb-4">
-          <h4 class="footer-title">روابط سريعة</h4>
-          <ul class="footer-links">
-            <li><a href="../index.html">الرئيسية</a></li>
-            <li><a href="states.html">الولايات</a></li>
-            <li><a href="statistics.html">الإحصائيات</a></li>
-            <li><a href="report.html">نشر بلاغ</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-4 mb-4">
-          <h4 class="footer-title">المعلومات</h4>
-          <ul class="footer-links">
-            <li><a href="about.html">من نحن</a></li>
-            <li><a href="contact.html">اتصل بنا</a></li>
-            <li><a href="privacy.html">سياسة الخصوصية</a></li>
-            <li><a href="disclaimer.html">إخلاء المسؤولية</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-4 col-md-4 mb-4">
-          <h4 class="footer-title">أرقام الطوارئ</h4>
-          <ul class="footer-links">
-            <li><a href="tel:1548">الشرطة الوطنية: 1548</a></li>
-            <li><a href="tel:1055">الدرك الوطني: 1055</a></li>
-            <li><a href="tel:1021">الحماية المدنية: 1021</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>جميع الحقوق محفوظة &copy; 2026 مفقودين الجزائر</p>
-      </div>
-    </div>
-  </footer>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Main JS -->
-  <script src="../js/main.js"></script>
-  
-  <script>
-    let currentPerson = null;
-    
-    function loadPerson() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get("id");
-      
-      if (!id) {
-        showToast("رقم البلاغ غير صحيح", "error");
-        return;
-      }
-      
-      currentPerson = demoData.persons.find(p => p.id === id);
-      
-      if (!currentPerson) {
-        showToast("البلاغ غير موجود", "error");
-        return;
-      }
-      
-      // Update page title
-      document.title = `${currentPerson.firstName} ${currentPerson.lastName} - مفقودين الجزائر`;
-      
-      // Update meta
-      document.querySelector('meta[name="description"]').content = 
-        `بلاغ مفقود: ${currentPerson.firstName} ${currentPerson.lastName}, ${currentPerson.age} سنة, ${currentPerson.state}`;
-      
       // Status
       const statusEl = document.getElementById("detailStatus");
       statusEl.textContent = getStatusLabel(currentPerson.status);

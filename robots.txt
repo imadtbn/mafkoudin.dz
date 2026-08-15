@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /mafkoudin.dz/
+Disallow: /mafkoudin.dz/pages/admin.html
+Sitemap: https://imadtbn.github.io/mafkoudin.dz/sitemap.xml

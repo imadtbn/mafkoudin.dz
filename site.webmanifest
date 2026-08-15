@@ -1,0 +1,15 @@
+{
+  "name": "مفقودين الجزائر",
+  "short_name": "مفقودين الجزائر",
+  "description": "منصة جزائرية للبحث عن الأشخاص المفقودين",
+  "lang": "ar-DZ",
+  "dir": "rtl",
+  "start_url": "/mafkoudin.dz/",
+  "scope": "/mafkoudin.dz/",
+  "display": "standalone",
+  "theme_color": "#d32f2f",
+  "background_color": "#ffffff",
+  "icons": [
+    {"src": "/mafkoudin.dz/assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

@@ -1,3 +1,15 @@
+const SITE_URL = "https://imadtbn.github.io/mafkoudin.dz";
+const SITE_NAME = "مفقودين الجزائر | Mafkoudin DZ";
+
+function getReportUrl(person) {
+  return `${SITE_URL}/pages/detail.html?id=${encodeURIComponent(person.id)}`;
+}
+
+function setMetaContent(selector, value, attribute = "content") {
+  const el = document.querySelector(selector);
+  if (el) el.setAttribute(attribute, value);
+}
+
 /**
  * Mafkoudin DZ - Missing Persons Algeria
  * Main JavaScript File
@@ -394,7 +406,7 @@ function createToastContainer() {
 // SHARE FUNCTIONALITY
 // ============================================
 function shareReport(person, platform) {
-  const url = `${window.location.origin}/pages/detail.html?id=${person.id}`;
+  const url = getReportUrl(person);
   const text = `🔴 بلاغ مفقود: ${person.firstName} ${person.lastName} - ${person.state}\n📅 تاريخ الاختفاء: ${formatDate(person.dateMissing)}\n📞 للاتصال: ${person.reporterPhone}`;
   
   const shareUrls = {
@@ -407,7 +419,19 @@ function shareReport(person, platform) {
   };
 
   if (platform === "copy") {
-    navigator.clipboard.writeText(url).then(() => showToast("تم نسخ الرابط!"));
+    const copyPromise = navigator.clipboard?.writeText ? navigator.clipboard.writeText(url) : Promise.reject(new Error("clipboard-unavailable"));
+    copyPromise.then(() => showToast("تم نسخ الرابط!"))
+      .catch(() => {
+        const input = document.createElement("textarea");
+        input.value = url;
+        input.style.position = "fixed";
+        input.style.opacity = "0";
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        input.remove();
+        showToast("تم نسخ الرابط!");
+      });
   } else if (shareUrls[platform]) {
     window.open(shareUrls[platform], "_blank", "width=600,height=400");
   }
@@ -493,9 +517,11 @@ document.addEventListener("DOMContentLoaded", () => {
 // PWA Registration
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/service-worker.js")
+    const projectBase = window.location.pathname.startsWith("/mafkoudin.dz/") ? "/mafkoudin.dz/" : "/";
+    const serviceWorkerUrl = `${projectBase}service-worker.js`;
+    navigator.serviceWorker.register(serviceWorkerUrl, { scope: projectBase })
       .then((reg) => console.log("Service Worker registered:", reg.scope))
-      .catch((err) => console.log("Service Worker registration failed:", err));
+      .catch((err) => console.warn("Service Worker registration failed:", err));
   });
         }
       

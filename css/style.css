@@ -432,6 +432,14 @@ button {
   transition: var(--transition-bounce);
 }
 
+.brand-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
 .navbar-brand:hover .brand-icon {
   transform: rotate(-10deg) scale(1.1);
   box-shadow: var(--shadow-glow);

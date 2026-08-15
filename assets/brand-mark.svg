@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">شعار مفقودين الجزائر</title>
+  <desc id="desc">عدسة بحث ترمز إلى البحث عن المفقودين بألوان الجزائر</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16a34a"/>
+      <stop offset="0.52" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dc2626"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="62" fill="url(#bg)"/>
+  <circle cx="116" cy="112" r="58" fill="#ffffff" stroke="#dc2626" stroke-width="15"/>
+  <path d="M157 154l48 48" fill="none" stroke="#dc2626" stroke-width="20" stroke-linecap="round"/>
+  <path d="M116 76c-20 0-36 16-36 36" fill="none" stroke="#16a34a" stroke-width="10" stroke-linecap="round" opacity=".95"/>
+  <circle cx="116" cy="112" r="10" fill="#16a34a"/>
+</svg>
