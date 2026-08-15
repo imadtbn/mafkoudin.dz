@@ -5,6 +5,7 @@ const APP_SHELL = [
   `${BASE_PATH}index.html`,
   `${BASE_PATH}css/style.css`,
   `${BASE_PATH}js/main.js`,
+  `${BASE_PATH}js/ads.js`,
   `${BASE_PATH}assets/favicon.svg`,
   `${BASE_PATH}assets/brand-mark.svg`,
   `${BASE_PATH}assets/apple-touch-icon.png`,

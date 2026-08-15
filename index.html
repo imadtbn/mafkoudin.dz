@@ -7,7 +7,7 @@
   <meta name="description" content="منصة جزائرية للبحث عن الأشخاص المفقودين داخل الجزائر. ساهم في إعادة المفقودين إلى ذويهم من خلال نشر ومشاركة البلاغات.">
   <meta name="keywords" content="مفقودين الجزائر, missing persons algeria, بلاغات مفقودين, البحث عن مفقود, الجزائر">
   <meta name="author" content="Mafkoudin DZ">
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content="مفقودين الجزائر | Mafkoudin DZ - البحث عن الأشخاص المفقودين">
   <meta property="og:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين ونشر البلاغات ومشاركتها للمساعدة في إعادتهم إلى ذويهم.">
@@ -15,30 +15,30 @@
   <meta property="og:url" content="https://imadtbn.github.io/mafkoudin.dz/">
   <meta property="og:image" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
   <meta property="og:locale" content="ar_DZ">
-  
+
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="مفقودين الجزائر | Mafkoudin DZ - البحث عن الأشخاص المفقودين">
   <meta name="twitter:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين ونشر البلاغات ومشاركتها للمساعدة في إعادتهم إلى ذويهم.">
-  
+
   <!-- Canonical URL -->
   <link rel="canonical" href="https://imadtbn.github.io/mafkoudin.dz/">
-  
+
   <!-- Favicon -->
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180">
-  
+
   <!-- PWA -->
   <link rel="manifest" href="assets/site.webmanifest">
   <meta name="theme-color" content="#d32f2f">
-  
+
   <!-- Bootstrap 5 RTL -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css">
-  
+
   <!-- Schema.org -->
   <script type="application/ld+json">
   {
@@ -59,6 +59,10 @@
   <meta name="twitter:image" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
   <meta name="twitter:url" content="https://imadtbn.github.io/mafkoudin.dz/">
   <meta name="robots" content="index,follow,max-image-preview:large">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5656416032906373" crossorigin="anonymous"></script>
+  <meta name="google-adsense-account" content="ca-pub-5656416032906373">
 </head>
 <body>
   <!-- Emergency Bar -->
@@ -96,6 +100,11 @@
       </div>
     </div>
   </nav>
+  <section class="site-ad site-ad-top" aria-label="إعلان"><div class="container">
+    <div class="ad-label">إعلان</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5656416032906373" data-ad-slot="3143411927" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div></section>
+
 
   <!-- Hero Section -->
   <section class="hero-section">
@@ -223,11 +232,11 @@
     <div class="container">
       <h2 class="section-title"><i class="fas fa-users text-primary-red"></i> البلاغات</h2>
       <p class="section-subtitle">آخر البلاغات المنشورة للأشخاص المفقودين</p>
-      
+
       <div class="row g-4" id="cardsContainer">
         <!-- Cards will be rendered here -->
       </div>
-      
+
       <div class="empty-state d-none" id="emptyState">
         <i class="fas fa-search"></i>
         <h3>لا توجد نتائج مطابقة للبحث</h3>
@@ -246,6 +255,12 @@
   </section>
 
   <!-- Footer -->
+
+  <section class="site-ad site-ad-bottom" aria-label="إعلان"><div class="container">
+    <div class="ad-label">إعلان</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-5656416032906373" data-ad-slot="6528123169"></ins>
+  </div></section>
+
   <footer class="footer">
     <div class="container">
       <div class="row">
@@ -294,12 +309,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Main JS -->
   <script src="js/main.js"></script>
-  
+
   <script>
     // ============================================
     // INDEX PAGE LOGIC
     // ============================================
-    
+
     // Initialize stats
     function updateStats() {
       const total = demoData.persons.length;
@@ -310,13 +325,13 @@
         const now = new Date();
         return reportDate.toDateString() === now.toDateString();
       }).length;
-      
+
       animateNumber("statTotal", total);
       animateNumber("statFound", found);
       animateNumber("statStates", states);
       animateNumber("statToday", today);
     }
-    
+
     function animateNumber(id, target) {
       const el = document.getElementById(id);
       if (!el) return;
@@ -331,7 +346,7 @@
         el.textContent = current.toLocaleString("ar-DZ");
       }, 30);
     }
-    
+
     // Populate state filter
     function populateStates() {
       const select = document.getElementById("filterState");
@@ -343,7 +358,7 @@
         select.appendChild(option);
       });
     }
-    
+
     // Populate municipality filter based on state
     function populateMunicipalities(state) {
       const select = document.getElementById("filterMunicipality");
@@ -357,18 +372,18 @@
         });
       }
     }
-    
+
     // Render cards
     function renderCards(persons) {
       const container = document.getElementById("cardsContainer");
       const emptyState = document.getElementById("emptyState");
-      
+
       if (persons.length === 0) {
         container.innerHTML = "";
         emptyState.classList.remove("d-none");
         return;
       }
-      
+
       emptyState.classList.add("d-none");
       container.innerHTML = persons.map(person => `
         <div class="col-md-6 col-lg-4 col-xl-3">
@@ -398,38 +413,38 @@
           </div>
         </div>
       `).join("");
-      
+
       initLazyLoading();
       initScrollAnimations();
     }
-    
+
     // Filter and search
     function filterPersons() {
       let filtered = [...demoData.persons];
-      
+
       // Search
       const searchTerm = document.getElementById("searchInput").value.toLowerCase().trim();
       if (searchTerm) {
-        filtered = filtered.filter(p => 
+        filtered = filtered.filter(p =>
           p.firstName.toLowerCase().includes(searchTerm) ||
           p.lastName.toLowerCase().includes(searchTerm) ||
           p.id.toLowerCase().includes(searchTerm) ||
           `${p.firstName} ${p.lastName}`.toLowerCase().includes(searchTerm)
         );
       }
-      
+
       // State
       const state = document.getElementById("filterState").value;
       if (state) filtered = filtered.filter(p => p.state === state);
-      
+
       // Municipality
       const municipality = document.getElementById("filterMunicipality").value;
       if (municipality) filtered = filtered.filter(p => p.municipality === municipality);
-      
+
       // Gender
       const gender = document.getElementById("filterGender").value;
       if (gender) filtered = filtered.filter(p => p.gender === gender);
-      
+
       // Age
       const ageFilter = document.getElementById("filterAge").value;
       if (ageFilter) {
@@ -440,32 +455,32 @@
           if (ageFilter === "senior") return p.age >= 60;
         });
       }
-      
+
       // Status
       const status = document.getElementById("filterStatus").value;
       if (status) filtered = filtered.filter(p => p.status === status);
-      
+
       // Date range
       const dateFrom = document.getElementById("filterDateFrom").value;
       const dateTo = document.getElementById("filterDateTo").value;
       if (dateFrom) filtered = filtered.filter(p => new Date(p.dateMissing) >= new Date(dateFrom));
       if (dateTo) filtered = filtered.filter(p => new Date(p.dateMissing) <= new Date(dateTo));
-      
+
       // Sort
       const sort = document.getElementById("filterSort").value;
       if (sort === "newest") filtered.sort((a, b) => new Date(b.dateMissing) - new Date(a.dateMissing));
       if (sort === "oldest") filtered.sort((a, b) => new Date(a.dateMissing) - new Date(b.dateMissing));
       if (sort === "mostViewed") filtered.sort((a, b) => b.views - a.views);
-      
+
       renderCards(filtered);
     }
-    
+
     // Event listeners
     document.addEventListener("DOMContentLoaded", () => {
       updateStats();
       populateStates();
       renderCards(demoData.persons);
-      
+
       document.getElementById("searchInput").addEventListener("input", filterPersons);
       document.getElementById("searchBtn").addEventListener("click", filterPersons);
       document.getElementById("filterState").addEventListener("change", (e) => {
@@ -479,7 +494,7 @@
       document.getElementById("filterSort").addEventListener("change", filterPersons);
       document.getElementById("filterDateFrom").addEventListener("change", filterPersons);
       document.getElementById("filterDateTo").addEventListener("change", filterPersons);
-      
+
       document.getElementById("applyFilters").addEventListener("click", filterPersons);
       document.getElementById("resetFilters").addEventListener("click", () => {
         document.getElementById("searchInput").value = "";
@@ -495,5 +510,6 @@
       });
     });
   </script>
+  <script src="js/ads.js" defer></script>
 </body>
 </html>

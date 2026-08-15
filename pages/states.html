@@ -6,7 +6,7 @@
   <title>الولايات | مفقودين الجزائر</title>
   <meta name="description" content="استعراض البلاغات حسب الولاية - خريطة الجزائر التفاعلية">
   <link rel="canonical" href="https://imadtbn.github.io/mafkoudin.dz/pages/states.html">
-  
+
   <!-- Bootstrap 5 RTL -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
   <!-- Font Awesome -->
@@ -16,20 +16,20 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  
+
   <style>
     #algeriaMap { height: 500px; border-radius: 12px; }
-    .state-card-mini { 
-      background: #fff; border-radius: 8px; padding: 1rem; 
+    .state-card-mini {
+      background: #fff; border-radius: 8px; padding: 1rem;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid #e0e0e0;
       transition: all 0.3s; cursor: pointer;
     }
-    .state-card-mini:hover { 
-      transform: translateY(-3px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); 
+    .state-card-mini:hover {
+      transform: translateY(-3px); box-shadow: 0 4px 16px rgba(0,0,0,0.15);
       border-color: #d32f2f;
     }
-    .state-card-mini .count { 
-      font-size: 1.5rem; font-weight: 800; color: #d32f2f; 
+    .state-card-mini .count {
+      font-size: 1.5rem; font-weight: 800; color: #d32f2f;
     }
     .leaflet-popup-content-wrapper { border-radius: 12px; }
     .leaflet-popup-content { text-align: center; font-family: 'Segoe UI', sans-serif; }
@@ -55,6 +55,10 @@
   <meta name="twitter:image" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
   <meta name="twitter:url" content="https://imadtbn.github.io/mafkoudin.dz/pages/states.html">
   <meta name="robots" content="index,follow,max-image-preview:large">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5656416032906373" crossorigin="anonymous"></script>
+  <meta name="google-adsense-account" content="ca-pub-5656416032906373">
 </head>
 <body>
   <!-- Emergency Bar -->
@@ -91,18 +95,23 @@
       </div>
     </div>
   </nav>
+  <section class="site-ad site-ad-top" aria-label="إعلان"><div class="container">
+    <div class="ad-label">إعلان</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5656416032906373" data-ad-slot="3143411927" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div></section>
+
 
   <!-- States Section -->
   <section class="states-section">
     <div class="container">
       <h2 class="section-title"><i class="fas fa-map-marked-alt text-primary-red"></i> خريطة الجزائر</h2>
       <p class="section-subtitle">استعرض البلاغات حسب الولاية - اضغط على أي ولاية لعرض البلاغات الخاصة بها</p>
-      
+
       <!-- Map -->
       <div class="mb-4">
         <div id="algeriaMap"></div>
       </div>
-      
+
       <!-- States Grid -->
       <h3 class="mb-3"><i class="fas fa-list text-primary-red me-2"></i>قائمة الولايات</h3>
       <div class="row g-3" id="statesGrid">
@@ -112,6 +121,12 @@
   </section>
 
   <!-- Footer -->
+
+  <section class="site-ad site-ad-bottom" aria-label="إعلان"><div class="container">
+    <div class="ad-label">إعلان</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-5656416032906373" data-ad-slot="6528123169"></ins>
+  </div></section>
+
   <footer class="footer">
     <div class="container">
       <div class="row">
@@ -161,18 +176,18 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Main JS -->
   <script src="../js/main.js"></script>
-  
+
   <script>
     let map;
-    
+
     function initMap() {
       // Center on Algeria
       map = L.map('algeriaMap').setView([28.5, 1.6], 5);
-      
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
-      
+
       // Add markers for each state
       demoData.states.forEach(state => {
         const marker = L.marker([state.lat, state.lng]).addTo(map);
@@ -183,7 +198,7 @@
         `);
       });
     }
-    
+
     function renderStates() {
       const grid = document.getElementById("statesGrid");
       grid.innerHTML = demoData.states.map(state => `
@@ -199,12 +214,13 @@
         </div>
       `).join("");
     }
-    
+
     document.addEventListener("DOMContentLoaded", () => {
       initMap();
       renderStates();
     });
   </script>
+  <script src="../js/ads.js" defer></script>
 </body>
   </html>
-  
+

@@ -2526,3 +2526,62 @@ textarea:focus-visible {
     height: 240px;
   }
 }
+
+/* ============================================
+   ADSENSE PLACEMENTS
+   ============================================ */
+.site-ad {
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.site-ad .container {
+  min-width: 0;
+}
+
+.site-ad-top {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.site-ad-bottom {
+  padding: var(--space-5) 0;
+  margin-top: var(--space-8);
+  border-top: 1px solid var(--gray-100);
+}
+
+.site-ad .adsbygoogle {
+  display: block;
+  width: 100%;
+  min-height: 90px;
+  overflow: hidden;
+}
+
+.site-ad-bottom .adsbygoogle {
+  min-height: 120px;
+}
+
+.ad-label {
+  color: var(--text-tertiary);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin-bottom: var(--space-2);
+}
+
+@media (max-width: 575px) {
+  .site-ad-top {
+    padding: var(--space-3) 0;
+  }
+
+  .site-ad-bottom {
+    padding: var(--space-4) 0;
+    margin-top: var(--space-6);
+  }
+
+  .site-ad .adsbygoogle,
+  .site-ad-bottom .adsbygoogle {
+    min-height: 70px;
+  }
+}

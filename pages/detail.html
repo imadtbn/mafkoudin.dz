@@ -8,7 +8,7 @@
   <meta property="og:title" content="تفاصيل البلاغ | مفقودين الجزائر">
   <meta property="og:type" content="article">
   <link rel="canonical" href="https://imadtbn.github.io/mafkoudin.dz/pages/detail.html">
-  
+
   <!-- Bootstrap 5 RTL -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
   <!-- Font Awesome -->
@@ -34,6 +34,10 @@
   <meta name="twitter:url" content="https://imadtbn.github.io/mafkoudin.dz/pages/detail.html">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <script type="application/ld+json" id="reportJsonLd">{}</script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5656416032906373" crossorigin="anonymous"></script>
+  <meta name="google-adsense-account" content="ca-pub-5656416032906373">
 </head>
 <body>
   <!-- Emergency Bar -->
@@ -70,6 +74,11 @@
       </div>
     </div>
   </nav>
+  <section class="site-ad site-ad-top" aria-label="إعلان"><div class="container">
+    <div class="ad-label">إعلان</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5656416032906373" data-ad-slot="3143411927" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div></section>
+
 
   <!-- Detail Hero -->
   <section class="detail-hero">
@@ -98,7 +107,7 @@
             <div class="detail-gallery" id="gallery">
               <!-- Gallery images will be rendered here -->
             </div>
-            
+
             <!-- Share Card -->
             <div class="detail-info-card mt-4">
               <h3><i class="fas fa-share-alt"></i> مشاركة البلاغ</h3>
@@ -223,13 +232,13 @@
           <div class="detail-info-card">
             <h3><i class="fas fa-map"></i> الموقع على الخريطة</h3>
             <div class="map-container" id="mapContainer">
-              <iframe 
+              <iframe
                 id="mapFrame"
-                width="100%" 
-                height="100%" 
-                style="border:0; border-radius: 12px;" 
-                allowfullscreen="" 
-                loading="lazy" 
+                width="100%"
+                height="100%"
+                style="border:0; border-radius: 12px;"
+                allowfullscreen=""
+                loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade">
               </iframe>
             </div>
@@ -258,7 +267,7 @@
               <span class="detail-info-label">البريد الإلكتروني</span>
               <a class="detail-info-value detail-email-value" id="reporterEmail" href="#" aria-label="إرسال بريد إلكتروني">---</a>
             </div>
-            
+
             <div class="contact-buttons mt-4">
               <button class="btn-contact btn-phone" id="btnCall">
                 <i class="fas fa-phone"></i> اتصال مباشر
@@ -280,6 +289,12 @@
   </section>
 
   <!-- Footer -->
+
+  <section class="site-ad site-ad-bottom" aria-label="إعلان"><div class="container">
+    <div class="ad-label">إعلان</div>
+    <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-5656416032906373" data-ad-slot="6528123169"></ins>
+  </div></section>
+
   <footer class="footer">
     <div class="container">
       <div class="row">
@@ -327,33 +342,33 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Main JS -->
   <script src="../js/main.js"></script>
-  
+
   <script>
     let currentPerson = null;
-    
+
     function loadPerson() {
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get("id");
-      
+
       if (!id) {
         showToast("رقم البلاغ غير صحيح", "error");
         return;
       }
-      
+
       currentPerson = demoData.persons.find(p => p.id === id);
-      
+
       if (!currentPerson) {
         showToast("البلاغ غير موجود", "error");
         return;
       }
-      
+
       // Update page title
       document.title = `${currentPerson.firstName} ${currentPerson.lastName} - مفقودين الجزائر`;
-      
+
       // Update meta
-      document.querySelector('meta[name="description"]').content = 
+      document.querySelector('meta[name="description"]').content =
         `بلاغ مفقود: ${currentPerson.firstName} ${currentPerson.lastName}, ${currentPerson.age} سنة, ${currentPerson.state}`;
-      
+
       // Share and SEO metadata for the current report.
       const reportUrl = getReportUrl(currentPerson);
       const detailUrl = getDetailUrl(currentPerson);
@@ -394,14 +409,14 @@
       const statusEl = document.getElementById("detailStatus");
       statusEl.textContent = getStatusLabel(currentPerson.status);
       statusEl.className = `badge fs-6 ${currentPerson.status === 'found' ? 'bg-success' : 'bg-white text-danger'}`;
-      
+
       // ID
       document.getElementById("detailId").textContent = `رقم البلاغ: ${currentPerson.id}`;
-      
+
       // Image
       document.getElementById("mainImage").src = currentPerson.mainImage;
       document.getElementById("mainImage").alt = `${currentPerson.firstName} ${currentPerson.lastName}`;
-      
+
       // Gallery
       const gallery = document.getElementById("gallery");
       if (currentPerson.gallery && currentPerson.gallery.length > 0) {
@@ -411,7 +426,7 @@
       } else {
         gallery.innerHTML = `<p class="text-muted text-center w-100">لا توجد صور إضافية</p>`;
       }
-      
+
       // Personal info
       document.getElementById("fullName").textContent = `${currentPerson.firstName} ${currentPerson.lastName}`;
       document.getElementById("age").textContent = `${currentPerson.age} سنة (${getAgeCategory(currentPerson.age)})`;
@@ -423,7 +438,7 @@
       document.getElementById("clothing").textContent = currentPerson.clothing || "غير محدد";
       document.getElementById("distinctiveMarks").textContent = currentPerson.distinctiveMarks || "غير محدد";
       document.getElementById("mentalState").textContent = currentPerson.mentalState || "غير محدد";
-      
+
       // Disappearance info
       document.getElementById("dateMissing").textContent = formatDate(currentPerson.dateMissing);
       document.getElementById("timeMissing").textContent = currentPerson.timeMissing || "غير محدد";
@@ -433,11 +448,11 @@
       document.getElementById("state").textContent = currentPerson.state;
       document.getElementById("municipality").textContent = currentPerson.municipality;
       document.getElementById("address").textContent = currentPerson.address || "غير محدد";
-      
+
       // Description
       document.getElementById("circumstances").textContent = currentPerson.circumstances || "غير محدد";
       document.getElementById("description").textContent = currentPerson.description || "غير محدد";
-      
+
       // Map - using OpenStreetMap
       const mapFrame = document.getElementById("mapFrame");
       const stateData = demoData.states.find(s => s.name === currentPerson.state);
@@ -446,12 +461,12 @@
       } else {
         mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=2.5%2C36.5%2C3.5%2C37.5&layer=mapnik";
       }
-      
+
       // Contact info
       document.getElementById("reporterName").textContent = currentPerson.reporterName || "غير محدد";
       document.getElementById("reporterRelation").textContent = currentPerson.reporterRelation || "غير محدد";
       document.getElementById("reporterPhone").textContent = currentPerson.reporterPhone || "غير محدد";
-      
+
       const phone2Row = document.getElementById("reporterPhone2Row");
       if (currentPerson.reporterPhone2) {
         document.getElementById("reporterPhone2").textContent = currentPerson.reporterPhone2;
@@ -459,7 +474,7 @@
       } else {
         phone2Row.style.display = "none";
       }
-      
+
       const emailRow = document.getElementById("reporterEmailRow");
       if (currentPerson.reporterEmail) {
         const emailLink = document.getElementById("reporterEmail");
@@ -470,25 +485,26 @@
       } else {
         emailRow.style.display = "none";
       }
-      
+
       // Contact buttons
       if (currentPerson.reporterPhone) {
         document.getElementById("btnCall").onclick = () => callPhone(currentPerson.reporterPhone);
         document.getElementById("btnWhatsApp").onclick = () => openWhatsApp(currentPerson.reporterPhone);
         document.getElementById("btnViber").onclick = () => openViber(currentPerson.reporterPhone);
       }
-      
+
       // Increment views (demo)
       currentPerson.views++;
     }
-    
+
     function shareCurrent(platform) {
       if (currentPerson) {
         shareReport(currentPerson, platform);
       }
     }
-    
+
     document.addEventListener("DOMContentLoaded", loadPerson);
   </script>
+  <script src="../js/ads.js" defer></script>
 </body>
 </html>
