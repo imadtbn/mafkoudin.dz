@@ -14,7 +14,7 @@
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="../css/style.css?v=detail-social-4">
+  <link rel="stylesheet" href="../css/style.css?v=global-rtl-ads-5">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 
   <style>
@@ -95,13 +95,15 @@
       </div>
     </div>
   </nav>
-  <section class="site-ad site-ad-top" aria-label="إعلان"><div class="container">
-    <div class="ad-label">إعلان</div>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5656416032906373" data-ad-slot="3143411927" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div></section>
 
-
-  <!-- States Section -->
+  <section class="ad-section ad-section-image" aria-label="إعلان متجاوب">
+    <div class="container">
+      <div class="ad-container">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5656416032906373" data-ad-slot="3143411927" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+    </div>
+  </section>
+<!-- States Section -->
   <section class="states-section">
     <div class="container">
       <h2 class="section-title"><i class="fas fa-map-marked-alt text-primary-red"></i> خريطة الجزائر</h2>
@@ -119,14 +121,23 @@
       </div>
     </div>
   </section>
+  <section class="ad-section ad-section-fluid" aria-label="إعلان داخل الخلاصة">
+    <div class="container">
+      <div class="ad-container">
+        <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fr+56+4k-d4+74" data-ad-client="ca-pub-5656416032906373" data-ad-slot="7867079394"></ins>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
-
-  <section class="site-ad site-ad-bottom" aria-label="إعلان"><div class="container">
-    <div class="ad-label">إعلان</div>
-    <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-5656416032906373" data-ad-slot="6528123169"></ins>
-  </div></section>
-
+  <!-- Footer -->
+  <section class="ad-section ad-section-footer" aria-label="إعلانات مقترحة">
+    <div class="container">
+      <div class="ad-container">
+        <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-5656416032906373" data-ad-slot="6528123169"></ins>
+      </div>
+    </div>
+  </section>
   <footer class="footer">
     <div class="container">
       <div class="row">
@@ -135,37 +146,38 @@
             <span class="brand-icon"><img src="../assets/brand-mark.svg" alt="" width="44" height="44" aria-hidden="true"></span>
             <span>مفقودين الجزائر</span>
           </div>
-          <p class="footer-desc">منصة وطنية تطوعية تهدف إلى المساعدة في العثور على الأشخاص المفقودين في الجزائر.</p>
+          <p class="footer-desc">منصة وطنية تطوعية تهدف إلى المساعدة في العثور على الأشخاص المفقودين في الجزائر من خلال نشر البلاغات وتسهيل الوصول إليها.</p>
         </div>
         <div class="col-lg-2 col-md-4 mb-4">
           <h4 class="footer-title">روابط سريعة</h4>
           <ul class="footer-links">
-            <li><a href="../index.html">الرئيسية</a></li>
-            <li><a href="states.html">الولايات</a></li>
-            <li><a href="statistics.html">الإحصائيات</a></li>
-            <li><a href="report.html">نشر بلاغ</a></li>
+            <li><a href="../index.html"><i class="fas fa-chevron-left"></i>الرئيسية</a></li>
+            <li><a href="../pages/states.html"><i class="fas fa-chevron-left"></i>الولايات</a></li>
+            <li><a href="../pages/statistics.html"><i class="fas fa-chevron-left"></i>الإحصائيات</a></li>
+            <li><a href="../pages/report.html"><i class="fas fa-chevron-left"></i>نشر بلاغ</a></li>
           </ul>
         </div>
         <div class="col-lg-2 col-md-4 mb-4">
           <h4 class="footer-title">المعلومات</h4>
           <ul class="footer-links">
-            <li><a href="about.html">من نحن</a></li>
-            <li><a href="contact.html">اتصل بنا</a></li>
-            <li><a href="privacy.html">سياسة الخصوصية</a></li>
-            <li><a href="disclaimer.html">إخلاء المسؤولية</a></li>
+            <li><a href="../pages/about.html"><i class="fas fa-chevron-left"></i>من نحن</a></li>
+            <li><a href="../pages/contact.html"><i class="fas fa-chevron-left"></i>اتصل بنا</a></li>
+            <li><a href="../pages/privacy.html"><i class="fas fa-chevron-left"></i>سياسة الخصوصية</a></li>
+            <li><a href="../pages/disclaimer.html"><i class="fas fa-chevron-left"></i>إخلاء المسؤولية</a></li>
           </ul>
         </div>
         <div class="col-lg-4 col-md-4 mb-4">
           <h4 class="footer-title">أرقام الطوارئ</h4>
           <ul class="footer-links">
-            <li><a href="tel:1548">الشرطة الوطنية: 1548</a></li>
-            <li><a href="tel:1055">الدرك الوطني: 1055</a></li>
-            <li><a href="tel:1021">الحماية المدنية: 1021</a></li>
+            <li><a href="tel:1548"><i class="fas fa-phone"></i>الشرطة الوطنية: 1548</a></li>
+            <li><a href="tel:1055"><i class="fas fa-phone"></i>الدرك الوطني: 1055</a></li>
+            <li><a href="tel:1021"><i class="fas fa-phone"></i>الحماية المدنية: 1021</a></li>
+            <li><a href="tel:1050"><i class="fas fa-phone"></i>النجدة: 1050</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>جميع الحقوق محفوظة &copy; 2026 مفقودين الجزائر</p>
+        <p>جميع الحقوق محفوظة &copy; 2026 مفقودين الجزائر | Mafkoudin DZ</p>
       </div>
     </div>
   </footer>
