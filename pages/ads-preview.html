@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معاينة الإعلانات | مفقودين الجزائر</title>
+  <meta name="description" content="صفحة داخلية لمعاينة مواضع وأحجام إعلانات Google AdSense على الهاتف والكمبيوتر في موقع مفقودين الجزائر.">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" sizes="180x180">
+  <link rel="stylesheet" href="../css/style.css?v=card-layout-2">
+  <style>
+    :root {
+      --preview-ink: #172033;
+      --preview-muted: #6b7280;
+      --preview-border: #dbe2ea;
+      --preview-bg: #f5f7fb;
+      --preview-red: #c62828;
+      --preview-green: #138a43;
+    }
+
+    body {
+      background: var(--preview-bg);
+      color: var(--preview-ink);
+    }
+
+    .preview-page {
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .preview-shell {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .preview-kicker {
+      color: var(--preview-green);
+      font-weight: 800;
+      margin: 0 0 .45rem;
+    }
+
+    .preview-title {
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+      margin: 0 0 .5rem;
+      font-weight: 900;
+    }
+
+    .preview-description {
+      color: var(--preview-muted);
+      margin: 0;
+      line-height: 1.8;
+      max-width: 720px;
+    }
+
+    .back-link {
+      flex: 0 0 auto;
+      color: var(--preview-red);
+      background: white;
+      border: 1px solid var(--preview-border);
+      border-radius: 999px;
+      padding: .7rem 1rem;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .preview-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .65rem;
+      padding: .85rem;
+      background: white;
+      border: 1px solid var(--preview-border);
+      border-radius: 16px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 30px rgba(23, 32, 51, .06);
+    }
+
+    .preview-controls-label {
+      color: var(--preview-muted);
+      font-size: .9rem;
+      font-weight: 800;
+      margin-left: .35rem;
+    }
+
+    .preview-mode {
+      border: 1px solid var(--preview-border);
+      background: #fff;
+      color: var(--preview-ink);
+      border-radius: 10px;
+      padding: .6rem .9rem;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 800;
+    }
+
+    .preview-mode.active,
+    .preview-mode:hover {
+      color: white;
+      background: var(--preview-red);
+      border-color: var(--preview-red);
+    }
+
+    .preview-note {
+      color: var(--preview-muted);
+      font-size: .82rem;
+      margin: 0 0 1.5rem;
+    }
+
+    .device-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+      align-items: start;
+      gap: 1.5rem;
+    }
+
+    .device-card {
+      min-width: 0;
+      background: #fff;
+      border: 1px solid var(--preview-border);
+      border-radius: 20px;
+      padding: 1rem;
+      box-shadow: 0 14px 34px rgba(23, 32, 51, .08);
+    }
+
+    .device-card h2 {
+      display: flex;
+      justify-content: space-between;
+      gap: .75rem;
+      font-size: 1.05rem;
+      margin: 0 0 .75rem;
+    }
+
+    .device-card h2 span {
+      color: var(--preview-muted);
+      font-size: .8rem;
+      font-weight: 600;
+    }
+
+    .device-viewport {
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid #b8c3d1;
+      border-radius: 14px;
+      background: #fff;
+      transition: width .25s ease, box-shadow .25s ease;
+    }
+
+    .desktop-viewport {
+      min-height: 650px;
+    }
+
+    .phone-viewport {
+      max-width: 375px;
+      min-height: 640px;
+      margin: 0 auto;
+      border-width: 7px;
+      border-color: #253044;
+      border-radius: 24px;
+    }
+
+    .mock-browser-bar {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      padding: 0 .7rem;
+      background: #eef2f7;
+      border-bottom: 1px solid var(--preview-border);
+    }
+
+    .mock-browser-bar i {
+      display: block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ef4444;
+    }
+
+    .mock-browser-bar i:nth-child(2) { background: #f59e0b; }
+    .mock-browser-bar i:nth-child(3) { background: #22c55e; }
+
+    .mock-site {
+      min-height: 610px;
+      background: #fff;
+    }
+
+    .mock-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      padding: .7rem 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, #b71c1c, #d32f2f);
+      font-size: .84rem;
+      font-weight: 900;
+    }
+
+    .mock-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      white-space: nowrap;
+    }
+
+    .mock-brand img {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+    }
+
+    .mock-links {
+      display: flex;
+      gap: .8rem;
+      color: rgba(255,255,255,.88);
+      font-size: .72rem;
+    }
+
+    .phone-viewport .mock-links {
+      display: none;
+    }
+
+    .mock-ad {
+      display: grid;
+      place-items: center;
+      min-height: 92px;
+      margin: .75rem 1rem;
+      padding: .75rem;
+      border: 2px dashed #e0a1a1;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #fff7f7, #fff);
+      color: var(--preview-red);
+      text-align: center;
+      font-size: .78rem;
+      line-height: 1.6;
+    }
+
+    .mock-ad strong {
+      display: block;
+      font-size: .9rem;
+    }
+
+    .mock-content {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: .8rem;
+      padding: .8rem 1rem;
+    }
+
+    .phone-viewport .mock-content {
+      grid-template-columns: 1fr;
+    }
+
+    .mock-card {
+      min-height: 150px;
+      border: 1px solid #e5eaf0;
+      border-radius: 12px;
+      padding: .9rem;
+      background: #fbfcfe;
+    }
+
+    .mock-card h3 {
+      color: var(--preview-ink);
+      font-size: .9rem;
+      margin: 0 0 .6rem;
+    }
+
+    .mock-line {
+      height: 9px;
+      width: 82%;
+      margin: .55rem 0;
+      border-radius: 999px;
+      background: #e5eaf0;
+    }
+
+    .mock-line.short { width: 56%; }
+    .mock-line.green { background: #c6ead4; }
+
+    .placement-list {
+      display: grid;
+      gap: .6rem;
+      margin-top: 1rem;
+    }
+
+    .placement-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .65rem;
+      padding: .7rem;
+      border: 1px solid var(--preview-border);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .placement-number {
+      display: grid;
+      place-items: center;
+      flex: 0 0 26px;
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      background: var(--preview-green);
+      border-radius: 50%;
+      font-size: .8rem;
+      font-weight: 900;
+    }
+
+    .placement-item strong,
+    .placement-item span {
+      display: block;
+    }
+
+    .placement-item strong { font-size: .86rem; }
+    .placement-item span { color: var(--preview-muted); font-size: .77rem; line-height: 1.6; }
+
+    .preview-footer {
+      margin-top: 1.5rem;
+      padding: 1rem 1.2rem;
+      border-radius: 14px;
+      background: #172033;
+      color: #e5e7eb;
+      line-height: 1.8;
+      font-size: .85rem;
+    }
+
+    @media (max-width: 900px) {
+      .device-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-viewport {
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .preview-page { padding: 1rem .7rem 2rem; }
+      .preview-header { display: block; }
+      .back-link { display: inline-block; margin-top: 1rem; }
+      .device-card { padding: .7rem; }
+      .desktop-viewport { min-height: 560px; }
+      .mock-content { padding-right: .7rem; padding-left: .7rem; }
+      .mock-ad { margin-right: .7rem; margin-left: .7rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="preview-page">
+    <div class="preview-shell">
+      <header class="preview-header">
+        <div>
+          <p class="preview-kicker">وضع المعاينة الداخلي</p>
+          <h1 class="preview-title">معاينة مواضع إعلانات Google AdSense</h1>
+          <p class="preview-description">هذه الصفحة لا تحمّل إعلانات حقيقية، بل تعرض نموذجًا بصريًا للمساحات المحجوزة حاليًا حتى يمكن مراجعة تأثيرها على تجربة المستخدم في الهاتف والكمبيوتر.</p>
+        </div>
+        <a class="back-link" href="../index.html">العودة إلى الموقع</a>
+      </header>
+
+      <section class="preview-controls" aria-label="اختيار وضع المعاينة">
+        <span class="preview-controls-label">عرض الأجهزة:</span>
+        <button type="button" class="preview-mode active" data-mode="both">الهاتف والكمبيوتر</button>
+        <button type="button" class="preview-mode" data-mode="desktop">الكمبيوتر فقط</button>
+        <button type="button" class="preview-mode" data-mode="phone">الهاتف فقط</button>
+      </section>
+
+      <p class="preview-note"><strong>ملاحظة:</strong> الموضع العلوي يظهر بعد الهيدر، والموضع السفلي يظهر قبل الفوتر. الإعلانات الحقيقية قد تكون أقصر أو أطول حسب Google AdSense وحجم الشاشة وتوفر الإعلانات.</p>
+
+      <section class="device-grid" id="deviceGrid">
+        <article class="device-card desktop-card">
+          <h2>معاينة الكمبيوتر <span>عرض مرن حتى 1440px</span></h2>
+          <div class="device-viewport desktop-viewport">
+            <div class="mock-browser-bar"><i></i><i></i><i></i></div>
+            <div class="mock-site">
+              <div class="mock-nav">
+                <span class="mock-brand"><img src="../assets/brand-mark.svg" alt=""><span>مفقودين الجزائر</span></span>
+                <span class="mock-links"><span>الرئيسية</span><span>الولايات</span><span>الإحصائيات</span><span>نشر بلاغ</span></span>
+              </div>
+              <div class="mock-ad"><div><strong>إعلان علوي متجاوب</strong><span>الموضع الحالي: بعد الهيدر مباشرة<br>slot: 3143411927</span></div></div>
+              <div class="mock-content">
+                <div class="mock-card"><h3>إعلانات المفقودين</h3><div class="mock-line"></div><div class="mock-line"></div><div class="mock-line short green"></div><div class="mock-line"></div></div>
+                <div class="mock-card"><h3>بحث وتصفية</h3><div class="mock-line short"></div><div class="mock-line"></div><div class="mock-line green"></div></div>
+              </div>
+              <div class="mock-ad"><div><strong>إعلان سفلي متجاوب</strong><span>الموضع الحالي: قبل الفوتر<br>slot: 6528123169</span></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="device-card phone-card">
+          <h2>معاينة الهاتف <span>عرض 375px</span></h2>
+          <div class="device-viewport phone-viewport">
+            <div class="mock-site">
+              <div class="mock-nav">
+                <span class="mock-brand"><img src="../assets/brand-mark.svg" alt=""><span>مفقودين الجزائر</span></span>
+                <span>☰</span>
+              </div>
+              <div class="mock-ad"><div><strong>إعلان علوي</strong><span>بعد الهيدر<br>متجاوب مع الهاتف</span></div></div>
+              <div class="mock-content">
+                <div class="mock-card"><h3>بلاغات المفقودين</h3><div class="mock-line"></div><div class="mock-line short"></div><div class="mock-line green"></div></div>
+                <div class="mock-card"><h3>تفاصيل البلاغ</h3><div class="mock-line"></div><div class="mock-line short"></div></div>
+              </div>
+              <div class="mock-ad"><div><strong>إعلان سفلي</strong><span>قبل الفوتر<br>مع مساحة آمنة للمحتوى</span></div></div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="placement-list" aria-label="تفاصيل مواضع الإعلانات">
+        <div class="placement-item"><span class="placement-number">1</span><div><strong>الإعلان العلوي</strong><span>يظهر بعد الهيدر وقبل محتوى الصفحة، وهو أول موضع يراه المستخدم دون أن يغطي المحتوى أو يعيق التنقل.</span></div></div>
+        <div class="placement-item"><span class="placement-number">2</span><div><strong>الإعلان السفلي</strong><span>يظهر قبل الفوتر بعد انتهاء المحتوى الأساسي، حتى لا يقطع قراءة البلاغ أو نتائج البحث.</span></div></div>
+        <div class="placement-item"><span class="placement-number">3</span><div><strong>سلوك الهاتف</strong><span>تتقلص المساحة أفقيًا وتبقى داخل إطار الصفحة، مع مساحة احتياطية تقلل القفز المفاجئ للمحتوى أثناء التحميل.</span></div></div>
+      </section>
+
+      <footer class="preview-footer">هذه صفحة مراجعة داخلية غير مفهرسة. عند اعتماد التصميم يمكن العودة إلى الموقع ومراجعة الصفحات الحقيقية، مع العلم أن شكل الإعلان النهائي تحدده Google AdSense بعد ملء الوحدة الإعلانية.</footer>
+    </div>
+  </main>
+
+  <script>
+    const modes = document.querySelectorAll('.preview-mode');
+    const grid = document.getElementById('deviceGrid');
+    modes.forEach((button) => button.addEventListener('click', () => {
+      modes.forEach((item) => item.classList.remove('active'));
+      button.classList.add('active');
+      grid.dataset.mode = button.dataset.mode;
+    }));
+  </script>
+  <style>
+    #deviceGrid[data-mode="desktop"] { grid-template-columns: 1fr; }
+    #deviceGrid[data-mode="desktop"] .phone-card { display: none; }
+    #deviceGrid[data-mode="phone"] { grid-template-columns: 1fr; }
+    #deviceGrid[data-mode="phone"] .desktop-card { display: none; }
+  </style>
+</body>
+</html>

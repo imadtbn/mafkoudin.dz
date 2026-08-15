@@ -2585,3 +2585,74 @@ textarea:focus-visible {
     min-height: 70px;
   }
 }
+
+/* ============================================
+   COMPACT HORIZONTAL PERSON CARD INFO
+   ============================================ */
+.card-info {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.card-info-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  min-height: 30px;
+}
+
+.card-info-row:nth-child(2) {
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, .75fr) minmax(0, .9fr);
+}
+
+.card-info-row-found {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.card-info-item {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: var(--space-2);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card-info-item i {
+  flex: 0 0 17px;
+  width: 17px;
+  font-size: 0.75rem;
+}
+
+.card-info-item span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-info-location span {
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 575px) {
+  .card-info-row {
+    gap: var(--space-1);
+  }
+
+  .card-info-item {
+    gap: var(--space-1);
+    font-size: 0.72rem;
+  }
+
+  .card-info-item i {
+    flex-basis: 15px;
+    width: 15px;
+    font-size: 0.68rem;
+  }
+}

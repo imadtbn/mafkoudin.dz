@@ -37,7 +37,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=card-layout-2">
 
   <!-- Schema.org -->
   <script type="application/ld+json">
@@ -394,14 +394,17 @@
             </div>
             <div class="card-body">
               <h5 class="card-name">${person.firstName} ${person.lastName}</h5>
-              <div class="card-info">
-                <div class="card-info-item"><i class="fas fa-birthday-cake"></i> ${person.age} سنة - ${getAgeCategory(person.age)}</div>
-                <div class="card-info-item"><i class="fas fa-venus-mars"></i> ${getGenderLabel(person.gender)}</div>
-                <div class="card-info-item"><i class="fas fa-map-marker-alt"></i> ${person.state} - ${person.municipality}</div>
-                <div class="card-info-item"><i class="fas fa-calendar-alt"></i> ${formatDate(person.dateMissing)}</div>
-                <div class="card-info-item"><i class="fas fa-clock"></i> ${person.daysMissing} يوم</div>
-                <div class="card-info-item"><i class="fas fa-eye"></i> ${person.views.toLocaleString("ar-DZ")} مشاهدة</div>
-                ${person.foundDate ? `<div class="card-info-item found-date"><i class="fas fa-check-circle"></i> تم العثور: ${formatDate(person.foundDate)}</div>` : ""}
+              <div class="card-info" aria-label="المعلومات المختصرة">
+                <div class="card-info-row">
+                  <div class="card-info-item"><i class="fas fa-birthday-cake"></i><span>${person.age} سنة - ${getAgeCategory(person.age)}</span></div>
+                  <div class="card-info-item"><i class="fas fa-venus-mars"></i><span>${getGenderLabel(person.gender)}</span></div>
+                  <div class="card-info-item"><i class="fas fa-calendar-alt"></i><span>${formatDate(person.dateMissing)}</span></div>
+                </div>
+                <div class="card-info-row">
+                  <div class="card-info-item card-info-location"><i class="fas fa-map-marker-alt"></i><span>${person.state} - ${person.municipality}</span></div>
+                  <div class="card-info-item"><i class="fas ${person.foundDate ? 'fa-check-circle' : 'fa-clock'}"></i><span>${person.foundDate ? `تم العثور: ${formatDate(person.foundDate)}` : `${person.daysMissing} يوم`}</span></div>
+                  <div class="card-info-item"><i class="fas fa-eye"></i><span>${person.views.toLocaleString("ar-DZ")} مشاهدة</span></div>
+                </div>
               </div>
               <div class="card-footer-actions">
                 <a href="${getDetailUrl(person)}" class="btn-card btn-card-primary">عرض التفاصيل</a>

@@ -1,5 +1,5 @@
 const BASE_PATH = new URL('./', self.registration.scope).pathname;
-const CACHE_NAME = 'mafkoudin-dz-shell-v1';
+const CACHE_NAME = 'mafkoudin-dz-shell-v2';
 const APP_SHELL = [
   BASE_PATH,
   `${BASE_PATH}index.html`,
