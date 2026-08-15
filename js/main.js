@@ -22,7 +22,7 @@ function setMetaContent(selector, value, attribute = "content") {
 // ============================================
 // DEMO DATA
 // ============================================
-const demoData = {
+let demoData = {
   persons: [
     {
       id: "MAF-2026-001",
@@ -340,6 +340,55 @@ const demoData = {
     "باتنة": ["باتنة", "تازولت", "نقاوس", "القصبة", "عين ياقوت"]
   }
 };
+
+// ============================================
+// EXTERNAL JSON DATA LOADER
+// ============================================
+function getDataBasePath() {
+  return window.location.pathname.startsWith('/mafkoudin.dz/') ? '/mafkoudin.dz/' : '/';
+}
+
+async function loadSiteData() {
+  const basePath = getDataBasePath();
+  const [reportsResponse, adminResponse] = await Promise.all([
+    fetch(`${basePath}dataperdu.json`, { cache: 'no-store' }),
+    fetch(`${basePath}data.json`, { cache: 'no-store' })
+  ]);
+
+  if (!reportsResponse.ok || !adminResponse.ok) {
+    throw new Error(`Data request failed: ${reportsResponse.status}/${adminResponse.status}`);
+  }
+
+  const reportsData = await reportsResponse.json();
+  const administrativeData = await adminResponse.json();
+  const wilayas = Array.isArray(administrativeData.wilayas) ? administrativeData.wilayas : [];
+  const fallbackStateMeta = new Map((demoData.states || []).map((state) => [state.name.trim(), state]));
+
+  if (Array.isArray(reportsData.persons)) {
+    demoData.persons = reportsData.persons;
+  }
+  demoData.wilayas = wilayas;
+  demoData.states = wilayas.map((wilaya) => {
+    const metadata = fallbackStateMeta.get(wilaya.name.trim()) || {};
+    return {
+      name: wilaya.name,
+      code: wilaya.code,
+      count: demoData.persons.filter((person) => person.state === wilaya.name).length,
+      lat: metadata.lat ?? null,
+      lng: metadata.lng ?? null
+    };
+  });
+  demoData.municipalities = Object.fromEntries(
+    wilayas.map((wilaya) => [wilaya.name, (wilaya.communes || []).map((commune) => commune.name)])
+  );
+  window.siteData = { reports: reportsData, administrative: administrativeData };
+  return demoData;
+}
+
+window.siteDataReady = loadSiteData().catch((error) => {
+  console.warn('External JSON data could not be loaded; using fallback data.', error);
+  return demoData;
+});
 
 // ============================================
 // UTILITY FUNCTIONS

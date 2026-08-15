@@ -161,67 +161,63 @@
   </section>
 
   <!-- Filters Section -->
-  <section class="filters-section">
+  <section class="filters-section filters-section-compact" id="filtersSection">
     <div class="container">
-      <div class="row g-3">
-        <div class="col-6 col-md-4 col-lg-2">
-          <label class="filter-label">الولاية</label>
-          <select class="filter-select" id="filterState">
-            <option value="">الكل</option>
-          </select>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <label class="filter-label">البلدية</label>
-          <select class="filter-select" id="filterMunicipality">
-            <option value="">الكل</option>
-          </select>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <label class="filter-label">الجنس</label>
-          <select class="filter-select" id="filterGender">
-            <option value="">الكل</option>
-            <option value="male">ذكر</option>
-            <option value="female">أنثى</option>
-          </select>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <label class="filter-label">الفئة العمرية</label>
-          <select class="filter-select" id="filterAge">
-            <option value="">الكل</option>
-            <option value="child">طفل (0-12)</option>
-            <option value="teen">مراهق (13-17)</option>
-            <option value="adult">بالغ (18-59)</option>
-            <option value="senior">مسن (60+)</option>
-          </select>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <label class="filter-label">الحالة</label>
-          <select class="filter-select" id="filterStatus">
-            <option value="">الكل</option>
-            <option value="missing">مفقود حاليا</option>
-            <option value="found">تم العثور عليه</option>
-          </select>
-        </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <label class="filter-label">الترتيب</label>
-          <select class="filter-select" id="filterSort">
-            <option value="newest">الأحدث</option>
-            <option value="oldest">الأقدم</option>
-            <option value="mostViewed">الأكثر مشاهدة</option>
-          </select>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-12 col-md-6">
-          <label class="filter-label">تاريخ الاختفاء</label>
-          <div class="d-flex gap-2">
-            <input type="date" class="filter-input" id="filterDateFrom" placeholder="من">
-            <input type="date" class="filter-input" id="filterDateTo" placeholder="إلى">
+      <div class="filters-toolbar">
+        <div class="filters-heading">
+          <span class="filters-heading-icon"><i class="fas fa-sliders-h"></i></span>
+          <div>
+            <h2>تصفية البلاغات</h2>
+            <p><span id="resultsCount">0</span> بلاغات مطابقة</p>
           </div>
         </div>
-        <div class="col-12 col-md-6 d-flex align-items-end gap-2 mt-3 mt-md-0">
-          <button class="filter-btn" id="applyFilters"><i class="fas fa-filter me-1"></i>تطبيق الفلاتر</button>
-          <button class="filter-btn reset-filters" id="resetFilters"><i class="fas fa-undo me-1"></i>إعادة تعيين</button>
+        <div class="filters-toolbar-actions">
+          <span class="active-filter-count" id="activeFilterCount">0 فلاتر نشطة</span>
+          <button type="button" class="filters-toggle" id="filtersToggle" aria-expanded="false" aria-controls="filtersPanel">
+            <i class="fas fa-sliders-h"></i><span>المزيد من الفلاتر</span><i class="fas fa-chevron-down toggle-chevron"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="quick-filters-row">
+        <div class="filter-control filter-control-state">
+          <label class="filter-label" for="filterState">الولاية</label>
+          <select class="filter-select" id="filterState"><option value="">كل الولايات</option></select>
+        </div>
+        <div class="filter-control">
+          <label class="filter-label" for="filterStatus">الحالة</label>
+          <select class="filter-select" id="filterStatus">
+            <option value="">كل الحالات</option><option value="missing">مفقود حاليا</option><option value="found">تم العثور عليه</option>
+          </select>
+        </div>
+        <div class="filter-control">
+          <label class="filter-label" for="filterSort">الترتيب</label>
+          <select class="filter-select" id="filterSort">
+            <option value="newest">الأحدث</option><option value="oldest">الأقدم</option><option value="mostViewed">الأكثر مشاهدة</option>
+          </select>
+        </div>
+        <button type="button" class="filter-btn filter-apply-quick" id="applyFilters"><i class="fas fa-filter"></i><span>تطبيق</span></button>
+        <button type="button" class="filter-btn reset-filters" id="resetFilters" title="إعادة تعيين الفلاتر"><i class="fas fa-undo"></i><span class="reset-label">إعادة تعيين</span></button>
+      </div>
+
+      <div class="filters-panel" id="filtersPanel" hidden>
+        <div class="advanced-filter-grid">
+          <div class="filter-control">
+            <label class="filter-label" for="filterMunicipality">البلدية</label>
+            <select class="filter-select" id="filterMunicipality" disabled><option value="">اختر الولاية أولًا</option></select>
+          </div>
+          <div class="filter-control">
+            <label class="filter-label" for="filterGender">الجنس</label>
+            <select class="filter-select" id="filterGender"><option value="">الكل</option><option value="male">ذكر</option><option value="female">أنثى</option></select>
+          </div>
+          <div class="filter-control">
+            <label class="filter-label" for="filterAge">الفئة العمرية</label>
+            <select class="filter-select" id="filterAge"><option value="">الكل</option><option value="child">طفل (0-12)</option><option value="teen">مراهق (13-17)</option><option value="adult">بالغ (18-59)</option><option value="senior">مسن (60+)</option></select>
+          </div>
+          <div class="filter-control filter-date-control">
+            <label class="filter-label">تاريخ الاختفاء</label>
+            <div class="date-range-controls"><input type="date" class="filter-input" id="filterDateFrom" aria-label="من تاريخ"><span>إلى</span><input type="date" class="filter-input" id="filterDateTo" aria-label="إلى تاريخ"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -347,10 +343,20 @@
       }, 30);
     }
 
+    function updateFilterSummary(resultCount = demoData.persons.length) {
+      const resultEl = document.getElementById("resultsCount");
+      const activeEl = document.getElementById("activeFilterCount");
+      if (resultEl) resultEl.textContent = Number(resultCount).toLocaleString("ar-DZ");
+      if (!activeEl) return;
+      const activeIds = ["filterState", "filterMunicipality", "filterGender", "filterAge", "filterStatus", "filterDateFrom", "filterDateTo"];
+      const activeCount = activeIds.reduce((count, id) => count + (document.getElementById(id)?.value ? 1 : 0), 0);
+      activeEl.textContent = `${activeCount.toLocaleString("ar-DZ")} فلاتر نشطة`;
+    }
+
     // Populate state filter
     function populateStates() {
       const select = document.getElementById("filterState");
-      const states = [...new Set(demoData.persons.map(p => p.state))].sort();
+      const states = (demoData.wilayas || demoData.states || []).map((item) => item.name).sort((a, b) => a.localeCompare(b, 'ar'));
       states.forEach(state => {
         const option = document.createElement("option");
         option.value = state;
@@ -362,7 +368,8 @@
     // Populate municipality filter based on state
     function populateMunicipalities(state) {
       const select = document.getElementById("filterMunicipality");
-      select.innerHTML = '<option value="">الكل</option>';
+      select.innerHTML = state ? '<option value="">كل البلديات</option>' : '<option value="">اختر الولاية أولًا</option>';
+      select.disabled = !state;
       if (state && demoData.municipalities[state]) {
         demoData.municipalities[state].forEach(mun => {
           const option = document.createElement("option");
@@ -376,6 +383,7 @@
     // Render cards
     function renderCards(persons) {
       const container = document.getElementById("cardsContainer");
+      updateFilterSummary(persons.length);
       const emptyState = document.getElementById("emptyState");
 
       if (persons.length === 0) {
@@ -479,10 +487,21 @@
     }
 
     // Event listeners
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
+      await window.siteDataReady;
       updateStats();
       populateStates();
+      populateMunicipalities("");
       renderCards(demoData.persons);
+
+      const filtersToggle = document.getElementById("filtersToggle");
+      const filtersPanel = document.getElementById("filtersPanel");
+      filtersToggle?.addEventListener("click", () => {
+        const isOpen = filtersToggle.getAttribute("aria-expanded") === "true";
+        filtersToggle.setAttribute("aria-expanded", String(!isOpen));
+        filtersToggle.querySelector("span").textContent = isOpen ? "المزيد من الفلاتر" : "إخفاء الفلاتر";
+        filtersPanel.hidden = isOpen;
+      });
 
       document.getElementById("searchInput").addEventListener("input", filterPersons);
       document.getElementById("searchBtn").addEventListener("click", filterPersons);
@@ -502,7 +521,8 @@
       document.getElementById("resetFilters").addEventListener("click", () => {
         document.getElementById("searchInput").value = "";
         document.getElementById("filterState").value = "";
-        document.getElementById("filterMunicipality").innerHTML = '<option value="">الكل</option>';
+        document.getElementById("filterMunicipality").innerHTML = '<option value="">اختر الولاية أولًا</option>';
+        document.getElementById("filterMunicipality").disabled = true;
         document.getElementById("filterGender").value = "";
         document.getElementById("filterAge").value = "";
         document.getElementById("filterStatus").value = "";

@@ -1,11 +1,13 @@
 const BASE_PATH = new URL('./', self.registration.scope).pathname;
-const CACHE_NAME = 'mafkoudin-dz-shell-v2';
+const CACHE_NAME = 'mafkoudin-dz-shell-v3';
 const APP_SHELL = [
   BASE_PATH,
   `${BASE_PATH}index.html`,
   `${BASE_PATH}css/style.css`,
   `${BASE_PATH}js/main.js`,
   `${BASE_PATH}js/ads.js`,
+  `${BASE_PATH}data.json`,
+  `${BASE_PATH}dataperdu.json`,
   `${BASE_PATH}assets/favicon.svg`,
   `${BASE_PATH}assets/brand-mark.svg`,
   `${BASE_PATH}assets/apple-touch-icon.png`,

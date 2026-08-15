@@ -503,7 +503,10 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", loadPerson);
+    document.addEventListener("DOMContentLoaded", async () => {
+      await window.siteDataReady;
+      loadPerson();
+    });
   </script>
   <script src="../js/ads.js" defer></script>
 </body>

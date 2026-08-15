@@ -53,7 +53,8 @@
   </div></div>
   <script src="../js/main.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
+      await window.siteDataReady;
       document.getElementById('adminTableBody').innerHTML = demoData.persons.map(p => `
         <tr>
           <td><span class="badge bg-light text-dark">${p.id}</span></td>

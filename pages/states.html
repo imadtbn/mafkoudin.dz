@@ -189,7 +189,7 @@
       }).addTo(map);
 
       // Add markers for each state
-      demoData.states.forEach(state => {
+      demoData.states.filter((state) => Number.isFinite(state.lat) && Number.isFinite(state.lng)).forEach(state => {
         const marker = L.marker([state.lat, state.lng]).addTo(map);
         marker.bindPopup(`
           <div class="popup-state-name">${state.name}</div>
@@ -215,7 +215,8 @@
       `).join("");
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
+      await window.siteDataReady;
       initMap();
       renderStates();
     });

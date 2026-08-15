@@ -353,7 +353,7 @@
     // Populate states
     function populateStates() {
       const stateSelect = document.getElementById("state");
-      const states = [...new Set(demoData.persons.map(p => p.state))].sort();
+      const states = (demoData.wilayas || demoData.states || []).map((item) => item.name).sort((a, b) => a.localeCompare(b, 'ar'));
       states.forEach(state => {
         const option = document.createElement("option");
         option.value = state;
@@ -444,7 +444,8 @@
       }, 2000);
     });
 
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
+      await window.siteDataReady;
       populateStates();
       initImageUploads();
 
