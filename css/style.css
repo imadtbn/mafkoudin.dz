@@ -2894,3 +2894,57 @@ textarea:focus-visible {
     display: inline;
   }
 }
+
+/* ============================================
+   HERO STATS RESPONSIVE LAYOUT
+   ============================================ */
+.hero-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.stat-card {
+  min-width: 0;
+  padding: var(--space-4) var(--space-3);
+}
+
+.stat-number {
+  font-size: 2rem;
+}
+
+.stat-label {
+  min-height: 2.25em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .78rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 991px) {
+  .hero-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575px) {
+  .hero-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .stat-card {
+    padding: var(--space-4) var(--space-2);
+    border-radius: var(--radius-lg);
+  }
+
+  .stat-number {
+    font-size: 1.55rem;
+  }
+
+  .stat-label {
+    font-size: .7rem;
+  }
+}
