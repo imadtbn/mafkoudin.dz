@@ -3169,3 +3169,61 @@ textarea {
     border-radius: var(--radius-lg);
   }
 }
+
+/* ============================================
+   FULL-BLEED MOBILE/DESKTOP-SITE SAFETY NET
+   Keep page chrome flush with the viewport when
+   Chrome's "Desktop site" uses a narrow layout viewport.
+   ============================================ */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: clip;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+}
+
+.emergency-bar,
+.navbar,
+.hero-section,
+.ad-section,
+.search-section,
+.filters-section,
+.cards-section,
+.footer {
+  width: 100%;
+  max-width: 100%;
+}
+
+@supports not (overflow: clip) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Bootstrap's 960px/1140px container widths are useful on a
+   real desktop, but create visible side gutters in a narrow
+   Desktop Site layout. Keep the inner content fluid there. */
+@media (max-width: 1199.98px) {
+  .container,
+  .emergency-bar > .container,
+  .navbar > .container,
+  .hero-section > .container,
+  .ad-section > .container,
+  .search-section > .container,
+  .filters-section > .container,
+  .cards-section > .container,
+  .footer > .container {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
