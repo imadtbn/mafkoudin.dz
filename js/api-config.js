@@ -3,4 +3,4 @@
  * مثال: https://your-admin-domain.example
  * لا تضع كلمات مرور أو مفاتيح أو أسرار في هذا الملف.
  */
-window.MAFKOUDIN_REPORTS_API_BASE_URL = "";
+window.MAFKOUDIN_REPORTS_API_BASE_URL = "https://mafadmin-guwxgghh.manus.space";
