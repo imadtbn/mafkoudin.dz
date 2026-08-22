@@ -348,6 +348,52 @@ function getDataBasePath() {
   return window.location.pathname.startsWith('/mafkoudin.dz/') ? '/mafkoudin.dz/' : '/';
 }
 
+function getPublicReportsApiUrl() {
+  return String(window.MAFKOUDIN_REPORTS_API_BASE_URL || "").replace(/\/$/, "");
+}
+
+function mapPublicReportToSitePerson(report) {
+  return {
+    id: report.reference,
+    firstName: report.firstName,
+    lastName: report.lastName,
+    age: report.age,
+    gender: report.gender,
+    state: report.state,
+    municipality: report.municipality,
+    address: "",
+    dateMissing: report.dateMissing,
+    timeMissing: report.timeMissing || "",
+    placeMissing: report.placeMissing,
+    lastSeen: report.lastSeen || "",
+    daysMissing: 0,
+    status: "missing",
+    height: report.heightCm ? String(report.heightCm) : "",
+    weight: report.weightKg ? String(report.weightKg) : "",
+    hairColor: report.hairColor || "",
+    eyeColor: report.eyeColor || "",
+    clothing: report.clothing || "",
+    distinctiveMarks: report.distinctiveMarks || "",
+    mentalState: report.mentalState || "",
+    circumstances: report.circumstances,
+    description: report.description || "",
+    mainImage: report.mainImage || "assets/brand-mark.svg",
+    gallery: report.extraImages || [],
+    reportDate: report.publishedAt ? report.publishedAt.slice(0, 10) : report.dateMissing,
+    views: 0,
+    foundDate: null
+  };
+}
+
+async function loadApprovedPublicReports() {
+  const apiUrl = getPublicReportsApiUrl();
+  if (!apiUrl) return [];
+  const response = await fetch(`${apiUrl}/api/public/reports`, { cache: "no-store" });
+  if (!response.ok) throw new Error(`Public reports request failed: ${response.status}`);
+  const payload = await response.json();
+  return Array.isArray(payload.reports) ? payload.reports.map(mapPublicReportToSitePerson) : [];
+}
+
 async function loadSiteData() {
   const basePath = getDataBasePath();
   const [reportsResponse, adminResponse] = await Promise.all([
@@ -366,6 +412,14 @@ async function loadSiteData() {
 
   if (Array.isArray(reportsData.persons)) {
     demoData.persons = reportsData.persons;
+  }
+  try {
+    const approvedReports = await loadApprovedPublicReports();
+    const mergedPersons = new Map(demoData.persons.map((person) => [person.id, person]));
+    approvedReports.forEach((person) => mergedPersons.set(person.id, person));
+    demoData.persons = Array.from(mergedPersons.values());
+  } catch (error) {
+    console.warn("Approved reports could not be loaded from the public API.", error);
   }
   demoData.wilayas = wilayas;
   demoData.states = wilayas.map((wilaya) => {

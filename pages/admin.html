@@ -3,74 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لوحة الإدارة | مفقودين الجزائر</title>
+  <meta name="robots" content="noindex,nofollow">
+  <title>بوابة الإدارة | مفقودين الجزائر</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../css/style.css?v=global-rtl-ads-6">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" sizes="180x180">
-  <meta property="og:title" content="لوحة الإدارة | مفقودين الجزائر">
-  <meta property="og:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين ونشر البلاغات ومشاركتها للمساعدة في إعادتهم إلى ذويهم.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://imadtbn.github.io/mafkoudin.dz/pages/admin.html">
-  <meta property="og:image" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
-  <meta property="og:image:secure_url" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="شعار ومنصة مفقودين الجزائر">
-  <meta property="og:site_name" content="مفقودين الجزائر | Mafkoudin DZ">
-  <meta property="og:locale" content="ar_DZ">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="لوحة الإدارة | مفقودين الجزائر">
-  <meta name="twitter:description" content="منصة جزائرية للبحث عن الأشخاص المفقودين ونشر البلاغات ومشاركتها للمساعدة في إعادتهم إلى ذويهم.">
-  <meta name="twitter:image" content="https://imadtbn.github.io/mafkoudin.dz/assets/og-image.png">
-  <meta name="twitter:url" content="https://imadtbn.github.io/mafkoudin.dz/pages/admin.html">
-  <meta name="robots" content="index,follow,max-image-preview:large">
 </head>
-<body>
-  <div class="container-fluid"><div class="row">
-    <div class="col-lg-2 admin-sidebar p-0">
-      <div class="admin-sidebar-brand"><span class="brand-icon"><img src="../assets/brand-mark.svg" alt="" width="44" height="44" aria-hidden="true"></span><span>لوحة الإدارة</span></div>
-      <a href="#" class="admin-nav-link active"><i class="fas fa-file-alt"></i> البلاغات</a>
-      <a href="#" class="admin-nav-link"><i class="fas fa-users"></i> المستخدمون</a>
-      <a href="#" class="admin-nav-link"><i class="fas fa-map"></i> الولايات</a>
-      <a href="#" class="admin-nav-link"><i class="fas fa-images"></i> الصور</a>
-      <a href="#" class="admin-nav-link"><i class="fas fa-exclamation-triangle"></i> البلاغات المكررة</a>
-      <a href="../index.html" class="admin-nav-link"><i class="fas fa-arrow-left"></i> العودة للموقع</a>
-    </div>
-    <div class="col-lg-10 admin-main">
-      <h2 class="mb-4">إدارة البلاغات</h2>
-      <div class="admin-card">
-        <div class="table-responsive">
-          <table class="admin-table">
-            <thead><tr><th>رقم البلاغ</th><th>الاسم</th><th>الولاية</th><th>التاريخ</th><th>الحالة</th><th>المشاهدات</th><th>الإجراءات</th></tr></thead>
-            <tbody id="adminTableBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div></div>
-  <script src="../js/main.js"></script>
+<body class="bg-light">
+  <main class="min-vh-100 d-flex align-items-center justify-content-center p-4">
+    <section class="report-form-card text-center" style="max-width: 560px; width: 100%;">
+      <span class="brand-icon mx-auto mb-4" style="width:64px;height:64px;font-size:1.6rem;background:var(--green-700);color:#fff"><i class="fas fa-shield-halved"></i></span>
+      <h1 class="h3 mb-3">بوابة الإدارة الآمنة</h1>
+      <p class="text-muted mb-4">لوحة المراجعة محمية بتسجيل دخول المشرف. لا تعرض هذه الصفحة أي بيانات بلاغات أو بيانات اتصال.</p>
+      <a id="adminDashboardLink" class="btn btn-success px-4 disabled" aria-disabled="true"><i class="fas fa-lock me-2"></i>فتح لوحة الإدارة</a>
+      <p id="adminSetupHint" class="small text-muted mt-3 mb-0">يجري إعداد رابط لوحة الإدارة.</p>
+      <p class="mt-4 mb-0"><a href="../index.html" class="text-decoration-none"><i class="fas fa-arrow-right me-1"></i>العودة إلى الموقع العام</a></p>
+    </section>
+  </main>
+  <script src="../js/api-config.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      await window.siteDataReady;
-      document.getElementById('adminTableBody').innerHTML = demoData.persons.map(p => `
-        <tr>
-          <td><span class="badge bg-light text-dark">${p.id}</span></td>
-          <td><strong>${p.firstName} ${p.lastName}</strong><br><small class="text-muted">${p.age} سنة</small></td>
-          <td>${p.state}</td>
-          <td>${p.reportDate}</td>
-          <td><span class="badge badge-${p.status==='found'?'found':(p.status==='pending'?'pending':'approved')}">${p.status==='found'?'تم العثور':'منشور'}</span></td>
-          <td>${p.views}</td>
-          <td>
-            <button class="btn-admin btn-admin-approve"><i class="fas fa-check"></i></button>
-            <button class="btn-admin btn-admin-edit"><i class="fas fa-edit"></i></button>
-            <button class="btn-admin btn-admin-reject"><i class="fas fa-trash"></i></button>
-          </td>
-        </tr>
-      `).join('');
-    });
+    const baseUrl = String(window.MAFKOUDIN_REPORTS_API_BASE_URL || "").replace(/\/$/, "");
+    const link = document.getElementById("adminDashboardLink");
+    const hint = document.getElementById("adminSetupHint");
+    if (baseUrl) {
+      link.href = baseUrl;
+      link.classList.remove("disabled");
+      link.setAttribute("aria-disabled", "false");
+      hint.textContent = "سيُطلب منك تسجيل الدخول بحساب المشرف للوصول إلى لوحة المراجعة.";
+    }
   </script>
 </body>
 </html>

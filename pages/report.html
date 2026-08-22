@@ -96,6 +96,7 @@
             </div>
 
             <form id="reportForm" novalidate>
+              <input type="text" id="website" name="website" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
               <!-- Images Section -->
               <h4 class="form-section-title"><i class="fas fa-images"></i> الصور</h4>
               <div class="row mb-4">
@@ -106,7 +107,7 @@
                     <p>اضغط هنا لرفع الصورة الرئيسية</p>
                     <small class="text-muted">الصيغ المسموحة: JPG, PNG - الحد الأقصى: 5 ميجا</small>
                   </div>
-                  <input type="file" class="d-none" id="mainImageInput" accept="image/*">
+                  <input type="file" class="d-none" id="mainImageInput" accept="image/jpeg,image/png,image/webp" required>
                   <div id="mainImagePreview" class="mt-2 d-none">
                     <img src="" alt="Preview" class="img-fluid rounded" style="max-height:200px">
                   </div>
@@ -359,113 +360,9 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Main JS -->
+  <script src="../js/api-config.js"></script>
   <script src="../js/main.js"></script>
-
-  <script>
-    // Populate states
-    function populateStates() {
-      const stateSelect = document.getElementById("state");
-      const states = (demoData.wilayas || demoData.states || []).map((item) => item.name).sort((a, b) => a.localeCompare(b, 'ar'));
-      states.forEach(state => {
-        const option = document.createElement("option");
-        option.value = state;
-        option.textContent = state;
-        stateSelect.appendChild(option);
-      });
-    }
-
-    // Populate municipalities based on state
-    function populateMunicipalities(state) {
-      const munSelect = document.getElementById("municipality");
-      munSelect.innerHTML = '<option value="">اختر البلدية</option>';
-      if (state && demoData.municipalities[state]) {
-        demoData.municipalities[state].forEach(mun => {
-          const option = document.createElement("option");
-          option.value = mun;
-          option.textContent = mun;
-          munSelect.appendChild(option);
-        });
-      }
-    }
-
-    // Image upload handling
-    function initImageUploads() {
-      const mainZone = document.getElementById("mainImageZone");
-      const mainInput = document.getElementById("mainImageInput");
-      const mainPreview = document.getElementById("mainImagePreview");
-
-      mainZone.addEventListener("click", () => mainInput.click());
-      mainInput.addEventListener("change", (e) => {
-        if (e.target.files[0]) {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            mainPreview.querySelector("img").src = event.target.result;
-            mainPreview.classList.remove("d-none");
-          };
-          reader.readAsDataURL(e.target.files[0]);
-        }
-      });
-
-      const extraZone = document.getElementById("extraImagesZone");
-      const extraInput = document.getElementById("extraImagesInput");
-      const extraPreview = document.getElementById("extraImagesPreview");
-
-      extraZone.addEventListener("click", () => extraInput.click());
-      extraInput.addEventListener("change", (e) => {
-        extraPreview.innerHTML = "";
-        extraPreview.classList.remove("d-none");
-        Array.from(e.target.files).forEach(file => {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            const img = document.createElement("img");
-            img.src = event.target.result;
-            img.className = "rounded";
-            img.style.cssText = "width:80px;height:80px;object-fit:cover;";
-            extraPreview.appendChild(img);
-          };
-          reader.readAsDataURL(file);
-        });
-      });
-    }
-
-    // Form submission
-    document.getElementById("reportForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      if (!this.checkValidity()) {
-        this.classList.add("was-validated");
-        showToast("الرجاء تعبئة جميع الحقول المطلوبة", "error");
-        return;
-      }
-
-      // Simulate submission
-      const btn = document.getElementById("submitBtn");
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> جاري الإرسال...';
-      btn.disabled = true;
-
-      setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-        showToast("تم استلام البلاغ بنجاح! سيتم مراجعته ونشره قريباً. رقم البلاغ المرجعي: MAF-2026-009");
-        this.reset();
-        this.classList.remove("was-validated");
-        document.getElementById("mainImagePreview").classList.add("d-none");
-        document.getElementById("extraImagesPreview").classList.add("d-none");
-      }, 2000);
-    });
-
-    document.addEventListener("DOMContentLoaded", async () => {
-      await window.siteDataReady;
-      populateStates();
-      initImageUploads();
-
-      document.getElementById("state").addEventListener("change", (e) => {
-        populateMunicipalities(e.target.value);
-      });
-    });
-  </script>
+  <script src="../js/report-submission.js"></script>
   <script src="../js/ads.js" defer></script>
 </body>
 </html>
