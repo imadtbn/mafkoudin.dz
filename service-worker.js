@@ -1,11 +1,15 @@
 const BASE_PATH = new URL('./', self.registration.scope).pathname;
-const CACHE_NAME = 'mafkoudin-dz-shell-v5';
+const CACHE_NAME = 'mafkoudin-dz-shell-v6';
 const APP_SHELL = [
   BASE_PATH,
   `${BASE_PATH}index.html`,
   `${BASE_PATH}css/style.css`,
   `${BASE_PATH}js/main.js`,
+  `${BASE_PATH}js/api-config.js?v=report-submit-v2`,
+  `${BASE_PATH}js/main.js?v=report-submit-v2`,
+  `${BASE_PATH}js/report-submission.js?v=report-submit-v2`,
   `${BASE_PATH}js/ads.js`,
+  `${BASE_PATH}pages/report.html`,
   `${BASE_PATH}data.json`,
   `${BASE_PATH}dataperdu.json`,
   `${BASE_PATH}assets/favicon.svg`,

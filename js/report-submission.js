@@ -38,19 +38,24 @@
 
   function populateStates() {
     const stateSelect = document.getElementById("state");
-    const states = (demoData.wilayas || demoData.states || []).map(item => item.name).sort((a, b) => a.localeCompare(b, "ar"));
+    if (!stateSelect || stateSelect.dataset.optionsLoaded === "true") return;
+    const data = window.demoData || {};
+    const states = (data.wilayas || data.states || []).map(item => item.name).sort((a, b) => a.localeCompare(b, "ar"));
     states.forEach(state => {
       const option = document.createElement("option");
       option.value = state;
       option.textContent = state;
       stateSelect.appendChild(option);
     });
+    stateSelect.dataset.optionsLoaded = "true";
   }
 
   function populateMunicipalities(state) {
     const municipalitySelect = document.getElementById("municipality");
+    if (!municipalitySelect) return;
+    const data = window.demoData || {};
     municipalitySelect.innerHTML = '<option value="">اختر البلدية</option>';
-    (demoData.municipalities?.[state] || []).forEach(municipality => {
+    (data.municipalities?.[state] || []).forEach(municipality => {
       const option = document.createElement("option");
       option.value = municipality;
       option.textContent = municipality;
@@ -138,6 +143,8 @@
     const mainZone = document.getElementById("mainImageZone");
     const mainInput = document.getElementById("mainImageInput");
     const mainPreview = document.getElementById("mainImagePreview");
+    if (!mainZone || mainZone.dataset.initialized === "true") return;
+    mainZone.dataset.initialized = "true";
     mainZone.addEventListener("click", () => mainInput.click());
     mainInput.addEventListener("change", () => {
       const file = mainInput.files[0];
@@ -167,11 +174,22 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", async () => {
-    await window.siteDataReady;
-    populateStates();
+  function initializeForm() {
+    const form = document.getElementById("reportForm");
+    const stateSelect = document.getElementById("state");
+    if (!form || form.dataset.submitHandlerBound === "true") return;
+    form.dataset.submitHandlerBound = "true";
+
     initImageUploads();
-    document.getElementById("state").addEventListener("change", event => populateMunicipalities(event.target.value));
-    document.getElementById("reportForm").addEventListener("submit", submitReport);
+    stateSelect?.addEventListener("change", event => populateMunicipalities(event.target.value));
+    form.addEventListener("submit", submitReport);
+
+    Promise.resolve(window.siteDataReady)
+      .catch(() => undefined)
+      .then(() => populateStates());
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initializeForm();
   });
 })();
