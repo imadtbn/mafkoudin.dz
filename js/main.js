@@ -625,7 +625,7 @@ document.addEventListener("DOMContentLoaded", () => {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     const projectBase = window.location.pathname.startsWith("/mafkoudin.dz/") ? "/mafkoudin.dz/" : "/";
-    const serviceWorkerUrl = `${projectBase}service-worker.js`;
+    const serviceWorkerUrl = `${projectBase}service-worker.js?v=report-ingress-v8`;
     navigator.serviceWorker.register(serviceWorkerUrl, { scope: projectBase })
       .then((reg) => console.log("Service Worker registered:", reg.scope))
       .catch((err) => console.warn("Service Worker registration failed:", err));
