@@ -36,6 +36,13 @@
     return value ? Number(value) : null;
   }
 
+  function setSubmissionStatus(message = "", type = "info") {
+    const status = document.getElementById("submissionStatus");
+    if (!status) return;
+    status.textContent = message;
+    status.className = `alert alert-${type === "success" ? "success" : type === "error" ? "danger" : "info"} mt-3 mb-0${message ? "" : " d-none"}`;
+  }
+
   const requiredTextFields = [
     ["firstName", "اسم الشخص المفقود"],
     ["lastName", "لقب الشخص المفقود"],
@@ -53,6 +60,7 @@
       }
       input.classList.add("is-invalid");
       input.focus();
+      setSubmissionStatus(`يرجى إدخال ${label}.`, "error");
       showToast(`يرجى إدخال ${label}.`, "error");
       return false;
     }
@@ -91,6 +99,7 @@
     const form = event.currentTarget;
     if (!form.checkValidity()) {
       form.classList.add("was-validated");
+      setSubmissionStatus("الرجاء تعبئة جميع الحقول المطلوبة.", "error");
       showToast("الرجاء تعبئة جميع الحقول المطلوبة", "error");
       return;
     }
@@ -98,6 +107,7 @@
 
     const baseUrl = apiBaseUrl();
     if (!baseUrl) {
+      setSubmissionStatus("خدمة استقبال البلاغات قيد الإعداد. يرجى المحاولة لاحقًا.", "error");
       showToast("خدمة استقبال البلاغات قيد الإعداد. يرجى المحاولة لاحقًا.", "error");
       return;
     }
@@ -109,6 +119,7 @@
     try {
       if (!mainInput.files[0]) throw new Error("الصورة الرئيسية مطلوبة");
       if (extraInput.files.length > 5) throw new Error("يمكنك رفع خمس صور إضافية كحد أقصى");
+      setSubmissionStatus("جارٍ تجهيز البلاغ وإرساله. لا تغلق الصفحة حتى تظهر النتيجة.", "info");
       btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> جاري الإرسال...';
       btn.disabled = true;
       const payload = {
@@ -150,13 +161,16 @@
       });
       const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error || "تعذر إرسال البلاغ الآن");
+      setSubmissionStatus(`تم استلام البلاغ بنجاح. رقمك المرجعي: ${body.reference}`, "success");
       showToast(`تم استلام البلاغ بنجاح. رقمك المرجعي: ${body.reference}`, "success");
       form.reset();
       form.classList.remove("was-validated");
       document.getElementById("mainImagePreview").classList.add("d-none");
       document.getElementById("extraImagesPreview").classList.add("d-none");
     } catch (error) {
-      showToast(error instanceof Error ? error.message : "تعذر إرسال البلاغ الآن", "error");
+      const message = error instanceof Error ? error.message : "تعذر إرسال البلاغ الآن";
+      setSubmissionStatus(message, "error");
+      showToast(message, "error");
     } finally {
       btn.innerHTML = originalText;
       btn.disabled = false;

@@ -621,14 +621,13 @@ document.addEventListener("DOMContentLoaded", () => {
   initMobileMenu();
 });
 
-// PWA Registration
+// Disable legacy offline caching so public report submissions always use the latest API configuration and form logic.
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    const projectBase = window.location.pathname.startsWith("/mafkoudin.dz/") ? "/mafkoudin.dz/" : "/";
-    const serviceWorkerUrl = `${projectBase}service-worker.js?v=report-ingress-v9`;
-    navigator.serviceWorker.register(serviceWorkerUrl, { scope: projectBase })
-      .then((reg) => console.log("Service Worker registered:", reg.scope))
-      .catch((err) => console.warn("Service Worker registration failed:", err));
+    navigator.serviceWorker.getRegistrations()
+      .then((registrations) => Promise.all(registrations.map((registration) => registration.unregister())))
+      .then(() => console.info("Legacy service worker cache disabled."))
+      .catch((err) => console.warn("Could not disable legacy service worker cache:", err));
   });
-        }
+}
       
