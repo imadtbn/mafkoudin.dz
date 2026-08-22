@@ -39,7 +39,7 @@
   function populateStates() {
     const stateSelect = document.getElementById("state");
     if (!stateSelect || stateSelect.dataset.optionsLoaded === "true") return;
-    const data = window.demoData || {};
+    const data = typeof demoData !== "undefined" ? demoData : {};
     const states = (data.wilayas || data.states || []).map(item => item.name).sort((a, b) => a.localeCompare(b, "ar"));
     states.forEach(state => {
       const option = document.createElement("option");
@@ -53,7 +53,7 @@
   function populateMunicipalities(state) {
     const municipalitySelect = document.getElementById("municipality");
     if (!municipalitySelect) return;
-    const data = window.demoData || {};
+    const data = typeof demoData !== "undefined" ? demoData : {};
     municipalitySelect.innerHTML = '<option value="">اختر البلدية</option>';
     (data.municipalities?.[state] || []).forEach(municipality => {
       const option = document.createElement("option");
