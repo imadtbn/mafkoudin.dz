@@ -6,13 +6,31 @@
     return String(window.MAFKOUDIN_REPORTS_API_BASE_URL || "").replace(/\/$/, "");
   }
 
-  function fileToDataUrl(file) {
+  function readWithFileReader(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result);
-      reader.onerror = () => reject(new Error("تعذر قراءة الصورة"));
+      reader.onerror = () => reject(reader.error || new Error("file_reader_failed"));
       reader.readAsDataURL(file);
     });
+  }
+
+  async function fileToDataUrl(file) {
+    try {
+      return await readWithFileReader(file);
+    } catch {
+      try {
+        const bytes = new Uint8Array(await file.arrayBuffer());
+        const chunkSize = 0x8000;
+        let binary = "";
+        for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+          binary += String.fromCharCode(...bytes.subarray(offset, offset + chunkSize));
+        }
+        return `data:${file.type};base64,${btoa(binary)}`;
+      } catch {
+        throw new Error("تعذر قراءة الصورة. اختر الصورة مجددًا أو جرّب صورة أصغر بصيغة JPG أو PNG.");
+      }
+    }
   }
 
   function validateImage(file) {
@@ -34,6 +52,12 @@
   function numericValue(id) {
     const value = document.getElementById(id).value;
     return value ? Number(value) : null;
+  }
+
+  function phoneValue(id) {
+    const value = document.getElementById(id).value;
+    const digits = value.replace(/\D/g, "");
+    return digits || null;
   }
 
   function setSubmissionStatus(message = "", type = "info") {
@@ -146,8 +170,8 @@
         reporter: {
           fullName: optionalValue("reporterName"),
           relation: document.getElementById("reporterRelation").value,
-          phone: optionalValue("reporterPhone"),
-          backupPhone: optionalValue("reporterPhone2"),
+          phone: phoneValue("reporterPhone"),
+          backupPhone: phoneValue("reporterPhone2"),
           email: optionalValue("reporterEmail"),
         },
         mainImage: await serializeImage(mainInput.files[0]),
@@ -209,6 +233,13 @@
         extraPreview.appendChild(image);
       });
       extraPreview.classList.remove("d-none");
+    });
+
+    ["reporterPhone", "reporterPhone2"].forEach((id) => {
+      const input = document.getElementById(id);
+      input?.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "").slice(0, 10);
+      });
     });
   }
 
