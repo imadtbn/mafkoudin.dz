@@ -36,6 +36,29 @@
     return value ? Number(value) : null;
   }
 
+  const requiredTextFields = [
+    ["firstName", "اسم الشخص المفقود"],
+    ["lastName", "لقب الشخص المفقود"],
+    ["placeMissing", "مكان الاختفاء"],
+    ["circumstances", "ظروف الاختفاء"],
+    ["reporterName", "اسم المبلّغ"],
+  ];
+
+  function validateRequiredTextFields() {
+    for (const [id, label] of requiredTextFields) {
+      const input = document.getElementById(id);
+      if (!input || input.value.trim()) {
+        input?.classList.remove("is-invalid");
+        continue;
+      }
+      input.classList.add("is-invalid");
+      input.focus();
+      showToast(`يرجى إدخال ${label}.`, "error");
+      return false;
+    }
+    return true;
+  }
+
   function populateStates() {
     const stateSelect = document.getElementById("state");
     if (!stateSelect || stateSelect.dataset.optionsLoaded === "true") return;
@@ -71,6 +94,7 @@
       showToast("الرجاء تعبئة جميع الحقول المطلوبة", "error");
       return;
     }
+    if (!validateRequiredTextFields()) return;
 
     const baseUrl = apiBaseUrl();
     if (!baseUrl) {
