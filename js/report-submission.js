@@ -6,42 +6,9 @@
     return String(window.MAFKOUDIN_REPORTS_API_BASE_URL || "").replace(/\/$/, "");
   }
 
-  function readWithFileReader(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = () => reject(reader.error || new Error("file_reader_failed"));
-      reader.readAsDataURL(file);
-    });
-  }
-
-  async function fileToDataUrl(file) {
-    try {
-      return await readWithFileReader(file);
-    } catch {
-      try {
-        const bytes = new Uint8Array(await file.arrayBuffer());
-        const chunkSize = 0x8000;
-        let binary = "";
-        for (let offset = 0; offset < bytes.length; offset += chunkSize) {
-          binary += String.fromCharCode(...bytes.subarray(offset, offset + chunkSize));
-        }
-        return `data:${file.type};base64,${btoa(binary)}`;
-      } catch {
-        throw new Error("تعذر قراءة الصورة. اختر الصورة مجددًا أو جرّب صورة أصغر بصيغة JPG أو PNG.");
-      }
-    }
-  }
-
   function validateImage(file) {
     if (!file) throw new Error("الصورة الرئيسية مطلوبة");
-    if (!acceptedTypes.includes(file.type)) throw new Error("يُسمح بصور JPG أو PNG أو WebP فقط");
     if (file.size > MAX_IMAGE_BYTES) throw new Error("يجب ألا يتجاوز حجم الصورة 5 ميغابايت");
-  }
-
-  async function serializeImage(file) {
-    validateImage(file);
-    return { name: file.name, mimeType: file.type, dataUrl: await fileToDataUrl(file) };
   }
 
   function optionalValue(id) {
@@ -146,6 +113,8 @@
       setSubmissionStatus("جارٍ تجهيز البلاغ وإرساله. لا تغلق الصفحة حتى تظهر النتيجة.", "info");
       btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> جاري الإرسال...';
       btn.disabled = true;
+      validateImage(mainInput.files[0]);
+      Array.from(extraInput.files).forEach(validateImage);
       const payload = {
         firstName: optionalValue("firstName"),
         lastName: optionalValue("lastName"),
@@ -174,14 +143,15 @@
           backupPhone: phoneValue("reporterPhone2"),
           email: optionalValue("reporterEmail"),
         },
-        mainImage: await serializeImage(mainInput.files[0]),
-        extraImages: await Promise.all(Array.from(extraInput.files).map(serializeImage)),
         website: document.getElementById("website")?.value || "",
       };
-      const response = await fetch(`${baseUrl}/api/public/reports`, {
+      const formData = new FormData();
+      formData.append("payload", JSON.stringify(payload));
+      formData.append("mainImage", mainInput.files[0]);
+      Array.from(extraInput.files).forEach(file => formData.append("extraImages", file));
+      const response = await fetch(`${baseUrl}/api/public/reports/upload`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: formData,
       });
       const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error || "تعذر إرسال البلاغ الآن");
