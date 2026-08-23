@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تفاصيل البلاغ | مفقودين الجزائر</title>
-  <meta name="description" content="تفاصيل بلاغ الشخص المفقود - الاسم، العمر، مكان الاختفاء، ومعلومات الاتصال">
+  <meta name="description" content="تفاصيل بلاغ الشخص المفقود - الاسم، العمر، مكان الاختفاء، والوصف العام.">
   <meta property="og:title" content="تفاصيل البلاغ | مفقودين الجزائر">
   <meta property="og:type" content="article">
   <link rel="canonical" href="https://imadtbn.github.io/mafkoudin.dz/pages/detail.html">
@@ -246,44 +246,9 @@
             </div>
           </div>
 
-          <!-- Contact Info -->
           <div class="detail-info-card">
-            <h3><i class="fas fa-address-book"></i> بيانات الاتصال</h3>
-            <div class="detail-info-row">
-              <span class="detail-info-label">اسم المبلغ</span>
-              <span class="detail-info-value" id="reporterName">---</span>
-            </div>
-            <div class="detail-info-row">
-              <span class="detail-info-label">صلة القرابة</span>
-              <span class="detail-info-value" id="reporterRelation">---</span>
-            </div>
-            <div class="detail-info-row">
-              <span class="detail-info-label">رقم الهاتف</span>
-              <span class="detail-info-value" id="reporterPhone">---</span>
-            </div>
-            <div class="detail-info-row" id="reporterPhone2Row">
-              <span class="detail-info-label">رقم هاتف احتياطي</span>
-              <span class="detail-info-value" id="reporterPhone2">---</span>
-            </div>
-            <div class="detail-info-row" id="reporterEmailRow">
-              <span class="detail-info-label">البريد الإلكتروني</span>
-              <a class="detail-info-value detail-email-value" id="reporterEmail" href="#" aria-label="إرسال بريد إلكتروني">---</a>
-            </div>
-
-            <div class="contact-buttons mt-4">
-              <button class="btn-contact btn-phone" id="btnCall">
-                <i class="fas fa-phone"></i> اتصال مباشر
-              </button>
-              <button class="btn-contact btn-whatsapp" id="btnWhatsApp">
-                <i class="fab fa-whatsapp"></i> واتساب
-              </button>
-              <button class="btn-contact btn-viber" id="btnViber">
-                <i class="fab fa-viber"></i> فايبر
-              </button>
-              <button class="btn-contact btn-share" onclick="shareCurrent('copy')">
-                <i class="fas fa-share-alt"></i> نسخ الرابط
-              </button>
-            </div>
+            <h3><i class="fas fa-shield-halved"></i> حماية الخصوصية</h3>
+            <p class="mb-0 text-muted">بيانات المبلّغ ووسائل التواصل محفوظة في لوحة المراجعة الآمنة ولا تُنشر في هذه الصفحة العامة. إذا كانت لديك معلومة تساعد في العثور على الشخص، تواصل مع أرقام الطوارئ المختصة.</p>
           </div>
         </div>
       </div>
@@ -473,37 +438,6 @@
         mapFrame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${stateData.lng - 0.5}%2C${stateData.lat - 0.5}%2C${stateData.lng + 0.5}%2C${stateData.lat + 0.5}&layer=mapnik&marker=${stateData.lat}%2C${stateData.lng}`;
       } else {
         mapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=2.5%2C36.5%2C3.5%2C37.5&layer=mapnik";
-      }
-
-      // Contact info
-      document.getElementById("reporterName").textContent = currentPerson.reporterName || "غير محدد";
-      document.getElementById("reporterRelation").textContent = currentPerson.reporterRelation || "غير محدد";
-      document.getElementById("reporterPhone").textContent = currentPerson.reporterPhone || "غير محدد";
-
-      const phone2Row = document.getElementById("reporterPhone2Row");
-      if (currentPerson.reporterPhone2) {
-        document.getElementById("reporterPhone2").textContent = currentPerson.reporterPhone2;
-        phone2Row.style.display = "flex";
-      } else {
-        phone2Row.style.display = "none";
-      }
-
-      const emailRow = document.getElementById("reporterEmailRow");
-      if (currentPerson.reporterEmail) {
-        const emailLink = document.getElementById("reporterEmail");
-        emailLink.textContent = currentPerson.reporterEmail;
-        emailLink.href = `mailto:${encodeURIComponent(currentPerson.reporterEmail)}`;
-        emailLink.title = `إرسال رسالة إلى ${currentPerson.reporterEmail}`;
-        emailRow.style.display = "flex";
-      } else {
-        emailRow.style.display = "none";
-      }
-
-      // Contact buttons
-      if (currentPerson.reporterPhone) {
-        document.getElementById("btnCall").onclick = () => callPhone(currentPerson.reporterPhone);
-        document.getElementById("btnWhatsApp").onclick = () => openWhatsApp(currentPerson.reporterPhone);
-        document.getElementById("btnViber").onclick = () => openViber(currentPerson.reporterPhone);
       }
 
       // Increment views (demo)
