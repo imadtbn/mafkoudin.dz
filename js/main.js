@@ -352,6 +352,13 @@ function getPublicReportsApiUrl() {
   return String(window.MAFKOUDIN_REPORTS_API_BASE_URL || "").replace(/\/$/, "");
 }
 
+function resolveStoredReportImage(url) {
+  const imageUrl = String(url || "").trim();
+  if (!imageUrl || !imageUrl.startsWith("/")) return imageUrl || "assets/brand-mark.svg";
+  const apiUrl = getPublicReportsApiUrl();
+  return apiUrl ? `${apiUrl}${imageUrl}` : imageUrl;
+}
+
 function mapPublicReportToSitePerson(report) {
   return {
     id: report.reference,
@@ -377,8 +384,8 @@ function mapPublicReportToSitePerson(report) {
     mentalState: report.mentalState || "",
     circumstances: report.circumstances,
     description: report.description || "",
-    mainImage: report.mainImage || "assets/brand-mark.svg",
-    gallery: report.extraImages || [],
+    mainImage: resolveStoredReportImage(report.mainImage),
+    gallery: Array.isArray(report.extraImages) ? report.extraImages.map(resolveStoredReportImage) : [],
     reportDate: report.publishedAt ? report.publishedAt.slice(0, 10) : report.dateMissing,
     views: 0,
     foundDate: null
