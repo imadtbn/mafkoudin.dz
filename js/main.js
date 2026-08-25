@@ -345,6 +345,9 @@ let demoData = {
   }
 };
 
+// لا تستخدم أمثلة الأشخاص المضمّنة في أي واجهة عامة؛ المصدر الوحيد للبطاقات هو API العام للبلاغات المعتمدة.
+demoData.persons = [];
+
 // ============================================
 // EXTERNAL JSON DATA LOADER
 // ============================================
@@ -407,30 +410,21 @@ async function loadApprovedPublicReports() {
 
 async function loadSiteData() {
   const basePath = getDataBasePath();
-  const [reportsResponse, adminResponse] = await Promise.all([
-    fetch(`${basePath}dataperdu.json`, { cache: 'no-store' }),
-    fetch(`${basePath}data.json`, { cache: 'no-store' })
-  ]);
+  const adminResponse = await fetch(`${basePath}data.json`, { cache: 'no-store' });
 
-  if (!reportsResponse.ok || !adminResponse.ok) {
-    throw new Error(`Data request failed: ${reportsResponse.status}/${adminResponse.status}`);
+  if (!adminResponse.ok) {
+    throw new Error(`Administrative data request failed: ${adminResponse.status}`);
   }
 
-  const reportsData = await reportsResponse.json();
   const administrativeData = await adminResponse.json();
   const wilayas = Array.isArray(administrativeData.wilayas) ? administrativeData.wilayas : [];
   const fallbackStateMeta = new Map((demoData.states || []).map((state) => [state.name.trim(), state]));
 
-  if (Array.isArray(reportsData.persons)) {
-    demoData.persons = reportsData.persons;
-  }
   try {
-    const approvedReports = await loadApprovedPublicReports();
-    const mergedPersons = new Map(demoData.persons.map((person) => [person.id, person]));
-    approvedReports.forEach((person) => mergedPersons.set(person.id, person));
-    demoData.persons = Array.from(mergedPersons.values());
+    demoData.persons = await loadApprovedPublicReports();
   } catch (error) {
-    console.warn("Approved reports could not be loaded from the public API.", error);
+    console.warn("Approved reports could not be loaded from the public API; no fallback reports will be shown.", error);
+    demoData.persons = [];
   }
   demoData.wilayas = wilayas;
   demoData.states = wilayas.map((wilaya) => {
@@ -446,7 +440,7 @@ async function loadSiteData() {
   demoData.municipalities = Object.fromEntries(
     wilayas.map((wilaya) => [wilaya.name, (wilaya.communes || []).map((commune) => commune.name)])
   );
-  window.siteData = { reports: reportsData, administrative: administrativeData };
+  window.siteData = { reports: { persons: demoData.persons }, administrative: administrativeData };
   return demoData;
 }
 
