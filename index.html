@@ -124,19 +124,19 @@
         <div class="col-lg-5">
           <div class="hero-stats">
             <div class="stat-card">
-              <span class="stat-number" id="statTotal">0</span>
+              <span class="stat-number stat-number-loading" id="statTotal" aria-busy="true" aria-label="جار تحميل إجمالي البلاغات"></span>
               <span class="stat-label">إجمالي البلاغات</span>
             </div>
             <div class="stat-card">
-              <span class="stat-number text-success" id="statFound">0</span>
+              <span class="stat-number text-success stat-number-loading" id="statFound" aria-busy="true" aria-label="جار تحميل البلاغات التي تم العثور عليها"></span>
               <span class="stat-label">تم العثور عليهم</span>
             </div>
             <div class="stat-card">
-              <span class="stat-number" id="statStates">0</span>
+              <span class="stat-number stat-number-loading" id="statStates" aria-busy="true" aria-label="جار تحميل عدد الولايات"></span>
               <span class="stat-label">ولاية مشمولة</span>
             </div>
             <div class="stat-card">
-              <span class="stat-number" id="statToday">0</span>
+              <span class="stat-number stat-number-loading" id="statToday" aria-busy="true" aria-label="جار تحميل بلاغات اليوم"></span>
               <span class="stat-label">بلاغات اليوم</span>
             </div>
           </div>
@@ -164,11 +164,11 @@
           <span class="filters-heading-icon"><i class="fas fa-sliders-h"></i></span>
           <div>
             <h2>تصفية البلاغات</h2>
-            <p><span id="resultsCount">0</span> بلاغات مطابقة</p>
+            <p><span id="resultsCount" class="loading-summary" aria-busy="true">جار التحميل</span> بلاغات مطابقة</p>
           </div>
         </div>
         <div class="filters-toolbar-actions">
-          <span class="active-filter-count" id="activeFilterCount">0 فلاتر نشطة</span>
+          <span class="active-filter-count loading-summary" id="activeFilterCount" aria-busy="true">جار تحميل الفلاتر</span>
           <button type="button" class="filters-toggle" id="filtersToggle" aria-expanded="false" aria-controls="filtersPanel">
             <i class="fas fa-sliders-h"></i><span>المزيد من الفلاتر</span><i class="fas fa-chevron-down toggle-chevron"></i>
           </button>
@@ -227,6 +227,14 @@
 
       <div class="row g-4" id="cardsContainer">
         <!-- Cards will be rendered here -->
+      </div>
+
+      <div class="reports-loading-state" id="reportsLoading" role="status" aria-live="polite">
+        <div class="spinner" aria-hidden="true"></div>
+        <div>
+          <h3>جار تحميل البلاغات المعتمدة</h3>
+          <p>لحظات من فضلك، نتحقق من أحدث البلاغات المنشورة.</p>
+        </div>
       </div>
 
       <div class="empty-state d-none" id="emptyState">
@@ -314,6 +322,8 @@
     function animateNumber(id, target) {
       const el = document.getElementById(id);
       if (!el) return;
+      el.classList.remove("stat-number-loading");
+      el.removeAttribute("aria-busy");
       let current = 0;
       const increment = Math.ceil(target / 30);
       const timer = setInterval(() => {
@@ -329,8 +339,14 @@
     function updateFilterSummary(resultCount = demoData.persons.length) {
       const resultEl = document.getElementById("resultsCount");
       const activeEl = document.getElementById("activeFilterCount");
-      if (resultEl) resultEl.textContent = Number(resultCount).toLocaleString("ar-DZ");
+      if (resultEl) {
+        resultEl.classList.remove("loading-summary");
+        resultEl.removeAttribute("aria-busy");
+        resultEl.textContent = Number(resultCount).toLocaleString("ar-DZ");
+      }
       if (!activeEl) return;
+      activeEl.classList.remove("loading-summary");
+      activeEl.removeAttribute("aria-busy");
       const activeIds = ["filterState", "filterMunicipality", "filterGender", "filterAge", "filterStatus", "filterDateFrom", "filterDateTo"];
       const activeCount = activeIds.reduce((count, id) => count + (document.getElementById(id)?.value ? 1 : 0), 0);
       activeEl.textContent = `${activeCount.toLocaleString("ar-DZ")} فلاتر نشطة`;
@@ -366,6 +382,7 @@
     // Render cards
     function renderCards(persons) {
       const container = document.getElementById("cardsContainer");
+      document.getElementById("reportsLoading")?.setAttribute("hidden", "");
       updateFilterSummary(persons.length);
       const emptyState = document.getElementById("emptyState");
 
