@@ -438,8 +438,9 @@
               </div>
               <div class="card-footer-actions">
                 <a href="${getDetailUrl(person)}" class="btn-card btn-card-primary">عرض التفاصيل</a>
-                <button class="btn-card btn-card-outline" onclick="shareReport(demoData.persons.find(p => p.id === '${person.id}'), 'copy')">
-                  <i class="fas fa-share-alt"></i>
+                <button type="button" class="btn-card btn-card-outline" aria-label="مشاركة البلاغ في فيسبوك أو مجموعة" title="مشاركة في فيسبوك أو مجموعة" onclick="shareReport(demoData.persons.find(p => p.id === '${person.id}'), 'facebookGroup')">
+                  <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                  <span>مشاركة</span>
                 </button>
               </div>
             </div>

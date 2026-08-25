@@ -524,6 +524,8 @@ function shareReport(person, platform) {
   
   const shareUrls = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+    // تعرض نافذة فيسبوك الرسمية خيارات النشر التي يملكها المستخدم، ومنها المجموعات التي يستطيع النشر فيها.
+    facebookGroup: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
     messenger: `https://www.facebook.com/dialog/send?link=${encodeURIComponent(url)}&app_id=123456`,
     whatsapp: `https://wa.me/?text=${encodeURIComponent(text + "\n" + url)}`,
     telegram: `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
