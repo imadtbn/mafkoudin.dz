@@ -8,7 +8,7 @@ function getDetailUrl(person) {
 function getReportUrl(person) {
   const apiUrl = getPublicReportsApiUrl();
   if (apiUrl && /^MAF-\d{4}-[A-Z0-9]{8}$/.test(String(person?.id || ""))) {
-    return `${apiUrl}/share/reports/${encodeURIComponent(person.id)}`;
+    return `${apiUrl}/api/public/share/reports/${encodeURIComponent(person.id)}`;
   }
   return getDetailUrl(person);
 }
