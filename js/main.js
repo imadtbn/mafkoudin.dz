@@ -26,8 +26,8 @@ function setMetaContent(selector, value, attribute = "content") {
 // ============================================
 // DEMO DATA
 // ============================================
-/**let demoData = {
-  persons: [
+let demoData = {
+  /**persons: [
     {
       id: "MAF-2026-001",
       firstName: "أحمد",
@@ -309,7 +309,7 @@ function setMetaContent(selector, value, attribute = "content") {
       foundDate: null
     }
   ],
-
+*/
   states: [
     { name: "الجزائر العاصمة", count: 12, lat: 36.7538, lng: 3.0588 },
     { name: "وهران", count: 8, lat: 35.6971, lng: -0.6308 },
@@ -344,7 +344,7 @@ function setMetaContent(selector, value, attribute = "content") {
     "باتنة": ["باتنة", "تازولت", "نقاوس", "القصبة", "عين ياقوت"]
   }
 };
-*/
+
 // ============================================
 // EXTERNAL JSON DATA LOADER
 // ============================================
