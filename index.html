@@ -355,13 +355,26 @@
     // Populate state filter
     function populateStates() {
       const select = document.getElementById("filterState");
-      const states = (demoData.wilayas || demoData.states || []).map((item) => item.name).sort((a, b) => a.localeCompare(b, 'ar'));
-      states.forEach(state => {
+      if (!select) return;
+
+      const stateCounts = new Map();
+      demoData.persons.forEach((person) => {
+        const state = String(person.state || "").trim();
+        if (!state) return;
+        stateCounts.set(state, (stateCounts.get(state) || 0) + 1);
+      });
+
+      select.innerHTML = '<option value="">كل الولايات</option>';
+      [...stateCounts.entries()]
+        .sort(([firstState], [secondState]) => firstState.localeCompare(secondState, "ar"))
+        .forEach(([state, count]) => {
         const option = document.createElement("option");
         option.value = state;
-        option.textContent = state;
+        option.textContent = `${state} (${count.toLocaleString("ar-DZ")})`;
         select.appendChild(option);
       });
+
+      select.disabled = stateCounts.size === 0;
     }
 
     // Populate municipality filter based on state
@@ -369,8 +382,15 @@
       const select = document.getElementById("filterMunicipality");
       select.innerHTML = state ? '<option value="">كل البلديات</option>' : '<option value="">اختر الولاية أولًا</option>';
       select.disabled = !state;
-      if (state && demoData.municipalities[state]) {
-        demoData.municipalities[state].forEach(mun => {
+      if (state) {
+        const municipalities = [...new Set(
+          demoData.persons
+            .filter((person) => String(person.state || "").trim() === state)
+            .map((person) => String(person.municipality || "").trim())
+            .filter(Boolean)
+        )].sort((firstMunicipality, secondMunicipality) => firstMunicipality.localeCompare(secondMunicipality, "ar"));
+
+        municipalities.forEach(mun => {
           const option = document.createElement("option");
           option.value = mun;
           option.textContent = mun;
@@ -448,7 +468,7 @@
 
       // State
       const state = document.getElementById("filterState").value;
-      if (state) filtered = filtered.filter(p => p.state === state);
+      if (state) filtered = filtered.filter(p => String(p.state || "").trim() === state);
 
       // Municipality
       const municipality = document.getElementById("filterMunicipality").value;
