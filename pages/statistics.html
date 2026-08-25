@@ -211,7 +211,7 @@
 
       return demoData.persons.filter((person) => {
         if (status !== 'all' && person.status !== status) return false;
-        if (state !== 'all' && person.state !== state) return false;
+        if (state !== 'all' && normalizeStateName(person.state) !== state) return false;
         if (period !== 'all') {
           const days = Number(period);
           const reportDate = new Date(`${person.reportDate}T00:00:00`);
@@ -228,7 +228,7 @@
 
     function updateSummary(persons) {
       const found = persons.filter((p) => p.status === 'found').length;
-      const states = new Set(persons.map((p) => p.state)).size;
+      const states = new Set(persons.map((p) => normalizeStateName(p.state)).filter(Boolean)).size;
       document.getElementById('summaryTotal').textContent = numberAr(persons.length);
       document.getElementById('summaryMissing').textContent = numberAr(persons.length - found);
       document.getElementById('summaryFound').textContent = numberAr(found);
@@ -259,9 +259,11 @@
 
       const stateMap = {};
       persons.forEach((person) => {
-        if (!stateMap[person.state]) stateMap[person.state] = { total: 0, missing: 0, found: 0 };
-        stateMap[person.state].total += 1;
-        stateMap[person.state][person.status] += 1;
+        const state = normalizeStateName(person.state);
+        if (!state) return;
+        if (!stateMap[state]) stateMap[state] = { total: 0, missing: 0, found: 0 };
+        stateMap[state].total += 1;
+        stateMap[state][person.status] += 1;
       });
       const stateRows = Object.entries(stateMap).sort((a, b) => b[1].total - a[1].total || a[0].localeCompare(b[0], 'ar'));
       document.getElementById('tableResultCount').textContent = `${numberAr(stateRows.length)} ولاية`;
@@ -304,7 +306,8 @@
 
     function populateStatisticsStates() {
       const select = document.getElementById('statsStateFilter');
-      (demoData.wilayas || demoData.states || []).map((item) => item.name).sort((a, b) => a.localeCompare(b, 'ar')).forEach((state) => {
+      select.innerHTML = '<option value="all">كل الولايات</option>';
+      (demoData.states || []).map((item) => item.name).sort((a, b) => a.localeCompare(b, 'ar')).forEach((state) => {
         const option = document.createElement('option');
         option.value = state;
         option.textContent = state;

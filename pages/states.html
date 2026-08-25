@@ -101,7 +101,7 @@
   <section class="states-section">
     <div class="container">
       <h2 class="section-title"><i class="fas fa-map-marked-alt text-primary-red"></i> خريطة الجزائر</h2>
-      <p class="section-subtitle">استعرض البلاغات حسب الولاية - اضغط على أي ولاية لعرض البلاغات الخاصة بها</p>
+      <p class="section-subtitle">تظهر الولايات التي تحتوي بلاغات منشورة فقط، وتتجدد تلقائيًا من قاعدة البيانات.</p>
 
       <!-- Map -->
       <div class="mb-4">
@@ -109,7 +109,7 @@
       </div>
 
       <!-- States Grid -->
-      <h3 class="mb-3"><i class="fas fa-list text-primary-red me-2"></i>قائمة الولايات</h3>
+      <h3 class="mb-3"><i class="fas fa-list text-primary-red me-2"></i>الولايات ذات البلاغات المنشورة</h3>
       <div class="row g-3" id="statesGrid">
         <!-- States will be rendered here -->
       </div>
@@ -202,7 +202,7 @@
               <span class="count">${state.count}</span>
             </div>
             <div class="state-name fw-bold">${state.name}</div>
-            <small class="text-muted">بلاغ مفقود</small>
+              <small class="text-muted">بلاغات منشورة</small>
           </div>
         </div>
       `).join("");

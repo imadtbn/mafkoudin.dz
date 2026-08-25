@@ -359,6 +359,15 @@ function getPublicReportsApiUrl() {
   return String(window.MAFKOUDIN_REPORTS_API_BASE_URL || "").replace(/\/$/, "");
 }
 
+function normalizeStateName(value) {
+  return String(value || "").trim().replace(/\s+/g, " ");
+}
+
+// إحداثيات مرجعية لعواصم الولايات؛ تستخدم للخريطة فقط ولا تحتوي أي بيانات بلاغات.
+const STATE_COORDINATES = Object.freeze({
+  "أدرار": [26.4888155, -1.3582442], "الشلف": [36.20342, 1.2680696], "الأغواط": [33.7504405, 2.6431094], "أم البواقي": [35.8105805, 7.0184178], "باتنة": [35.3384291, 5.7315453], "بجاية": [36.5569005, 4.7858925], "بسكرة": [34.7845635, 5.8124353], "بشار": [31.385726, -2.0115958], "البليدة": [36.5012595, 2.9517666], "البويرة": [36.2316481, 3.9082579], "تمنراست": [24.3753438, 4.3208436], "تبسة": [35.124945, 7.9011735], "تلمسان": [34.667468, -1.2978132], "تيارت": [34.8947575, 1.5945792], "تيزي وزو": [36.6816175, 4.237186], "الجزائر": [36.700051, 3.0291266], "الجزائر العاصمة": [36.700051, 3.0291266], "الجلفة": [34.342841, 3.2172531], "جيجل": [36.7292188, 5.9607776], "سطيف": [36.105661, 5.5620276], "سعيدة": [34.743349, 0.2440764], "سكيكدة": [36.7545115, 6.8856255], "سيدي بلعباس": [34.682268, -0.4357555], "عنابة": [36.8438878, 7.5983068], "قالمة": [36.3491635, 7.409499], "قسنطينة": [36.3584165, 6.6671674], "المدية": [35.9752045, 3.0123504], "مستغانم": [36.0026915, 0.3686867], "المسيلة": [35.1300205, 4.2003107], "معسكر": [35.3978385, 0.2430195], "ورقلة": [31.92823306, 5.27516681], "وهران": [35.6215862, -0.7016143], "البيض": [32.570303, 1.1259581], "إليزي": [27.8528505, 7.8189636], "برج بوعريريج": [36.0962029, 4.6602742], "بومرداس": [36.7358032, 3.6163046], "الطارف": [36.6713563, 8.070134], "تندوف": [27.543907, -6.2399251], "تيسمسيلت": [35.7858975, 1.8340957], "الوادي": [33.215441, 7.1553214], "خنشلة": [34.9133455, 6.9059431], "سوق أهراس": [36.1378681, 7.8262426], "تيبازة": [36.527157, 2.1672012], "ميلة": [36.2502135, 6.1652163], "عين الدفلة": [36.1586843, 2.0842817], "النعامة": [33.2336851, -0.8151958], "عين تيموشنت": [35.3651297, -0.9452171], "غرداية": [32.440827, 3.5618209], "غليزان": [35.8363185, 0.9118537], "تيميمون": [29.26631963, 0.23483276], "برج باجي مختار": [21.32437224, 0.94928741], "بني عباس": [30.1317426, -2.169031], "أولاد جلال": [34.4254103, 5.0644342], "عين صالح": [27.19902208, 2.48016357], "عين قزام": [19.5704491, 5.76953888], "تقرت": [33.1098968, 6.066102], "جانت": [24.55149974, 9.48669434], "المغير": [33.9496809, 5.921089], "المنيعة": [30.5841144, 2.88219452]
+});
+
 function resolveStoredReportImage(url) {
   const imageUrl = String(url || "").trim();
   if (!imageUrl || !imageUrl.startsWith("/")) return imageUrl || "assets/brand-mark.svg";
@@ -418,7 +427,6 @@ async function loadSiteData() {
 
   const administrativeData = await adminResponse.json();
   const wilayas = Array.isArray(administrativeData.wilayas) ? administrativeData.wilayas : [];
-  const fallbackStateMeta = new Map((demoData.states || []).map((state) => [state.name.trim(), state]));
 
   try {
     demoData.persons = await loadApprovedPublicReports();
@@ -427,16 +435,24 @@ async function loadSiteData() {
     demoData.persons = [];
   }
   demoData.wilayas = wilayas;
-  demoData.states = wilayas.map((wilaya) => {
-    const metadata = fallbackStateMeta.get(wilaya.name.trim()) || {};
-    return {
-      name: wilaya.name,
-      code: wilaya.code,
-      count: demoData.persons.filter((person) => person.state === wilaya.name).length,
-      lat: metadata.lat ?? null,
-      lng: metadata.lng ?? null
-    };
+  const administrativeStateMeta = new Map(wilayas.map((wilaya) => [normalizeStateName(wilaya.name), wilaya]));
+  const publishedStateCounts = new Map();
+  demoData.persons.forEach((person) => {
+    const state = normalizeStateName(person.state);
+    if (!state) return;
+    publishedStateCounts.set(state, (publishedStateCounts.get(state) || 0) + 1);
   });
+  demoData.states = [...publishedStateCounts.entries()].map(([state, count]) => {
+    const metadata = administrativeStateMeta.get(state) || {};
+    const coordinates = STATE_COORDINATES[state] || [];
+    return {
+      name: state,
+      code: metadata.code || "",
+      count,
+      lat: coordinates[0] ?? null,
+      lng: coordinates[1] ?? null
+    };
+  }).sort((first, second) => first.name.localeCompare(second.name, "ar"));
   demoData.municipalities = Object.fromEntries(
     wilayas.map((wilaya) => [wilaya.name, (wilaya.communes || []).map((commune) => commune.name)])
   );

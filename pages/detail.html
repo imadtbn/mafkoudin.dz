@@ -406,7 +406,7 @@
 
       // Map - using OpenStreetMap
       const mapFrame = document.getElementById("mapFrame");
-      const stateData = demoData.states.find(s => s.name === currentPerson.state);
+      const stateData = demoData.states.find(s => s.name === normalizeStateName(currentPerson.state));
       if (stateData) {
         mapFrame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${stateData.lng - 0.5}%2C${stateData.lat - 0.5}%2C${stateData.lng + 0.5}%2C${stateData.lat + 0.5}&layer=mapnik&marker=${stateData.lat}%2C${stateData.lng}`;
       } else {
