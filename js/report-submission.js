@@ -37,6 +37,8 @@
   const requiredTextFields = [
     ["firstName", "اسم الشخص المفقود"],
     ["lastName", "لقب الشخص المفقود"],
+    ["state", "الولاية"],
+    ["municipality", "البلدية"],
     ["placeMissing", "مكان الاختفاء"],
     ["circumstances", "ظروف الاختفاء"],
     ["reporterName", "اسم المبلّغ"],
@@ -56,33 +58,6 @@
       return false;
     }
     return true;
-  }
-
-  function populateStates() {
-    const stateSelect = document.getElementById("state");
-    if (!stateSelect || stateSelect.dataset.optionsLoaded === "true") return;
-    const data = typeof demoData !== "undefined" ? demoData : {};
-    const states = (data.wilayas || data.states || []).map(item => item.name).sort((a, b) => a.localeCompare(b, "ar"));
-    states.forEach(state => {
-      const option = document.createElement("option");
-      option.value = state;
-      option.textContent = state;
-      stateSelect.appendChild(option);
-    });
-    stateSelect.dataset.optionsLoaded = "true";
-  }
-
-  function populateMunicipalities(state) {
-    const municipalitySelect = document.getElementById("municipality");
-    if (!municipalitySelect) return;
-    const data = typeof demoData !== "undefined" ? demoData : {};
-    municipalitySelect.innerHTML = '<option value="">اختر البلدية</option>';
-    (data.municipalities?.[state] || []).forEach(municipality => {
-      const option = document.createElement("option");
-      option.value = municipality;
-      option.textContent = municipality;
-      municipalitySelect.appendChild(option);
-    });
   }
 
   async function submitReport(event) {
@@ -127,8 +102,8 @@
         eyeColor: optionalValue("eyeColor"),
         clothing: optionalValue("clothing"),
         distinctiveMarks: optionalValue("distinctiveMarks"),
-        state: document.getElementById("state").value,
-        municipality: document.getElementById("municipality").value,
+        state: document.getElementById("state").value.trim(),
+        municipality: document.getElementById("municipality").value.trim(),
         address: optionalValue("address"),
         dateMissing: document.getElementById("dateMissing").value,
         timeMissing: optionalValue("timeMissing"),
@@ -215,17 +190,11 @@
 
   function initializeForm() {
     const form = document.getElementById("reportForm");
-    const stateSelect = document.getElementById("state");
     if (!form || form.dataset.submitHandlerBound === "true") return;
     form.dataset.submitHandlerBound = "true";
 
     initImageUploads();
-    stateSelect?.addEventListener("change", event => populateMunicipalities(event.target.value));
     form.addEventListener("submit", submitReport);
-
-    Promise.resolve(window.siteDataReady)
-      .catch(() => undefined)
-      .then(() => populateStates());
   }
 
   document.addEventListener("DOMContentLoaded", () => {

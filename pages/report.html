@@ -184,18 +184,14 @@
               <h4 class="form-section-title"><i class="fas fa-map-marker-alt"></i> معلومات الاختفاء</h4>
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">الولاية <span class="required">*</span></label>
-                  <select class="form-select" id="state" required>
-                    <option value="">اختر الولاية</option>
-                  </select>
-                  <div class="invalid-feedback">الرجاء اختيار الولاية</div>
+                  <label class="form-label" for="state">الولاية <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="state" required maxlength="120" autocomplete="address-level1" placeholder="مثال: بومرداس">
+                  <div class="invalid-feedback">الرجاء إدخال الولاية</div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label class="form-label">البلدية <span class="required">*</span></label>
-                  <select class="form-select" id="municipality" required>
-                    <option value="">اختر البلدية</option>
-                  </select>
-                  <div class="invalid-feedback">الرجاء اختيار البلدية</div>
+                  <label class="form-label" for="municipality">البلدية <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="municipality" required maxlength="160" autocomplete="address-level2" placeholder="مثال: بودواو">
+                  <div class="invalid-feedback">الرجاء إدخال البلدية</div>
                 </div>
                 <div class="col-12 mb-3">
                   <label class="form-label">العنوان التفصيلي</label>
