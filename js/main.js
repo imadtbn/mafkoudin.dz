@@ -6,6 +6,10 @@ function getDetailUrl(person) {
 }
 
 function getReportUrl(person) {
+  const apiUrl = getPublicReportsApiUrl();
+  if (apiUrl && /^MAF-\d{4}-[A-Z0-9]{8}$/.test(String(person?.id || ""))) {
+    return `${apiUrl}/reports/${encodeURIComponent(person.id)}`;
+  }
   return getDetailUrl(person);
 }
 
