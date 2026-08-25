@@ -525,7 +525,8 @@ function createToastContainer() {
 // ============================================
 function shareReport(person, platform) {
   const url = getReportUrl(person);
-  const text = `🔴 بلاغ مفقود: ${person.firstName} ${person.lastName} - ${person.state}\n📅 تاريخ الاختفاء: ${formatDate(person.dateMissing)}\n📞 للاتصال: ${person.reporterPhone}`;
+  const location = [person.state, person.municipality].filter(Boolean).join(" - ");
+  const text = `🔴 بلاغ مفقود: ${person.firstName} ${person.lastName}\n👤 العمر: ${person.age} سنة | ${getGenderLabel(person.gender)}\n📍 المنطقة: ${location || "غير محددة"}\n📅 تاريخ الاختفاء: ${formatDate(person.dateMissing)}\nيرجى مشاركة البلاغ للمساعدة في العثور عليه.`;
   
   const shareUrls = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
