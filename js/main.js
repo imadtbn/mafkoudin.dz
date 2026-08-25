@@ -6,7 +6,11 @@ function getDetailUrl(person) {
 }
 
 function getReportUrl(person) {
-  return `${SITE_URL}/reports/${encodeURIComponent(person.id)}/`;
+  const apiUrl = getPublicReportsApiUrl();
+  if (apiUrl && /^MAF-\d{4}-[A-Z0-9]{8}$/.test(String(person?.id || ""))) {
+    return `${apiUrl}/share/reports/${encodeURIComponent(person.id)}`;
+  }
+  return getDetailUrl(person);
 }
 
 function setMetaContent(selector, value, attribute = "content") {
