@@ -2964,6 +2964,10 @@ textarea:focus-visible {
   margin-top: var(--space-4);
 }
 
+.share-actions-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .share-button {
   display: inline-flex;
   align-items: center;
@@ -3018,6 +3022,7 @@ textarea:focus-visible {
 .share-email { background: #64748b; }
 .share-copy { background: var(--primary-600); }
 .share-print { background: #475569; }
+.share-universal { background: linear-gradient(135deg, var(--primary-600), #1d4ed8); }
 
 @media (min-width: 768px) {
   .share-actions {

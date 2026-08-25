@@ -517,38 +517,47 @@ function createToastContainer() {
 // ============================================
 // SHARE FUNCTIONALITY
 // ============================================
-function shareReport(person, platform) {
+async function copyShareLink(url) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(url);
+    return;
+  }
+
+  const input = document.createElement("textarea");
+  input.value = url;
+  input.style.position = "fixed";
+  input.style.opacity = "0";
+  document.body.appendChild(input);
+  input.select();
+  const copied = document.execCommand("copy");
+  input.remove();
+  if (!copied) throw new Error("clipboard-unavailable");
+}
+
+async function shareReport(person) {
+  if (!person) return;
   const url = getReportUrl(person);
   const location = [person.state, person.municipality].filter(Boolean).join(" - ");
   const text = `🔴 بلاغ مفقود: ${person.firstName} ${person.lastName}\n👤 العمر: ${person.age} سنة | ${getGenderLabel(person.gender)}\n📍 المنطقة: ${location || "غير محددة"}\n📅 تاريخ الاختفاء: ${formatDate(person.dateMissing)}\nيرجى مشاركة البلاغ للمساعدة في العثور عليه.`;
-  
-  const shareUrls = {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-    // تعرض نافذة فيسبوك الرسمية خيارات النشر التي يملكها المستخدم، ومنها المجموعات التي يستطيع النشر فيها.
-    facebookGroup: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-    messenger: `https://www.facebook.com/dialog/send?link=${encodeURIComponent(url)}&app_id=123456`,
-    whatsapp: `https://wa.me/?text=${encodeURIComponent(text + "\n" + url)}`,
-    telegram: `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
-    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-    email: `mailto:?subject=${encodeURIComponent("بلاغ مفقود - " + person.firstName + " " + person.lastName)}&body=${encodeURIComponent(text + "\n\n" + url)}`
-  };
 
-  if (platform === "copy") {
-    const copyPromise = navigator.clipboard?.writeText ? navigator.clipboard.writeText(url) : Promise.reject(new Error("clipboard-unavailable"));
-    copyPromise.then(() => showToast("تم نسخ الرابط!"))
-      .catch(() => {
-        const input = document.createElement("textarea");
-        input.value = url;
-        input.style.position = "fixed";
-        input.style.opacity = "0";
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand("copy");
-        input.remove();
-        showToast("تم نسخ الرابط!");
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: `بلاغ مفقود: ${person.firstName} ${person.lastName}`,
+        text,
+        url
       });
-  } else if (shareUrls[platform]) {
-    window.open(shareUrls[platform], "_blank", "width=600,height=400");
+      return;
+    } catch (error) {
+      if (error?.name === "AbortError") return;
+    }
+  }
+
+  try {
+    await copyShareLink(url);
+    showToast("تم نسخ رابط البلاغ. الصقه في المنصة التي تريد المشاركة فيها.");
+  } catch {
+    showToast("تعذر فتح المشاركة الآن. انسخ رابط صفحة التفاصيل يدويًا.", "error");
   }
 }
 
