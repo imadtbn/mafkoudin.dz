@@ -48,3 +48,13 @@ test('manual ad units appear only after public content and outside the report fo
   const contactForm = contact.match(/<form[\s\S]*?<\/form>/)?.[0] || '';
   assert.equal(contactForm.includes('adsbygoogle'), false);
 });
+
+test('contact page exposes actions instead of visible contact details and links to the approved message form', () => {
+  const contact = readFileSync(join(root, 'pages', 'contact.html'), 'utf8');
+  assert.match(contact, /id="emailAction"/);
+  assert.match(contact, /id="phoneAction"/);
+  assert.match(contact, /id="messageFormAction"/);
+  assert.match(contact, /1FAIpQLSfLQSiqJkPQ1waYeRMVmx2S0KJRAtpROoGMYnGurCBkt0Ottw\/viewform/);
+  assert.equal(contact.includes('contact@mafkoudin-dz.com'), false);
+  assert.equal(contact.includes('0234-567-890'), false);
+});

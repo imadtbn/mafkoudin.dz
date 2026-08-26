@@ -48,22 +48,17 @@
       <div class="col-lg-5 mb-4">
         <div class="content-card h-100">
           <h1>اتصل بنا</h1>
-          <p>نحن هنا لمساعدتك. يمكنك التواصل معنا عبر القنوات التالية:</p>
-          <div class="contact-info-item"><i class="fas fa-envelope"></i><div><h4>البريد الإلكتروني</h4><p>contact@mafkoudin-dz.com</p></div></div>
-          <div class="contact-info-item"><i class="fas fa-phone"></i><div><h4>الهاتف</h4><p>0234-567-890</p></div></div>
-          <div class="contact-info-item"><i class="fas fa-map-marker-alt"></i><div><h4>العنوان</h4><p>الجزائر العاصمة، الجزائر</p></div></div>
+          <p>اختر وسيلة التواصل المناسبة. تفتح الأزرار تطبيق البريد أو الاتصال في جهازك مباشرة، دون عرض بيانات التواصل في الصفحة.</p>
+          <button type="button" class="contact-info-item contact-action-button" id="emailAction" aria-label="إرسال بريد إلكتروني"><i class="fas fa-envelope"></i><span><h4>إرسال بريد إلكتروني</h4><p>فتح تطبيق البريد لإرسال رسالة</p></span><i class="fas fa-arrow-up-left-from-circle contact-action-arrow" aria-hidden="true"></i></button>
+          <button type="button" class="contact-info-item contact-action-button" id="phoneAction" aria-label="إجراء اتصال هاتفي"><i class="fas fa-phone"></i><span><h4>إجراء اتصال هاتفي</h4><p>فتح تطبيق الاتصال في جهازك</p></span><i class="fas fa-arrow-up-left-from-circle contact-action-arrow" aria-hidden="true"></i></button>
         </div>
       </div>
       <div class="col-lg-7">
         <div class="content-card">
           <h2>أرسل رسالة</h2>
-          <form>
-            <div class="mb-3"><label class="form-label">الاسم</label><input type="text" class="form-control" required></div>
-            <div class="mb-3"><label class="form-label">البريد الإلكتروني</label><input type="email" class="form-control" required></div>
-            <div class="mb-3"><label class="form-label">الموضوع</label><input type="text" class="form-control" required></div>
-            <div class="mb-3"><label class="form-label">الرسالة</label><textarea class="form-control" rows="5" required></textarea></div>
-            <button type="submit" class="btn-submit">إرسال</button>
-          </form>
+          <p>استخدم نموذج الرسائل الآمن لإرسال الاسم والبريد والموضوع والرسالة. تُستقبل الردود عبر Google Forms ولا تُحفظ في صفحة الموقع.</p>
+          <button type="button" class="btn-submit contact-form-launch" id="messageFormAction"><i class="fas fa-paper-plane" aria-hidden="true"></i> فتح نموذج الرسائل</button>
+          <p class="contact-form-note"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> يفتح النموذج في نافذة جديدة.</p>
         </div>
       </div>
     </div>
@@ -124,5 +119,23 @@
     </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (() => {
+      const decode = (value) => window.atob(value);
+      const email = decode('dGFiYW5paW1hZGVkZGluZUBnbWFpbC5jb20=');
+      const phone = decode('MDY5Nzc0MzcyMQ==');
+      const messageFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfLQSiqJkPQ1waYeRMVmx2S0KJRAtpROoGMYnGurCBkt0Ottw/viewform';
+
+      document.getElementById('emailAction')?.addEventListener('click', () => {
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent('رسالة من موقع مفقودين الجزائر')}`;
+      });
+      document.getElementById('phoneAction')?.addEventListener('click', () => {
+        window.location.href = `tel:${phone}`;
+      });
+      document.getElementById('messageFormAction')?.addEventListener('click', () => {
+        window.open(messageFormUrl, '_blank', 'noopener,noreferrer');
+      });
+    })();
+  </script>
 </body>
 </html>

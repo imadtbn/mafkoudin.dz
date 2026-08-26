@@ -1763,6 +1763,36 @@ button {
   color: var(--text-secondary);
 }
 
+.contact-action-button {
+  width: 100%;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: right;
+}
+
+.contact-action-button span { flex: 1; }
+
+.contact-action-arrow {
+  margin-right: auto;
+  margin-left: 0;
+  opacity: .75;
+}
+
+.contact-action-button:focus-visible,
+.contact-form-launch:focus-visible {
+  outline: 3px solid var(--primary-300);
+  outline-offset: 3px;
+}
+
+.contact-form-launch { display: inline-flex; align-items: center; gap: .55rem; }
+
+.contact-form-note {
+  margin-top: var(--space-4);
+  color: var(--text-tertiary) !important;
+  font-size: .9rem;
+}
+
 /* ============================================
    FOOTER
    ============================================ */
