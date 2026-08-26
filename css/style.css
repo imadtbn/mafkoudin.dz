@@ -3214,3 +3214,26 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .pwa-install-button { transition: none; }
 }
+
+/* Manual AdSense placements stay separate from reports, forms, and emergency actions. */
+.ad-slot-container {
+  margin: 2rem auto 0;
+  max-width: 100%;
+  min-height: 90px;
+  overflow: hidden;
+  padding: .75rem;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-xs);
+}
+
+.ad-slot-article { margin-bottom: 1.5rem; }
+
+.ad-slot-label {
+  display: block;
+  margin-bottom: .5rem;
+  color: var(--text-tertiary);
+  font-size: .75rem;
+  text-align: center;
+}
