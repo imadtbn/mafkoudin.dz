@@ -14,22 +14,27 @@ function htmlFiles(directory) {
   });
 }
 
-test('central loader replaces direct GA snippets in content pages', () => {
+test('central loader replaces direct GA snippets and adds a single GTM noscript fallback', () => {
   const pages = htmlFiles(root).filter((file) => !excluded.has(relative(root, file)));
   for (const page of pages) {
     const html = readFileSync(page, 'utf8');
-    assert.equal((html.match(/site-tags\.js\?v=site-tags-1/g) || []).length, 1, relative(root, page));
+    assert.equal((html.match(/site-tags\.js\?v=site-tags-2/g) || []).length, 1, relative(root, page));
     assert.equal(html.includes('googletagmanager.com/gtag/js'), false, relative(root, page));
     assert.equal(html.includes("gtag('config'"), false, relative(root, page));
+    assert.equal((html.match(/googletagmanager\.com\/ns\.html\?id=GTM-M2PN233N/g) || []).length, 1, relative(root, page));
   }
 });
 
-test('central loader carries documented GA4 and AdSense identifiers with a single loader per source', () => {
+test('central loader uses GTM for GA4 and retains one conditional AdSense loader', () => {
   const loader = readFileSync(join(root, 'js', 'site-tags.js'), 'utf8');
   assert.match(loader, /G-2R9CE6PH9K/);
+  assert.match(loader, /GTM-M2PN233N/);
+  assert.match(loader, /ga4Mode: 'gtm'/);
   assert.match(loader, /ca-pub-5656416032906373/);
   assert.match(loader, /loadScriptOnce/);
   assert.match(loader, /data-ad-client/);
+  assert.equal(loader.includes("gtag('config'"), false);
+  assert.match(loader, /IntersectionObserver/);
 });
 
 test('manual ad units appear only after public content and outside the report form', () => {
