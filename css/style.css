@@ -3859,3 +3859,42 @@ input:focus, select:focus, textarea:focus {
   .state-card-mini { transition: none; }
   .state-card-mini:hover { transform: none; }
 }
+
+
+
+/* Typography refinement — Arabic-first, readable across devices */
+:root {
+  --font-sans: "Tajawal", Arial, Tahoma, sans-serif;
+  --font-display: "Tajawal", Arial, Tahoma, sans-serif;
+}
+html, body,
+button, input, select, textarea,
+.btn, .navbar, .navbar-brand, .nav-link,
+.hero-title, .hero-subtitle, .section-title, .section-subtitle,
+.content-card, .content-card h1, .content-card h2, .content-card h3,
+.report-form-card, .report-form-card h1, .report-form-card h2,
+.form-label, .form-control, .form-select, .form-check-label,
+.detail-info-card, .detail-info-label, .detail-info-value,
+.stats-page-header, .stats-summary-number, .stats-summary-label,
+.stats-widget-heading, .stats-table, .state-name,
+.footer, .footer-title, .footer-desc, .footer-links,
+.breadcrumb, .alert, .contact-action-button {
+  font-family: "Tajawal", Arial, Tahoma, sans-serif;
+}
+body { font-size: 16px; line-height: 1.75; }
+h1, h2, h3, h4, h5, h6,
+.hero-title, .section-title, .content-card h1, .content-card h2,
+.content-card h3, .stats-page-header h1 {
+  font-weight: 800;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+p, li, .content-card, .footer-desc { line-height: 1.85; }
+button, .btn, .nav-link, .form-label, .form-section-title {
+  font-weight: 700;
+}
+input, select, textarea, .form-control, .form-select {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+::placeholder { font-family: "Tajawal", Arial, Tahoma, sans-serif; }
